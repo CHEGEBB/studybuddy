@@ -130,44 +130,58 @@ const subjects = [
     icon: Calculator, 
     color: "from-green-400 to-emerald-500", 
     students: "15,420",
-    description: "Algebra, Calculus, Geometry & Statistics"
+    description: "Algebra, Calculus, Geometry & Statistics",
+    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?q=80&w=2070&auto=format&fit=crop",
+    category: "SCIENCE"
   },
   { 
     name: "Physics", 
     icon: Atom, 
     color: "from-blue-400 to-blue-600", 
     students: "12,350",
-    description: "Mechanics, Thermodynamics & Waves"
+    description: "Mechanics, Thermodynamics & Waves",
+    image: "https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?q=80&w=2074&auto=format&fit=crop",
+    category: "SCIENCE"
   },
   { 
     name: "Chemistry", 
     icon: TestTube, 
     color: "from-purple-400 to-purple-600", 
     students: "11,200",
-    description: "Organic, Inorganic & Physical Chemistry"
+    description: "Organic, Inorganic & Physical Chemistry",
+    image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2070&auto=format&fit=crop",
+    category: "SCIENCE"
   },
   { 
     name: "Biology", 
     icon: Dna, 
     color: "from-green-400 to-green-600", 
     students: "13,800",
-    description: "Genetics, Ecology & Human Biology"
+    description: "Genetics, Ecology & Human Biology",
+    image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?q=80&w=2071&auto=format&fit=crop",
+    category: "SCIENCE"
   },
   { 
     name: "English", 
     icon: PenTool, 
     color: "from-orange-400 to-orange-600", 
     students: "16,900",
-    description: "Literature, Grammar & Composition"
+    description: "Literature, Grammar & Composition",
+    image: "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?q=80&w=2086&auto=format&fit=crop",
+    category: "LANGUAGES"
   },
   { 
     name: "Kiswahili", 
     icon: MessageCircle, 
     color: "from-red-400 to-red-600", 
     students: "14,600",
-    description: "Lugha, Fasihi na Utamaduni"
+    description: "Lugha, Fasihi na Utamaduni",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop",
+    category: "LANGUAGES"
   }
 ];
+
+
 
 // Featured teachers with enhanced data
 const featuredTeachers = [
@@ -517,48 +531,97 @@ useEffect(() => {
       </section>
 
       {/* Enhanced Subjects Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="text-center mb-16">
-            <p className="text-green-500 font-semibold mb-4 uppercase tracking-wide">Popular Subjects</p>
-            <h2 className="text-5xl font-bold mb-6">
-              <span className="text-slate-800">Master Your</span>{' '}
-              <span className="text-green-500">Favorite Subjects</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Choose from our comprehensive range of subjects taught by Kenya's best teachers
-            </p>
-          </div>
+      <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <div className="text-center mb-16">
+      <div className="inline-flex items-center justify-center px-4 py-2 bg-orange-100 text-orange-600 rounded-full font-semibold text-sm uppercase tracking-wide mb-6">
+        <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+        Popular Subjects
+      </div>
+      <h2 className="text-5xl font-bold mb-6">
+        <span className="text-slate-800">Master Your</span>{' '}
+        <span className="text-green-500">Favorite Subjects</span>
+      </h2>
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        Choose from our comprehensive range of subjects taught by Kenya's best teachers
+      </p>
+    </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {subjects.map((subject, index) => (
-              <div 
-                key={index} 
-                className="group cursor-pointer card-hover"
-                style={{animationDelay: `${index * 100}ms`}}
-              >
-                <div className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group-hover:border-green-200 floating-card">
-                  <div className={`h-2 bg-gradient-to-r ${subject.color}`} />
-                  <div className="p-8">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${subject.color} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <subject.icon className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-2">{subject.name}</h3>
-                    <p className="text-gray-600 mb-4 text-sm">{subject.description}</p>
-                    <div className="flex items-center justify-between">
-                      <div className="text-sm text-gray-500">
-                        <Users className="w-4 h-4 inline mr-1" />
-                        {subject.students} students
-                      </div>
-                      <ArrowRight className="w-5 h-5 text-green-500 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {subjects.map((subject, index) => (
+        <div 
+          key={index} 
+          className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-2"
+        >
+          <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group-hover:border-green-200 relative">
+            {/* Category Badge */}
+            <div className="absolute top-4 right-4 z-20">
+              <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${subject.color}`}>
+                {subject.category}
+              </div>
+            </div>
+
+            {/* Heart Icon */}
+            <div className="absolute top-4 left-4 z-20">
+              <div className={`w-10 h-10 bg-gradient-to-br ${subject.color} rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                <Heart className="w-5 h-5 text-white" />
+              </div>
+            </div>
+
+            {/* Image Section */}
+            <div className="relative h-48 overflow-hidden">
+              <img 
+                src={subject.image} 
+                alt={subject.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+            </div>
+            
+            {/* Content Section */}
+            <div className="p-6">
+              <h3 className="text-2xl font-bold text-slate-800 mb-2 group-hover:text-green-600 transition-colors">
+                {subject.name}
+              </h3>
+              <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                {subject.description}
+              </p>
+              
+              {/* Stats and Rating */}
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center text-sm text-gray-500">
+                  <Users className="w-4 h-4 mr-1" />
+                  <span>{subject.students} students</span>
+                </div>
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                  ))}
+                  <span className="ml-1 text-sm text-gray-600">4.8</span>
                 </div>
               </div>
-            ))}
+
+              {/* Action Button */}
+              <button className={`w-full py-3 px-6 bg-gradient-to-r ${subject.color} text-white rounded-xl font-semibold transition-all duration-300 transform group-hover:scale-105 shadow-lg hover:shadow-xl`}>
+                <span className="flex items-center justify-center">
+                  Start Learning
+                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </button>
+            </div>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+
+    {/* View More Button */}
+    <div className="text-center mt-16">
+      <button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+        View All Subjects
+      </button>
+    </div>
+  </div>
+</section>
 
       {/* Enhanced Teachers Section */}
       <section id="teachers" className="py-24 bg-gray-50">
@@ -629,82 +692,161 @@ useEffect(() => {
       </section>
 
       {/* Newsletter Subscription Section */}
-      <section className="py-24 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 pattern-overlay" />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="slide-left">
-              <div className="relative">
-                <img 
-                  src="https://images.unsplash.com/photo-1551836022-deb4988cc6c0?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Student with tablet" 
-                  className="w-full h-80 object-cover rounded-3xl shadow-2xl parallax-image-reverse"
-                />
-                <div className="absolute inset-0 bg-black/20 rounded-3xl" />
-                <div className="absolute top-8 left-8 bg-white/20 backdrop-blur-sm rounded-2xl p-4 floating-badge">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-3 h-3 bg-green-400 rounded-full pulse-dot" />
-                    <div className="w-3 h-3 bg-orange-400 rounded-full pulse-dot" style={{animationDelay: '0.5s'}} />
-                    <div className="w-3 h-3 bg-blue-400 rounded-full pulse-dot" style={{animationDelay: '1s'}} />
-                  </div>
+<section className="py-24 bg-gradient-to-r from-emerald-400 via-green-500 to-green-600 relative overflow-visible">
+  {/* Decorative Background Elements */}
+  <div className="absolute inset-0">
+    <div className="absolute inset-0 pattern-overlay opacity-20" />
+    {/* Floating Dots Pattern */}
+    <div className="absolute top-20 left-10 grid grid-cols-6 gap-2 opacity-30">
+      {[...Array(24)].map((_, i) => (
+        <div key={i} className="w-2 h-2 bg-white rounded-full animate-pulse" style={{animationDelay: `${i * 0.1}s`}} />
+      ))}
+    </div>
+    {/* Floating geometric shapes */}
+    <div className="absolute top-32 right-20 w-20 h-20 border-4 border-white/20 rounded-full animate-spin" style={{animationDuration: '20s'}} />
+    <div className="absolute bottom-20 left-32 w-16 h-16 bg-white/10 rotate-45 animate-bounce" style={{animationDelay: '2s'}} />
+  </div>
+
+  <div className="max-w-7xl mx-auto px-4 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* Image Section with Floating Badges */}
+      <div className="relative order-2 lg:order-1">
+        <div className="relative">
+          {/* Main Image with Proper Overflow */}
+          <div className="relative z-20 transform lg:-translate-y-20">
+            <img 
+              src="/assets/images/person1.png" 
+              alt="Student with tablet" 
+              className="w-full max-w-md mx-auto h-auto object-cover rounded-3xl"
+            />
+            
+            {/* Floating Badges */}
+            {/* Subscribe Badge - Top Left */}
+            <div className="absolute -top-4 -left-4 bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg animate-bounce">
+              <div className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                  <Mail className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <div className="text-xs font-bold text-gray-800">Subscribe</div>
+                  <div className="text-xs text-gray-600">Newsletter</div>
                 </div>
               </div>
             </div>
 
-            <div className="text-white slide-right">
-              <div className="mb-6">
-                <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
-                  📧 Subscribe to Newsletter
-                </span>
+            {/* Students Count Badge - Top Right */}
+            <div className="absolute -top-6 -right-6 bg-teal-500 text-white rounded-2xl p-4 shadow-lg animate-pulse">
+              <div className="text-center">
+                <div className="text-xl font-bold">25K+</div>
+                <div className="text-xs">Students</div>
               </div>
-              
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Stay Updated About New Subjects & Study Tips
-              </h2>
-              
-              <p className="text-xl text-white/90 mb-8 leading-relaxed">
-                Get weekly study tips, new subject announcements, and exclusive content delivered to your inbox.
-              </p>
+            </div>
 
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6 glass-card">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <input
-                    type="email"
-                    placeholder="Enter your email address..."
-                    className="flex-1 bg-white/20 border border-white/30 rounded-xl px-6 py-4 text-white placeholder-white/70 focus:outline-none focus:border-white focus:ring-2 focus:ring-white/20 transition-all backdrop-blur-sm"
-                  />
-                  <button className="bg-white text-orange-500 px-8 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 hover:bg-gray-50 shadow-lg pulse-button">
-                    <Send className="w-5 h-5 inline mr-2" />
-                    Subscribe Now
-                  </button>
-                </div>
-                <div className="flex items-center mt-4 text-sm text-white/80">
-                  <input type="checkbox" className="mr-3 rounded" />
-                  <span>I agree to receive educational content and updates. No spam, unsubscribe anytime.</span>
+            {/* Weekly Updates Badge - Bottom Left */}
+            <div className="absolute -bottom-4 -left-6 bg-purple-500 text-white rounded-xl p-3 shadow-lg" style={{animation: 'float 3s ease-in-out infinite'}}>
+              <div className="flex items-center space-x-2">
+                <Calendar className="w-5 h-5" />
+                <div>
+                  <div className="text-sm font-bold">Weekly</div>
+                  <div className="text-xs">Updates</div>
                 </div>
               </div>
+            </div>
 
-              <div className="flex items-center space-x-6 text-white/80">
-                <div className="flex items-center space-x-2">
-                  <Shield className="w-5 h-5" />
-                  <span className="text-sm">Secure & Private</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-5 h-5" />
-                  <span className="text-sm">Weekly Updates</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5" />
-                  <span className="text-sm">Join 25K+ Students</span>
-                </div>
+            {/* Success Rate Badge - Bottom Right */}
+            <div className="absolute -bottom-2 -right-8 bg-green-500 text-white rounded-full p-3 shadow-lg animate-spin" style={{animationDuration: '8s'}}>
+              <div className="text-center">
+                <Shield className="w-6 h-6 mx-auto" />
+                <div className="text-xs mt-1">Secure</div>
               </div>
+            </div>
+
+            {/* Notification Dots */}
+            <div className="absolute top-4 right-4 flex space-x-1">
+              <div className="w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+              <div className="w-3 h-3 bg-orange-400 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
+              <div className="w-3 h-3 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
             </div>
           </div>
+
+          {/* Background Decoration */}
+          <div className="absolute inset-0 bg-white/10 rounded-3xl blur-3xl transform scale-110 -z-10"></div>
         </div>
-      </section>
+      </div>
+
+      {/* Content Section */}
+      <div className="text-white order-1 lg:order-2">
+        <div className="mb-6">
+          <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
+            📧 Subscribe Our Newsletter
+          </span>
+        </div>
+        
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+          Want To Stay Informed About New Courses & Study ?
+        </h2>
+        
+        <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+          Get weekly study tips, new subject announcements, and exclusive content delivered to your inbox.
+        </p>
+
+        {/* Newsletter Form */}
+        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4">
+            <input
+              type="email"
+              placeholder="Enter Your Email..."
+              className="flex-1 bg-white border-0 rounded-xl px-6 py-4 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/20 transition-all"
+            />
+            <button className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap">
+              SUBSCRIBE NOW
+            </button>
+          </div>
+          <div className="flex items-center mt-4 text-sm text-white/80">
+            <input type="checkbox" className="mr-3 rounded" />
+            <span>I agree to receive educational content and updates. No spam, unsubscribe anytime.</span>
+          </div>
+        </div>
+
+        {/* Feature Icons */}
+        <div className="flex flex-wrap gap-6 text-white/80">
+          <div className="flex items-center space-x-2">
+            <Shield className="w-5 h-5" />
+            <span className="text-sm">Secure & Private</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Mail className="w-5 h-5" />
+            <span className="text-sm">Weekly Updates</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Users className="w-5 h-5" />
+            <span className="text-sm">Join 25K+ Students</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{/* Add this CSS for custom animations */}
+<style jsx>{`
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @media (max-width: 768px) {
+    .transform.lg\\:-translate-y-20 {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .transform.lg\\:-translate-y-20 {
+      transform: translateY(0);
+    }
+  }
+`}</style>
 
       {/* Enhanced Testimonials Section */}
       <section className="py-24 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden">
