@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { 
   BookOpen, Users, Award, Clock, Star, ChevronRight, Play, Zap, Target,
   TrendingUp, Shield, Globe, ArrowRight, CheckCircle, Calculator,
@@ -17,20 +17,31 @@ import Footer from '../components/layout/Footer';
 import '../styles/animations.scss';
 import Image from 'next/image';
 
-// Parallax hook
+// Optimized parallax hook with throttling
 const useParallax = () => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
+    let ticking = false;
+    
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrollY(window.scrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return scrollY;
 };
 
-// Typewriter effect hook
+// Optimized typewriter hook
 const useTypewriter = (text: string, speed: number = 100) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -48,9 +59,9 @@ const useTypewriter = (text: string, speed: number = 100) => {
   return displayText;
 };
 
-// Intersection Observer hook
+// Optimized intersection observer hook
 const useIntersectionObserver = (options = {}) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -58,35 +69,36 @@ const useIntersectionObserver = (options = {}) => {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      options
+      { threshold: 0.1, ...options }
     );
     
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
     
     return () => {
-      if (ref.current) {
-        observer.disconnect();
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, [ref, options]);
+  }, []);
 
-  return [ref, isVisible];
+  return [ref, isVisible] as const;
 };
 
-// CountUp animation
-const CountUp = ({ end, duration = 2000 }) => {
+// Optimized CountUp component
+const CountUp = React.memo(({ end, duration = 2000 }: { end: number; duration?: number }) => {
   const [count, setCount] = useState(0);
   const [ref, isVisible] = useIntersectionObserver({ threshold: 0.1 });
 
   useEffect(() => {
     if (!isVisible) return;
 
-    let startTime;
-    let animationFrameId;
+    let startTime: number;
+    let animationFrameId: number;
     
-    const animateCount = (timestamp) => {
+    const animateCount = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / duration, 1);
       setCount(Math.floor(progress * end));
@@ -98,14 +110,18 @@ const CountUp = ({ end, duration = 2000 }) => {
     animationFrameId = requestAnimationFrame(animateCount);
     
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
     };
   }, [isVisible, end, duration]);
 
   return <span ref={ref}>{count.toLocaleString()}</span>;
-};
+});
 
-// Hero carousel data
+CountUp.displayName = 'CountUp';
+
+// Static data moved outside component to prevent recreation
 const heroSlides = [
   {
     image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=2070&auto=format&fit=crop",
@@ -124,7 +140,6 @@ const heroSlides = [
   }
 ];
 
-// Subjects data
 const subjects = [
   { 
     name: "Mathematics", 
@@ -182,9 +197,6 @@ const subjects = [
   }
 ];
 
-
-
-// Featured teachers with enhanced data
 const featuredTeachers = [
   {
     name: "John Maina",
@@ -228,7 +240,6 @@ const featuredTeachers = [
   }
 ];
 
-// Enhanced testimonials
 const testimonials = [
   {
     text: "StudyBuddy completely transformed my grades. My math scores went from a C- to an A in just one term thanks to the incredible teachers on this platform!",
@@ -268,33 +279,38 @@ const testimonials = [
 ];
 
 export default function StudyBuddyHomepage() {
-  const scrollY = useParallax();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const typewriterText = useTypewriter("Time To Learn", 150);
-  const testimonialsRef = useRef(null);
   const [currentTestimonialPair, setCurrentTestimonialPair] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
 
-// Auto-scroll testimonials effect
-useEffect(() => {
-  const interval = setInterval(() => {
-    setCurrentTestimonialPair((prev) => (prev + 1) % Math.ceil(testimonials.length / 2));
-  }, 4000);
-  return () => clearInterval(interval);
-}, []);
+  // Memoized values
+  const testimonialPairs = useMemo(() => Math.ceil(testimonials.length / 2), []);
 
-  // Hero carousel effect
+  // Auto-scroll effects with cleanup
   useEffect(() => {
-    const interval = setInterval(() => {
+    const testimonialInterval = setInterval(() => {
+      setCurrentTestimonialPair((prev) => (prev + 1) % testimonialPairs);
+    }, 4000);
+
+    const slideInterval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+
+    return () => {
+      clearInterval(testimonialInterval);
+      clearInterval(slideInterval);
+    };
+  }, [testimonialPairs]);
 
   // Hydration fix
-  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
+  }, []);
+
+  // Slide change handler
+  const handleSlideChange = useCallback((index: number) => {
+    setCurrentSlide(index);
   }, []);
 
   if (!isMounted) {
@@ -305,178 +321,179 @@ useEffect(() => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Modern Hero Section with Fixed Background */}
-<section id="home" className="relative h-screen overflow-hidden">
-  {/* Fixed Background Images Carousel */}
-  {heroSlides.map((slide, index) => (
-    <div 
-      key={index}
-      className={`fixed inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-        index === currentSlide ? 'opacity-100' : 'opacity-0'
-      }`}
-      style={{
-        backgroundImage: `url('${slide.image}')`,
-        backgroundAttachment: 'fixed',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center',
-      }}
-    />
-  ))}
-  
-  {/* Modern Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-800/40 to-emerald-900/50" />
-  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-  
-  {/* Floating Elements - Minimal */}
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div className="floating-element absolute top-20 right-20 w-16 h-16 border border-emerald-400/20 rounded-full"></div>
-    <div className="floating-element absolute bottom-40 left-16 w-12 h-12 bg-emerald-500/10 rounded-full blur-sm"></div>
-    <div className="floating-element absolute top-1/3 right-1/4 w-8 h-8 border border-green-400/30 rounded-full"></div>
-    <BookOpen className="floating-element absolute top-1/4 left-1/4 w-6 h-6 text-emerald-400/30" />
-    <GraduationCap className="floating-element absolute bottom-1/3 right-1/3 w-8 h-8 text-green-400/20" />
-    <Award className="floating-element absolute top-1/2 left-1/6 w-5 h-5 text-green-400/25" />
-  </div>
-
-  {/* Hero Content */}
-  <div className="relative z-10 h-full flex items-center px-4 sm:px-6 lg:px-8">
-    <div className="max-w-7xl mx-auto w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+      {/* Optimized Hero Section - Removed fixed background for performance */}
+      <section id="home" className="relative h-screen overflow-hidden">
+        {/* Optimized Background Images Carousel */}
+        <div className="absolute inset-0">
+          {heroSlides.map((slide, index) => (
+            <div 
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                quality={85}
+              />
+            </div>
+          ))}
+        </div>
         
-        {/* Left Content */}
-        <div className="space-y-8 slide-left">
-          <div className="space-y-4">
-            <span className="inline-block text-emerald-400 text-sm sm:text-base font-semibold tracking-wide uppercase bg-emerald-400/10 px-4 py-2 rounded-full border border-emerald-400/20 backdrop-blur-sm">
-              Personal & Online Teachers for Kenyan Students
-            </span>
-            
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
-              <span className="block mb-2">Excel in School</span>
-              <span className="text-emerald-400 block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
-                {currentSlide !== null && heroSlides[currentSlide]?.title}
-              </span>
-            </h1>
-            
-            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl leading-relaxed">
-              {currentSlide !== null && heroSlides[currentSlide]?.subtitle}
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-emerald-500/25 flex items-center justify-center gap-3">
-              <Rocket className="w-5 h-5" />
-              Find Your Teacher
-            </button>
-            
-            <button className="border-2 border-white/30 text-white hover:bg-white hover:text-emerald-600 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm flex items-center justify-center gap-3">
-              <Play className="w-5 h-5" />
-              Watch Demo
-            </button>
-          </div>
-
-          {/* Quick Stats */}
-          <div className="flex flex-wrap gap-8 pt-4">
-            <div className="text-center sm:text-left">
-              <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-                <Users className="w-6 h-6 text-emerald-400" />
-                15K+
-              </div>
-              <div className="text-sm text-gray-400">Active Students</div>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-                <Star className="w-6 h-6 text-emerald-400" />
-                4.9
-              </div>
-              <div className="text-sm text-gray-400">Average Rating</div>
-            </div>
-            <div className="text-center sm:text-left">
-              <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
-                <Trophy className="w-6 h-6 text-emerald-400" />
-                95%
-              </div>
-              <div className="text-sm text-gray-400">Success Rate</div>
-            </div>
-          </div>
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-800/40 to-emerald-900/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+        
+        {/* Simplified Floating Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 right-20 w-16 h-16 border border-emerald-400/20 rounded-full animate-pulse"></div>
+          <div className="absolute bottom-40 left-16 w-12 h-12 bg-emerald-500/10 rounded-full blur-sm animate-bounce"></div>
+          <div className="absolute top-1/3 right-1/4 w-8 h-8 border border-green-400/30 rounded-full animate-ping"></div>
+          <BookOpen className="absolute top-1/4 left-1/4 w-6 h-6 text-emerald-400/30 animate-pulse" />
+          <GraduationCap className="absolute bottom-1/3 right-1/3 w-8 h-8 text-green-400/20 animate-bounce" />
+          <Award className="absolute top-1/2 left-1/6 w-5 h-5 text-green-400/25 animate-pulse" />
         </div>
 
-        {/* Right Visual Element */}
-        <div className="relative slide-right lg:block hidden">
-          <div className="relative">
-            {/* Main Visual Card */}
-            <div className="bg-white backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl text-black">
-              <div className="space-y-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-black font-semibold">StudyBuddy Platform</div>
-                    <div className="text-gray-500 text-sm">Your Success Partner</div>
-                  </div>
-                </div>
-                
+        {/* Hero Content */}
+        <div className="relative z-10 h-full flex items-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+              
+              {/* Left Content */}
+              <div className="space-y-8 animate-fade-in">
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-emerald-500">
-                    <CheckCircle className="w-5 h-5 text-emerald-400" />
-                    <span>Kenyan Curriculum Expert Teachers</span>
+                  <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+                    <span className="block mb-2">Excel in School</span>
+                    <span className="text-emerald-400 block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
+                      {heroSlides[currentSlide]?.title}
+                    </span>
+                  </h1>
+                  
+                  <p className="text-lg sm:text-xl text-gray-300 max-w-2xl leading-relaxed">
+                    {heroSlides[currentSlide]?.subtitle}
+                  </p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-emerald-500/25 flex items-center justify-center gap-3">
+                    <Rocket className="w-5 h-5" />
+                    Find Your Teacher
+                  </button>
+                  
+                  <button className="border-2 border-white/30 text-white hover:bg-white hover:text-emerald-600 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm flex items-center justify-center gap-3">
+                    <Play className="w-5 h-5" />
+                    Watch Demo
+                  </button>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="flex flex-wrap gap-8 pt-4">
+                  <div className="text-center sm:text-left">
+                    <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                      <Users className="w-6 h-6 text-emerald-400" />
+                      15K+
+                    </div>
+                    <div className="text-sm text-gray-400">Active Students</div>
                   </div>
-                  <div className="flex items-center gap-3 text-emerald-500">
-                    <CheckCircle className="w-5 h-5 text-emerald-400" />
-                    <span>Personalized Learning Plans</span>
+                  <div className="text-center sm:text-left">
+                    <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                      <Star className="w-6 h-6 text-emerald-400" />
+                      4.9
+                    </div>
+                    <div className="text-sm text-gray-400">Average Rating</div>
                   </div>
-                  <div className="flex items-center gap-3 text-emerald-500">
-                    <CheckCircle className="w-5 h-5 text-emerald-400" />
-                    <span>24/7 Academic Support</span>
+                  <div className="text-center sm:text-left">
+                    <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                      <Trophy className="w-6 h-6 text-emerald-400" />
+                      95%
+                    </div>
+                    <div className="text-sm text-gray-400">Success Rate</div>
                   </div>
                 </div>
-                
-                <div className="bg-emerald-500/20 rounded-2xl p-4 border border-emerald-400/30">
-                  <div className="text-emerald-400 text-sm font-medium">Latest Achievement</div>
-                  <div className="text-black font-semibold">Mathematics Grade: A</div>
-                  <div className="text-black text-sm">Improved by 2 grades!</div>
+              </div>
+
+              {/* Right Visual Element */}
+              <div className="relative lg:block hidden animate-fade-in-right">
+                <div className="relative">
+                  {/* Main Visual Card */}
+                  <div className="bg-white backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl text-black">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
+                          <GraduationCap className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-black font-semibold">StudyBuddy Platform</div>
+                          <div className="text-gray-500 text-sm">Your Success Partner</div>
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-center gap-3 text-emerald-500">
+                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                          <span>Kenyan Curriculum Expert Teachers</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-emerald-500">
+                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                          <span>Personalized Learning Plans</span>
+                        </div>
+                        <div className="flex items-center gap-3 text-emerald-500">
+                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                          <span>24/7 Academic Support</span>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-emerald-500/20 rounded-2xl p-4 border border-emerald-400/30">
+                        <div className="text-emerald-400 text-sm font-medium">Latest Achievement</div>
+                        <div className="text-black font-semibold">Mathematics Grade: A</div>
+                        <div className="text-black text-sm">Improved by 2 grades!</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Floating Achievement Badges */}
+                  <div className="absolute -top-4 -right-8 animate-bounce">
+                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
+                      <div className="flex items-center gap-2">
+                        <Award className="w-5 h-5 text-emerald-400" />
+                        <span className="text-white text-sm font-medium">Top Performer</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute -bottom-6 -left-6 animate-pulse">
+                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="w-5 h-5 text-green-400" />
+                        <span className="text-white text-sm font-medium">95% Success</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Floating Achievement Badges */}
-            <div className="floating-badge absolute -top-4 -right-8">
-              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
-                <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5 text-emerald-400" />
-                  <span className="text-white text-sm font-medium">Top Performer</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="floating-badge absolute -bottom-6 -left-6">
-              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
-                <div className="flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-green-400" />
-                  <span className="text-white text-sm font-medium">95% Success</span>
-                </div>
-              </div>
+            {/* Slide Indicators */}
+            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+              {heroSlides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSlideChange(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === currentSlide ? 'bg-emerald-400 w-8' : 'bg-white/40 w-2'
+                  }`}
+                />
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
-        {heroSlides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentSlide(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === currentSlide ? 'bg-emerald-400 w-8' : 'bg-white/40 w-2'
-            }`}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-      {/* Enhanced Statistics Section */}
+      {/* Statistics Section */}
       <section className="py-20 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -486,7 +503,7 @@ useEffect(() => {
               { number: 47, label: "Counties Covered", icon: MapPin, color: "text-purple-500" },
               { number: 98, label: "Success Rate %", icon: Trophy, color: "text-orange-500" }
             ].map((stat, index) => (
-              <div key={index} className="text-center counter-up group" style={{animationDelay: `${index * 200}ms`}}>
+              <div key={index} className="text-center group">
                 <div className={`w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br ${
                   stat.color === 'text-green-500' ? 'from-green-100 to-green-200' :
                   stat.color === 'text-blue-500' ? 'from-blue-100 to-blue-200' :
@@ -506,35 +523,37 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* About Us Section with Parallax */}
+      {/* About Us Section */}
       <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="slide-left">
+            <div className="animate-slide-in-left">
               <div className="relative">
-                <img 
+                <Image 
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
                   alt="Students collaborating" 
-                  className="w-full h-96 object-cover rounded-3xl shadow-2xl parallax-image"
+                  width={600}
+                  height={400}
+                  className="w-full h-96 object-cover rounded-3xl shadow-2xl"
                 />
-                <div className="absolute -bottom-6 -right-6 bg-green-500 text-white p-6 rounded-2xl shadow-xl pop-in">
+                <div className="absolute -bottom-6 -right-6 bg-green-500 text-white p-6 rounded-2xl shadow-xl">
                   <div className="text-3xl font-bold">15+</div>
                   <div className="text-sm">Years Experience</div>
                 </div>
-                <div className="absolute -top-6 -left-6 bg-white p-4 rounded-full shadow-lg bounce-slow">
+                <div className="absolute -top-6 -left-6 bg-white p-4 rounded-full shadow-lg animate-bounce">
                   <Award className="w-8 h-8 text-green-500" />
                 </div>
               </div>
             </div>
 
-            <div className="slide-right">
+            <div className="animate-slide-in-right">
               <div className="mb-6">
                 <span className="text-green-500 font-semibold uppercase tracking-wide">About StudyBuddy</span>
                 <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mt-4 mb-6">
                   Empowering Kenyan Students for Academic Excellence
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                  StudyBuddy is Kenya's premier online learning platform, connecting high school students with qualified teachers across all subjects. We're committed to making quality education accessible to every Kenyan student.
+                  StudyBuddy is Kenya&apos;s premier online learning platform, connecting high school students with qualified teachers across all subjects. We&apos;re committed to making quality education accessible to every Kenyan student.
                 </p>
               </div>
 
@@ -545,7 +564,7 @@ useEffect(() => {
                   { icon: Certificate, title: "Certified Teachers", desc: "Qualified professionals" },
                   { icon: Growth, title: "Proven Results", desc: "Track your progress" }
                 ].map((feature, index) => (
-                  <div key={index} className="flex items-start space-x-4 fade-up" style={{animationDelay: `${index * 100}ms`}}>
+                  <div key={index} className="flex items-start space-x-4">
                     <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
                       <feature.icon className="w-6 h-6 text-green-600" />
                     </div>
@@ -565,100 +584,101 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Enhanced Subjects Section */}
+      {/* Subjects Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50 via-white to-blue-50 relative overflow-hidden">
-  <div className="max-w-7xl mx-auto px-4 relative z-10">
-    <div className="text-center mb-16">
-      <div className="inline-flex items-center justify-center px-4 py-2 bg-orange-100 text-orange-600 rounded-full font-semibold text-sm uppercase tracking-wide mb-6">
-        <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
-        Popular Subjects
-      </div>
-      <h2 className="text-5xl font-bold mb-6">
-        <span className="text-slate-800">Master Your</span>{' '}
-        <span className="text-green-500">Favorite Subjects</span>
-      </h2>
-      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-        Choose from our comprehensive range of subjects taught by Kenya's best teachers
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {subjects.map((subject, index) => (
-        <div 
-          key={index} 
-          className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-2"
-        >
-          <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group-hover:border-green-200 relative">
-            {/* Category Badge */}
-            <div className="absolute top-4 right-4 z-20">
-              <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${subject.color}`}>
-                {subject.category}
-              </div>
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center justify-center px-4 py-2 bg-orange-100 text-orange-600 rounded-full font-semibold text-sm uppercase tracking-wide mb-6">
+              <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
+              Popular Subjects
             </div>
+            <h2 className="text-5xl font-bold mb-6">
+              <span className="text-slate-800">Master Your</span>{' '}
+              <span className="text-green-500">Favorite Subjects</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose from our comprehensive range of subjects taught by Kenya&apos;s best teachers
+            </p>
+          </div>
 
-            {/* Heart Icon */}
-            <div className="absolute top-4 left-4 z-20">
-              <div className={`w-10 h-10 bg-gradient-to-br ${subject.color} rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                <Heart className="w-5 h-5 text-white" />
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {subjects.map((subject, index) => (
+              <div 
+                key={index} 
+                className="group cursor-pointer transform transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group-hover:border-green-200 relative">
+                  {/* Category Badge */}
+                  <div className="absolute top-4 right-4 z-20">
+                    <div className={`px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r ${subject.color}`}>
+                      {subject.category}
+                    </div>
+                  </div>
 
-            {/* Image Section */}
-            <div className="relative h-48 overflow-hidden">
-              <img 
-                src={subject.image} 
-                alt={subject.name}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-            </div>
-            
-            {/* Content Section */}
-            <div className="p-6">
-              <h3 className="text-2xl font-bold text-slate-800 mb-2 group-hover:text-green-600 transition-colors">
-                {subject.name}
-              </h3>
-              <p className="text-gray-600 mb-4 text-sm leading-relaxed">
-                {subject.description}
-              </p>
-              
-              {/* Stats and Rating */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center text-sm text-gray-500">
-                  <Users className="w-4 h-4 mr-1" />
-                  <span>{subject.students} students</span>
+                  {/* Heart Icon */}
+                  <div className="absolute top-4 left-4 z-20">
+                    <div className={`w-10 h-10 bg-gradient-to-br ${subject.color} rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <Heart className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Image Section */}
+                  <div className="relative h-48 overflow-hidden">
+                    <Image 
+                      src={subject.image} 
+                      alt={subject.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  </div>
+                  
+                  {/* Content Section */}
+                  <div className="p-6">
+                    <h3 className="text-2xl font-bold text-slate-800 mb-2 group-hover:text-green-600 transition-colors">
+                      {subject.name}
+                    </h3>
+                    <p className="text-gray-600 mb-4 text-sm leading-relaxed">
+                      {subject.description}
+                    </p>
+                    
+                    {/* Stats and Rating */}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center text-sm text-gray-500">
+                        <Users className="w-4 h-4 mr-1" />
+                        <span>{subject.students} students</span>
+                      </div>
+                      <div className="flex items-center">
+                        {[...Array(5)].map((_, i) => (
+                          <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
+                        ))}
+                        <span className="ml-1 text-sm text-gray-600">4.8</span>
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <button className={`w-full py-3 px-6 bg-gradient-to-r ${subject.color} text-white rounded-xl font-semibold transition-all duration-300 transform group-hover:scale-105 shadow-lg hover:shadow-xl`}>
+                      <span className="flex items-center justify-center">
+                        Start Learning
+                        <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </span>
+                    </button>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                  <span className="ml-1 text-sm text-gray-600">4.8</span>
-                </div>
               </div>
+            ))}
+          </div>
 
-              {/* Action Button */}
-              <button className={`w-full py-3 px-6 bg-gradient-to-r ${subject.color} text-white rounded-xl font-semibold transition-all duration-300 transform group-hover:scale-105 shadow-lg hover:shadow-xl`}>
-                <span className="flex items-center justify-center">
-                  Start Learning
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-            </div>
+          {/* View More Button */}
+          <div className="text-center mt-16">
+            <button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+              View All Subjects
+            </button>
           </div>
         </div>
-      ))}
-    </div>
+      </section>
 
-    {/* View More Button */}
-    <div className="text-center mt-16">
-      <button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
-        View All Subjects
-      </button>
-    </div>
-  </div>
-</section>
-
-      {/* Enhanced Teachers Section */}
+      {/* Teachers Section */}
       <section id="teachers" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
@@ -668,7 +688,7 @@ useEffect(() => {
               <span className="text-green-500">Teachers</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Learn from Kenya's most experienced and qualified educators
+              Learn from Kenya&apos;s most experienced and qualified educators
             </p>
           </div>
 
@@ -676,22 +696,23 @@ useEffect(() => {
             {featuredTeachers.map((teacher, index) => (
               <div 
                 key={index} 
-                className="group teacher-card"
-                style={{animationDelay: `${index * 150}ms`}}
+                className="group"
               >
-                <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform group-hover:-translate-y-2 teacher-card-inner">
+                <div className="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden transform group-hover:-translate-y-2">
                   <div className="relative">
                     <div className="h-64 overflow-hidden">
-                      <img 
+                      <Image 
                         src={teacher.image} 
                         alt={teacher.name}
+                        width={300}
+                        height={300}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                     </div>
-                    <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg price-tag">
+                    <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg">
                       KES {teacher.price}/hr
                     </div>
-                    <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1 rating-badge">
+                    <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
                       <div className="flex items-center space-x-1">
                         <Star className="w-4 h-4 text-yellow-400 fill-current" />
                         <span className="text-sm font-semibold">{teacher.rating}</span>
@@ -726,264 +747,232 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Newsletter Subscription Section */}
-<section className="py-24 bg-gradient-to-r from-emerald-400 via-green-500 to-green-600 relative overflow-visible">
-  {/* Decorative Background Elements */}
-  <div className="absolute inset-0">
-    <div className="absolute inset-0 pattern-overlay opacity-20" />
-    {/* Floating Dots Pattern */}
-    <div className="absolute top-20 left-10 grid grid-cols-6 gap-2 opacity-30">
-      {[...Array(24)].map((_, i) => (
-        <div key={i} className="w-2 h-2 bg-white rounded-full animate-pulse" style={{animationDelay: `${i * 0.1}s`}} />
-      ))}
-    </div>
-    {/* Floating geometric shapes */}
-    <div className="absolute top-32 right-20 w-20 h-20 border-4 border-white/20 rounded-full animate-spin" style={{animationDuration: '20s'}} />
-    <div className="absolute bottom-20 left-32 w-16 h-16 bg-white/10 rotate-45 animate-bounce" style={{animationDelay: '2s'}} />
-  </div>
+      {/* Newsletter Section */}
+      <section className="py-24 bg-gradient-to-r from-emerald-400 via-green-500 to-green-600 relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 grid grid-cols-6 gap-2 opacity-30">
+            {[...Array(24)].map((_, i) => (
+              <div key={i} className="w-2 h-2 bg-white rounded-full animate-pulse" style={{animationDelay: `${i * 0.1}s`}} />
+            ))}
+          </div>
+          <div className="absolute top-32 right-20 w-20 h-20 border-4 border-white/20 rounded-full animate-spin" style={{animationDuration: '20s'}} />
+          <div className="absolute bottom-20 left-32 w-16 h-16 bg-white/10 rotate-45 animate-bounce" style={{animationDelay: '2s'}} />
+        </div>
 
-  <div className="max-w-7xl mx-auto px-4 relative z-10">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      {/* Image Section with Floating Badges */}
-      <div className="relative order-2 lg:order-1">
-        <div className="relative">
-          {/* Main Image with Proper Overflow */}
-          <div className="relative z-20 transform lg:-translate-y-20">
-            <img 
-              src="/assets/images/person1.png" 
-              alt="Student with tablet" 
-              className="w-full max-w-md mx-auto h-auto object-cover rounded-3xl"
-            />
-            
-            {/* Floating Badges */}
-            {/* Subscribe Badge - Top Left */}
-            <div className="absolute -top-4 -left-4 bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg animate-bounce">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                  <Mail className="w-4 h-4 text-white" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image Section */}
+            <div className="relative order-2 lg:order-1">
+              <div className="relative">
+                <div className="relative z-20 transform lg:-translate-y-20">
+                  <Image 
+                    src="/assets/images/person1.png" 
+                    alt="Student with tablet" 
+                    width={400}
+                    height={500}
+                    className="w-full max-w-md mx-auto h-auto object-cover rounded-3xl"
+                  />
+                  
+                  {/* Floating Badges */}
+                  <div className="absolute -top-4 -left-4 bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg animate-bounce">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                        <Mail className="w-4 h-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-gray-800">Subscribe</div>
+                        <div className="text-xs text-gray-600">Newsletter</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute -top-6 -right-6 bg-teal-500 text-white rounded-2xl p-4 shadow-lg animate-pulse">
+                    <div className="text-center">
+                      <div className="text-xl font-bold">25K+</div>
+                      <div className="text-xs">Students</div>
+                    </div>
+                  </div>
+
+                  <div className="absolute -bottom-4 -left-6 bg-purple-500 text-white rounded-xl p-3 shadow-lg animate-bounce">
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="w-5 h-5" />
+                      <div>
+                        <div className="text-sm font-bold">Weekly</div>
+                        <div className="text-xs">Updates</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="absolute -bottom-2 -right-8 bg-green-500 text-white rounded-full p-3 shadow-lg animate-spin" style={{animationDuration: '8s'}}>
+                    <div className="text-center">
+                      <Shield className="w-6 h-6 mx-auto" />
+                      <div className="text-xs mt-1">Secure</div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-xs font-bold text-gray-800">Subscribe</div>
-                  <div className="text-xs text-gray-600">Newsletter</div>
+              </div>
+            </div>
+
+            {/* Content Section */}
+            <div className="text-white order-1 lg:order-2">
+              <div className="mb-6">
+                <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
+                  Subscribe Our Newsletter
+                </span>
+              </div>
+              
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                Want To Stay Informed About New Courses & Study Tips?
+              </h2>
+              
+              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
+                Get weekly study tips, new subject announcements, and exclusive content delivered to your inbox.
+              </p>
+
+              {/* Newsletter Form */}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <input
+                    type="email"
+                    placeholder="Enter Your Email..."
+                    className="flex-1 bg-white border-0 rounded-xl px-6 py-4 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/20 transition-all"
+                  />
+                  <button className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap">
+                    SUBSCRIBE NOW
+                  </button>
+                </div>
+                <div className="flex items-center mt-4 text-sm text-white/80">
+                  <input type="checkbox" className="mr-3 rounded" />
+                  <span>I agree to receive educational content and updates. No spam, unsubscribe anytime.</span>
                 </div>
               </div>
-            </div>
 
-            {/* Students Count Badge - Top Right */}
-            <div className="absolute -top-6 -right-6 bg-teal-500 text-white rounded-2xl p-4 shadow-lg animate-pulse">
-              <div className="text-center">
-                <div className="text-xl font-bold">25K+</div>
-                <div className="text-xs">Students</div>
-              </div>
-            </div>
-
-            {/* Weekly Updates Badge - Bottom Left */}
-            <div className="absolute -bottom-4 -left-6 bg-purple-500 text-white rounded-xl p-3 shadow-lg" style={{animation: 'float 3s ease-in-out infinite'}}>
-              <div className="flex items-center space-x-2">
-                <Calendar className="w-5 h-5" />
-                <div>
-                  <div className="text-sm font-bold">Weekly</div>
-                  <div className="text-xs">Updates</div>
+              {/* Feature Icons */}
+              <div className="flex flex-wrap gap-6 text-white/80">
+                <div className="flex items-center space-x-2">
+                  <Shield className="w-5 h-5" />
+                  <span className="text-sm">Secure & Private</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail className="w-5 h-5" />
+                  <span className="text-sm">Weekly Updates</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Users className="w-5 h-5" />
+                  <span className="text-sm">Join 25K+ Students</span>
                 </div>
               </div>
-            </div>
-
-            {/* Success Rate Badge - Bottom Right */}
-            <div className="absolute -bottom-2 -right-8 bg-green-500 text-white rounded-full p-3 shadow-lg animate-spin" style={{animationDuration: '8s'}}>
-              <div className="text-center">
-                <Shield className="w-6 h-6 mx-auto" />
-                <div className="text-xs mt-1">Secure</div>
-              </div>
-            </div>
-
-            {/* Notification Dots */}
-            <div className="absolute top-4 right-4 flex space-x-1">
-              <div className="w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
-              <div className="w-3 h-3 bg-orange-400 rounded-full animate-ping" style={{animationDelay: '0.5s'}}></div>
-              <div className="w-3 h-3 bg-blue-400 rounded-full animate-ping" style={{animationDelay: '1s'}}></div>
             </div>
           </div>
-
-          {/* Background Decoration */}
-          <div className="absolute inset-0 bg-white/10 rounded-3xl blur-3xl transform scale-110 -z-10"></div>
         </div>
-      </div>
+      </section>
 
-      {/* Content Section */}
-      <div className="text-white order-1 lg:order-2">
-        <div className="mb-6">
-          <span className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">
-            📧 Subscribe Our Newsletter
-          </span>
-        </div>
-        
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-          Want To Stay Informed About New Courses & Study ?
-        </h2>
-        
-        <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-          Get weekly study tips, new subject announcements, and exclusive content delivered to your inbox.
-        </p>
+      {/* Testimonials Section */}
+      <section className="py-24 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <div className="text-center mb-16">
+            <p className="text-orange-500 font-semibold mb-4 uppercase tracking-wide">OUR STUDENT&apos;S REVIEWS</p>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
+              What Real Students Say About Us!
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Hear from students who have transformed their academic journey with StudyBuddy&apos;s expert teachers and personalized learning approach.
+            </p>
+          </div>
 
-        {/* Newsletter Form */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4">
-            <input
-              type="email"
-              placeholder="Enter Your Email..."
-              className="flex-1 bg-white border-0 rounded-xl px-6 py-4 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/20 transition-all"
-            />
-            <button className="bg-teal-500 hover:bg-teal-600 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg whitespace-nowrap">
-              SUBSCRIBE NOW
+          {/* Auto-scrolling testimonial pairs */}
+          <div className="relative h-96 flex items-center justify-center">
+            {Array.from({ length: testimonialPairs }).map((_, pairIndex) => (
+              <div 
+                key={pairIndex}
+                className={`absolute inset-0 flex items-center justify-center gap-8 transition-opacity duration-1000 ${
+                  pairIndex === currentTestimonialPair ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                {/* Left testimonial */}
+                {testimonials[pairIndex * 2] && (
+                  <div className="relative">
+                    <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white p-8 rounded-full max-w-md relative">
+                      <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
+                        <Image
+                          src={testimonials[pairIndex * 2].avatar}
+                          alt={testimonials[pairIndex * 2].author}
+                          width={80}
+                          height={80}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="pr-12">
+                        <h4 className="text-xl font-bold mb-2">{testimonials[pairIndex * 2].author}</h4>
+                        <p className="text-sm mb-4 text-teal-100">{testimonials[pairIndex * 2].role}</p>
+                        <div className="flex mb-4">
+                          {[...Array(5)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-yellow-300 fill-current" />
+                          ))}
+                        </div>
+                        <p className="text-sm leading-relaxed italic">
+                          &quot;{testimonials[pairIndex * 2].text.substring(0, 150)}...&quot;
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Right testimonial */}
+                {testimonials[pairIndex * 2 + 1] && (
+                  <div className="relative">
+                    <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-8 rounded-full max-w-md relative">
+                      <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
+                        <Image
+                          src={testimonials[pairIndex * 2 + 1].avatar}
+                          alt={testimonials[pairIndex * 2 + 1].author}
+                          width={80}
+                          height={80}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="pl-12">
+                        <h4 className="text-xl font-bold mb-2">{testimonials[pairIndex * 2 + 1].author}</h4>
+                        <p className="text-sm mb-4 text-purple-100">{testimonials[pairIndex * 2 + 1].role}</p>
+                        <div className="flex mb-4">
+                          {[...Array(4)].map((_, i) => (
+                            <Star key={i} className="w-4 h-4 text-yellow-300 fill-current" />
+                          ))}
+                          <Star className="w-4 h-4 text-yellow-300" />
+                        </div>
+                        <p className="text-sm leading-relaxed italic">
+                          &quot;{testimonials[pairIndex * 2 + 1].text.substring(0, 150)}...&quot;
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* View more button */}
+          <div className="text-center mt-16">
+            <button className="bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+              VIEW MORE REVIEWS
             </button>
           </div>
-          <div className="flex items-center mt-4 text-sm text-white/80">
-            <input type="checkbox" className="mr-3 rounded" />
-            <span>I agree to receive educational content and updates. No spam, unsubscribe anytime.</span>
-          </div>
-        </div>
 
-        {/* Feature Icons */}
-        <div className="flex flex-wrap gap-6 text-white/80">
-          <div className="flex items-center space-x-2">
-            <Shield className="w-5 h-5" />
-            <span className="text-sm">Secure & Private</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Mail className="w-5 h-5" />
-            <span className="text-sm">Weekly Updates</span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Users className="w-5 h-5" />
-            <span className="text-sm">Join 25K+ Students</span>
+          {/* Testimonial indicators */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {Array.from({ length: testimonialPairs }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentTestimonialPair(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentTestimonialPair ? 'bg-orange-500 w-8' : 'bg-gray-300'
+                }`}
+              />
+            ))}
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-{/* Add this CSS for custom animations */}
-<style jsx>{`
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-  
-  @media (max-width: 768px) {
-    .transform.lg\\:-translate-y-20 {
-      transform: translateY(-10px);
-    }
-  }
-  
-  @media (max-width: 640px) {
-    .transform.lg\\:-translate-y-20 {
-      transform: translateY(0);
-    }
-  }
-`}</style>
-
-      {/* Enhanced Testimonials Section */}
-      <section className="py-24 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <p className="text-orange-500 font-semibold mb-4 uppercase tracking-wide">OUR STUDENT'S REVIEWS</p>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            What Real Student's Says About Us !
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Hear from students who have transformed their academic journey with StudyBuddy's expert teachers and personalized learning approach.
-          </p>
-        </div>
-    
-        {/* Auto-scrolling testimonial pairs */}
-        <div className="relative h-96 flex items-center justify-center">
-          {Array.from({ length: Math.ceil(testimonials.length / 2) }).map((_, pairIndex) => (
-            <div 
-              key={pairIndex}
-              className={`absolute inset-0 flex items-center justify-center gap-8 transition-opacity duration-1000 ${
-                pairIndex === currentTestimonialPair ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              {/* Left testimonial bubble */}
-              {testimonials[pairIndex * 2] && (
-                <div className="relative bubble-testimonial-left">
-                  <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white p-8 rounded-full max-w-md relative bubble-shape-left">
-                    <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
-                      <img
-                        src={testimonials[pairIndex * 2].avatar}
-                        alt={testimonials[pairIndex * 2].author}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="pr-12">
-                      <h4 className="text-xl font-bold mb-2">{testimonials[pairIndex * 2].author}</h4>
-                      <p className="text-sm mb-4 text-teal-100">{testimonials[pairIndex * 2].role}</p>
-                      <div className="flex mb-4">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-300 fill-current" />
-                        ))}
-                      </div>
-                      <p className="text-sm leading-relaxed italic">
-                        "{testimonials[pairIndex * 2].text.substring(0, 150)}..."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-    
-              {/* Right testimonial bubble */}
-              {testimonials[pairIndex * 2 + 1] && (
-                <div className="relative bubble-testimonial-right">
-                  <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-8 rounded-full max-w-md relative bubble-shape-right">
-                    <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
-                      <img
-                        src={testimonials[pairIndex * 2 + 1].avatar}
-                        alt={testimonials[pairIndex * 2 + 1].author}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="pl-12">
-                      <h4 className="text-xl font-bold mb-2">{testimonials[pairIndex * 2 + 1].author}</h4>
-                      <p className="text-sm mb-4 text-purple-100">{testimonials[pairIndex * 2 + 1].role}</p>
-                      <div className="flex mb-4">
-                        {[...Array(4)].map((_, i) => (
-                          <Star key={i} className="w-4 h-4 text-yellow-300 fill-current" />
-                        ))}
-                        <Star className="w-4 h-4 text-yellow-300" />
-                      </div>
-                      <p className="text-sm leading-relaxed italic">
-                        "{testimonials[pairIndex * 2 + 1].text.substring(0, 150)}..."
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-    
-        {/* View more button */}
-        <div className="text-center mt-16">
-          <button className="bg-gradient-to-r from-orange-400 to-orange-600 hover:from-orange-500 hover:to-orange-700 text-white px-8 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-            VIEW MORE REVIEW
-          </button>
-        </div>
-    
-        {/* Testimonial indicators */}
-        <div className="flex justify-center mt-8 space-x-2">
-          {Array.from({ length: Math.ceil(testimonials.length / 2) }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentTestimonialPair(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentTestimonialPair ? 'bg-orange-500 w-8' : 'bg-gray-300'
-              }`}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
+      </section>
 
       {/* Success Guarantee Section */}
       <section className="py-24 bg-white relative">
@@ -994,7 +983,7 @@ useEffect(() => {
               100% Success <span className="text-green-500">Guarantee</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're so confident in our teaching quality that we guarantee your success
+              We&apos;re so confident in our teaching quality that we guarantee your success
             </p>
           </div>
 
@@ -1019,8 +1008,8 @@ useEffect(() => {
                 gradient: "from-purple-500 to-purple-600"
               }
             ].map((item, index) => (
-              <div key={index} className="text-center guarantee-card" style={{animationDelay: `${index * 200}ms`}}>
-                <div className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg hover:scale-110 transition-transform duration-300 floating-icon`}>
+              <div key={index} className="text-center">
+                <div className={`w-20 h-20 bg-gradient-to-br ${item.gradient} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-lg hover:scale-110 transition-transform duration-300`}>
                   <item.icon className="w-10 h-10 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-slate-800 mb-4">{item.title}</h3>
@@ -1036,7 +1025,7 @@ useEffect(() => {
               <h3 className="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Success Journey?</h3>
               <p className="text-xl mb-8 text-green-100">Join thousands of successful students today</p>
               <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-                <button className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg glow-button-white">
+                <button className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg">
                   Find Your Teacher
                 </button>
                 <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 hover:bg-white hover:text-green-600">
@@ -1048,23 +1037,21 @@ useEffect(() => {
         </div>
       </section>
 
-      
-      {/* Enhanced Impact Section */}
+      {/* Impact Section */}
       <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
-        {/* Background overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-green-500/5"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
             {/* Left Content */}
-            <div className="slide-left order-2 lg:order-1">
+            <div className="order-2 lg:order-1">
               <div className="mb-8">
                 <span className="text-green-500 font-semibold uppercase tracking-wide text-sm">
                   Our Impact
                 </span>
-                <h2 className="impact-title text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6 leading-tight">
-                  Transforming Kenyan Students' Academic Journey
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6 leading-tight">
+                  Transforming Kenyan Students&apos; Academic Journey
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">
                   StudyBuddy has helped thousands of Kenyan high school students excel in their studies 
@@ -1073,7 +1060,7 @@ useEffect(() => {
               </div>
       
               <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
-                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up">
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                   </div>
@@ -1081,7 +1068,7 @@ useEffect(() => {
                   <div className="text-gray-600 text-xs sm:text-sm">Students Enrolled</div>
                 </div>
                 
-                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: '150ms'}}>
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
                   </div>
@@ -1089,7 +1076,7 @@ useEffect(() => {
                   <div className="text-gray-600 text-xs sm:text-sm">Grade Improvement</div>
                 </div>
                 
-                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: '300ms'}}>
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Star className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
                   </div>
@@ -1097,7 +1084,7 @@ useEffect(() => {
                   <div className="text-gray-600 text-xs sm:text-sm">Student Rating</div>
                 </div>
                 
-                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: '450ms'}}>
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
                     <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
                   </div>
@@ -1113,21 +1100,20 @@ useEffect(() => {
             </div>
       
             {/* Right Visual */}
-            <div className="relative slide-right order-1 lg:order-2">
+            <div className="relative order-1 lg:order-2">
               <div className="relative max-w-md mx-auto lg:max-w-lg">
-                {/* Main Image */}
                 <div className="relative">
                   <Image 
                     src="/assets/images/person4.png" 
                     alt="StudyBuddy Student" 
                     width={400}
                     height={500}
-                    className="w-full h-auto object-cover rounded-2xl "
+                    className="w-full h-auto object-cover rounded-2xl"
                     priority
                   />
                   
                   {/* Floating Achievement Badges */}
-                  <div className="floating-badge absolute -top-2 -left-4 sm:-top-4 sm:-left-8">
+                  <div className="absolute -top-2 -left-4 sm:-top-4 sm:-left-8 animate-bounce">
                     <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg border border-green-100">
                       <div className="flex items-center space-x-2">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center">
@@ -1140,7 +1126,7 @@ useEffect(() => {
                     </div>
                   </div>
       
-                  <div className="floating-badge absolute -top-1 -right-6 sm:-top-2 sm:-right-12">
+                  <div className="absolute -top-1 -right-6 sm:-top-2 sm:-right-12 animate-pulse">
                     <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg border border-blue-100">
                       <div className="flex items-center space-x-2">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-500 rounded-full flex items-center justify-center">
@@ -1153,7 +1139,7 @@ useEffect(() => {
                     </div>
                   </div>
       
-                  <div className="floating-badge absolute -bottom-3 -right-4 sm:-bottom-4 sm:-right-8">
+                  <div className="absolute -bottom-3 -right-4 sm:-bottom-4 sm:-right-8 animate-pulse">
                     <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg border border-purple-100">
                       <div className="flex items-center space-x-2">
                         <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-500 rounded-full flex items-center justify-center">
@@ -1177,79 +1163,170 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Hero CTA Section with Background Image */}
-<section className="relative h-96 md:h-[500px] lg:h-[600px] overflow-hidden">
-  {/* Background Image */}
-  <div
-    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-    style={{
-      backgroundImage: "url('https://images.unsplash.com/photo-1462536943532-57a629f6cc60?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-    }}
-  />
-  
-  {/* Modern Dark Emerald to Black Gradient Overlay */}
-  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-emerald-700/50 to-black/70"></div>
-  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-emerald-800/40 to-slate-900/60"></div>
-         
-  <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-    <div className="max-w-4xl mx-auto">
-      {/* Animated Title */}
-      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight transform hover:scale-105 transition-all duration-500">
-        Transform Your Academic Journey Today
-      </h2>
-      
-      {/* Subtitle with glow effect */}
-      <p className="text-xl sm:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed font-light drop-shadow-lg">
-        Join over <span className="font-bold text-emerald-300">125,000 students</span> who have improved their grades with StudyBuddy
-      </p>
-      
-      {/* CTA Button with awesome effects */}
-      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <button className="bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:bg-emerald-50 shadow-xl border-2 border-transparent hover:border-emerald-300 flex items-center gap-2">
-          <Rocket className="w-5 h-5" />
-          Get Started Now
-        </button>
+      {/* Hero CTA Section */}
+      <section className="relative h-96 md:h-[500px] lg:h-[600px] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1462536943532-57a629f6cc60?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Students studying together"
+            fill
+            className="object-cover"
+            quality={85}
+          />
+        </div>
         
-        <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-110 hover:bg-white hover:text-emerald-600 hover:shadow-2xl backdrop-blur-sm flex items-center gap-2">
-          <BookOpen className="w-5 h-5" />
-          Learn More
-        </button>
-      </div>
-      
-      {/* Stats row */}
-      <div className="flex flex-wrap justify-center gap-8 mt-12 text-white">
-        <div className="text-center">
-          <div className="text-3xl font-bold text-emerald-300 flex items-center justify-center gap-2">
-            <Users className="w-6 h-6" />
-            15K+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-emerald-700/50 to-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-emerald-800/40 to-slate-900/60"></div>
+               
+        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Animated Title */}
+            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight transform hover:scale-105 transition-all duration-500">
+              Transform Your Academic Journey Today
+            </h2>
+            
+            {/* Subtitle with glow effect */}
+            <p className="text-xl sm:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed font-light drop-shadow-lg">
+              Join over <span className="font-bold text-emerald-300">125,000 students</span> who have improved their grades with StudyBuddy
+            </p>
+            
+            {/* CTA Button with awesome effects */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <button className="bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:bg-emerald-50 shadow-xl border-2 border-transparent hover:border-emerald-300 flex items-center gap-2">
+                <Rocket className="w-5 h-5" />
+                Get Started Now
+              </button>
+              
+              <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-110 hover:bg-white hover:text-emerald-600 hover:shadow-2xl backdrop-blur-sm flex items-center gap-2">
+                <BookOpen className="w-5 h-5" />
+                Learn More
+              </button>
+            </div>
+            
+            {/* Stats row */}
+            <div className="flex flex-wrap justify-center gap-8 mt-12 text-white">
+              <div className="text-center">
+                <div className="text-3xl font-bold text-emerald-300 flex items-center justify-center gap-2">
+                  <Users className="w-6 h-6" />
+                  15K+
+                </div>
+                <div className="text-sm opacity-90">Students</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-teal-300 flex items-center justify-center gap-2">
+                  <TrendingUp className="w-6 h-6" />
+                  95%
+                </div>
+                <div className="text-sm opacity-90">Success Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold text-green-300 flex items-center justify-center gap-2">
+                  <Star className="w-6 h-6" />
+                  4.9
+                </div>
+                <div className="text-sm opacity-90">Rating</div>
+              </div>
+            </div>
           </div>
-          <div className="text-sm opacity-90">Students</div>
         </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-teal-300 flex items-center justify-center gap-2">
-            <TrendingUp className="w-6 h-6" />
-            95%
-          </div>
-          <div className="text-sm opacity-90">Success Rate</div>
-        </div>
-        <div className="text-center">
-          <div className="text-3xl font-bold text-green-300 flex items-center justify-center gap-2">
-            <Star className="w-6 h-6" />
-            4.9
-          </div>
-          <div className="text-sm opacity-90">Rating</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  {/* Floating elements for extra awesomeness */}
-  <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-400/20 rounded-full blur-xl animate-pulse"></div>
-  <div className="absolute bottom-32 right-16 w-16 h-16 bg-teal-400/30 rounded-full blur-lg animate-bounce"></div>
-  <div className="absolute top-40 right-20 w-12 h-12 bg-green-400/25 rounded-full blur-md animate-ping"></div>
-</section>
+        
+        {/* Floating elements */}
+        <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-400/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-32 right-16 w-16 h-16 bg-teal-400/30 rounded-full blur-lg animate-bounce"></div>
+        <div className="absolute top-40 right-20 w-12 h-12 bg-green-400/25 rounded-full blur-md animate-ping"></div>
+      </section>
 
       <Footer />
+
+      {/* Custom CSS for additional animations */}
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        @keyframes fade-in-right {
+          from {
+            opacity: 0;
+            transform: translateX(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slide-in-left {
+          from {
+            opacity: 0;
+            transform: translateX(-50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        @keyframes slide-in-right {
+          from {
+            opacity: 0;
+            transform: translateX(50px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in-right {
+          animation: fade-in-right 0.8s ease-out 0.2s forwards;
+          opacity: 0;
+        }
+        
+        .animate-slide-in-left {
+          animation: slide-in-left 0.8s ease-out forwards;
+        }
+        
+        .animate-slide-in-right {
+          animation: slide-in-right 0.8s ease-out 0.3s forwards;
+          opacity: 0;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .animate-fade-in,
+          .animate-fade-in-right,
+          .animate-slide-in-left,
+          .animate-slide-in-right {
+            animation: none;
+            opacity: 1;
+            transform: none;
+          }
+        }
+        
+        @media (max-width: 768px) {
+          .transform.lg\\:-translate-y-20 {
+            transform: translateY(-10px);
+          }
+        }
+        
+        @media (max-width: 640px) {
+          .transform.lg\\:-translate-y-20 {
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </div>
   );
 }
