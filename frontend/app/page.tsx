@@ -275,6 +275,13 @@ const testimonials = [
     role: "Form 1 Student",
     school: "Precious Blood Riruta",
     avatar: "https://images.unsplash.com/photo-1596815064285-45ed8a9c0463?q=80&w=1915&auto=format&fit=crop"
+  },
+  {
+    text: "Thanks to StudyBuddy, I finally understand Kiswahili grammar and literature. My teacher is patient and explains everything clearly.",
+    author: "Peter Njoroge",
+    role: "Form 3 Student",
+    school: "Moi High School Kabarak",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2069&auto=format&fit=crop"
   }
 ];
 
@@ -893,7 +900,7 @@ export default function StudyBuddyHomepage() {
                 {/* Left testimonial */}
                 {testimonials[pairIndex * 2] && (
                   <div className="relative border-4 border-white border-solid rounded-xl p-0.5 shadow-2xl">
-                    <div className="bg-gradient-to-br from-emerald-400 to-green-600 text-white p-8 rounded-xl max-w-md relative">
+                    <div className="bg-gradient-to-br from-emerald-400 to-green-600 text-white p-8 rounded-[10px] max-w-md relative">
                       <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
                         <Image
                           src={testimonials[pairIndex * 2].avatar}
@@ -921,7 +928,7 @@ export default function StudyBuddyHomepage() {
 
                 {/* Right testimonial */}
                 {testimonials[pairIndex * 2 + 1] && (
-                  <div className="relative border-4 border-white border-solid rounded-xl p-0.5 shadow-2xl">
+                  <div className="relative border-4 border-white border-solid rounded-[10px] p-0.5 shadow-2xl">
                     <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-8 rounded-xl max-w-md relative">
                       <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
                         <Image
