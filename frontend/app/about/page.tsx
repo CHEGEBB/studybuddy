@@ -17,7 +17,12 @@ import {
   ArrowRight,
   PlayCircle,
   Calendar,
-  MapPin
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  X,
+  Instagram
 } from 'lucide-react';
 import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
@@ -407,74 +412,173 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-24 bg-emerald-600 relative overflow-hidden">
-        {/* <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
-          }}
-        ></div> */}
+     {/* Team Section */}
+<section className="py-24 bg-gray-50 relative overflow-hidden">
+  {/* Decorative Elements */}
+  <div className="absolute top-20 left-10 w-20 h-20">
+    <div className="grid grid-cols-4 gap-1">
+      {[...Array(16)].map((_, i) => (
+        <div key={i} className="w-2 h-2 bg-orange-400 rounded-full opacity-60"></div>
+      ))}
+    </div>
+  </div>
+  
+  <div className="absolute top-32 right-20 w-16 h-16">
+    <div className="grid grid-cols-3 gap-1">
+      {[...Array(9)].map((_, i) => (
+        <div key={i} className="w-3 h-3 bg-teal-400 rounded-full opacity-50"></div>
+      ))}
+    </div>
+  </div>
+
+  {/* Kite/Paper Plane */}
+  <div className="absolute top-16 right-32">
+    <svg width="60" height="60" viewBox="0 0 60 60" className="text-pink-300 opacity-70">
+      <path d="M30 5L45 20L30 35L15 20Z" fill="currentColor" stroke="white" strokeWidth="2"/>
+      <path d="M30 35L35 55L30 50L25 55Z" fill="currentColor" opacity="0.7"/>
+    </svg>
+  </div>
+
+  {/* Cloud decorations */}
+  <div className="absolute top-40 left-1/4">
+    <svg width="40" height="25" viewBox="0 0 40 25" className="text-blue-200 opacity-60">
+      <path d="M10 15a5 5 0 0 1 5-5h4a8 8 0 1 1 11 7.5H10z" fill="currentColor"/>
+    </svg>
+  </div>
+
+  <div className="container mx-auto px-4">
+    <div className="text-center mb-16">
+      <span className="inline-block bg-emerald-500 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase mb-4 tracking-wide">
+        👥 OUR TEAM MEMBERS
+      </span>
+      <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+        Meet Our Great Teachers
+        <br />
+        <span className="text-gray-700">& Best Instructors</span>
+      </h2>
+      <div className="flex justify-end mb-8">
+        <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+          VIEW ALL TEAM
+        </button>
+      </div>
+    </div>
+    
+    {/* Team Cards Layout - First Row: 4 cards */}
+    <div className="flex justify-center gap-6 mb-12 max-w-6xl mx-auto">
+      {team.slice(0, 4).map((member, index) => {
+        const colors = [
+          { bg: 'bg-emerald-500', text: 'text-white' },
+          { bg: 'bg-green-500', text: 'text-white' },
+          { bg: 'bg-teal-500', text: 'text-white' },
+          { bg: 'bg-emerald-400', text: 'text-white' }
+        ];
+        const colorSet = colors[index % colors.length];
         
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 animate-on-scroll">
-            <span className="inline-block bg-white text-emerald-600 text-sm font-semibold px-4 py-1 rounded-full uppercase mb-4">
-              Meet Our Team
-            </span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
-              The Minds Behind StudyBuddy
-            </h2>
-            <p className="text-emerald-100 text-xl max-w-3xl mx-auto leading-relaxed">
-              Our team of dedicated educators and technology experts work tirelessly to 
-              create the best learning experience for Kenyan students.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <div
-                key={member.name}
-                className="team-card group animate-on-scroll"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-6 border border-white/20 hover:border-white/40 transition-all duration-500 group-hover:-translate-y-2 text-center overflow-hidden">
-                  <div className="relative mb-6 rounded-2xl overflow-hidden team-image-container">
-                    <Image 
-                      src={member.image} 
-                      alt={member.name}
-                      width={300}
-                      height={300}
-                      className="object-cover w-full h-72 team-image"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-emerald-600/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                      <div className="flex space-x-3">
-                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors duration-300">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M8.84 10.835h1.765v-1.681c0-.753.19-1.916 1.043-2.629.868-.731 2.07-.731 3.954-.731h1.327v2.928h-1.765c-.258 0-.868.258-.868.995v1.118h2.634l-.322 2.908h-2.312v8.416h-3.691v-8.416H8.84v-2.908z"></path>
-                          </svg>
-                        </div>
-                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors duration-300">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.599-.1-.899a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"></path>
-                          </svg>
-                        </div>
-                        <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center cursor-pointer hover:bg-white/30 transition-colors duration-300">
-                          <svg className="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216 4.61 4.61 0 0 0-2.633-2.633 6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42 4.607 4.607 0 0 0-2.633 2.633 6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419 4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"></path>
-                            <circle cx="11.994" cy="11.979" r="3.003"></circle>
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-1">{member.name}</h3>
-                  <p className="text-emerald-200 text-sm">{member.role}</p>
+        return (
+          <div
+            key={member.name}
+            className="team-card group relative"
+            style={{ animationDelay: `${index * 0.2}s` }}
+          >
+            <div className={`${colorSet.bg} rounded-full w-72 h-96 flex flex-col items-center justify-end text-center transition-all duration-500 group-hover:scale-105 relative overflow-hidden shadow-xl cursor-pointer`}>
+              {/* Social Media Icons - appear on hover */}
+              <div className="absolute top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                <div className="flex space-x-3">
+                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Facebook className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <X className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Linkedin className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  </a>
+                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Instagram className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  </a>
                 </div>
               </div>
-            ))}
+              
+              {/* Member Photo - positioned from bottom */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-full">
+                <Image 
+                  src={member.image} 
+                  alt={member.name}
+                  width={288}
+                  height={384}
+                  className="object-cover object-top w-full h-full rounded-full"
+                />
+              </div>
+              
+              {/* Member Info - positioned at bottom with background */}
+              <div className="relative z-10 bg-black bg-opacity-40 w-full py-6 px-4 rounded-b-full">
+                <h3 className={`text-xl font-bold ${colorSet.text} mb-1`}>{member.name}</h3>
+                <p className={`${colorSet.text} text-sm font-medium opacity-90 uppercase tracking-wide`}>
+                  {member.role}
+                </p>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    {/* Second Row - Single centered card if exists */}
+    {team.length > 4 && (
+      <div className="flex justify-center">
+        <div className="team-card group relative" style={{ animationDelay: `${4 * 0.2}s` }}>
+          <div className="bg-emerald-500 rounded-full w-72 h-96 flex flex-col items-center justify-end text-center transition-all duration-500 group-hover:scale-105 relative overflow-hidden shadow-xl cursor-pointer">
+            {/* Social Media Overlay */}
+            <div className="absolute inset-0 bg-emerald-600 bg-opacity-95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full flex items-center justify-center z-20">
+              <div className="flex space-x-4">
+                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216 4.61 4.61 0 0 0-2.633-2.633 6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42 4.607 4.607 0 0 0-2.633 2.633 6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419 4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"/>
+                    <circle cx="11.994" cy="11.979" r="3.003"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            {/* Member Photo - positioned from bottom */}
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full h-full">
+              <Image 
+                src={team[4].image} 
+                alt={team[4].name}
+                width={288}
+                height={384}
+                className="object-cover object-top w-full h-full rounded-full"
+              />
+            </div>
+            
+            {/* Member Info - positioned at bottom with background */}
+            <div className="relative z-10 bg-black bg-opacity-40 w-full py-6 px-4 rounded-b-full">
+              <h3 className="text-xl font-bold text-white mb-1">{team[4].name}</h3>
+              <p className="text-white text-sm font-medium opacity-90 uppercase tracking-wide">
+                {team[4].role}
+              </p>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    )}
+  </div>
+</section>
 
       {/* Testimonials Section */}
       <section className="py-24 bg-slate-900 relative overflow-hidden">
