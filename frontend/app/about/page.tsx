@@ -250,7 +250,7 @@ const AboutPage = () => {
             {stats.map((stat, index) => (
               <div
                 key={stat.label}
-                className="stat-card bg-white rounded-3xl p-8 shadow-lg border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center animate-on-scroll"
+                className="stat-card bg-white  p-8  border border-gray-100 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 text-center animate-on-scroll"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
                 <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-r ${stat.color} rounded-2xl flex items-center justify-center shadow-lg`}>
