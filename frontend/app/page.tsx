@@ -417,7 +417,7 @@ export default function StudyBuddyHomepage() {
               </div>
 
               {/* Right Visual Element */}
-              <div className="relative lg:block hidden animate-fade-in-right">
+              <div className="relative lg:block hidden animate-fade-in-right border-4 border-green-400 border-dotted rounded-3xl p-0.5">
                 <div className="relative">
                   {/* Main Visual Card */}
                   <div className="bg-white backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl text-black">
@@ -527,14 +527,14 @@ export default function StudyBuddyHomepage() {
       <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-slide-in-left">
+            <div className="animate-slide-in-left border-4 border-dotted  border-green-400 rounded-[60px] p-1">
               <div className="relative">
                 <Image 
                   src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
                   alt="Students collaborating" 
                   width={600}
                   height={400}
-                  className="w-full h-96 object-cover rounded-3xl shadow-2xl"
+                  className="w-full h-96 object-cover rounded-[60px] shadow-2xl"
                 />
                 <div className="absolute -bottom-6 -right-6 bg-green-500 text-white p-6 rounded-2xl shadow-xl">
                   <div className="text-3xl font-bold">15+</div>
@@ -892,8 +892,8 @@ export default function StudyBuddyHomepage() {
               >
                 {/* Left testimonial */}
                 {testimonials[pairIndex * 2] && (
-                  <div className="relative">
-                    <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white p-8 rounded-full max-w-md relative">
+                  <div className="relative border-4 border-white border-solid rounded-xl p-0.5 shadow-2xl">
+                    <div className="bg-gradient-to-br from-emerald-400 to-green-600 text-white p-8 rounded-xl max-w-md relative">
                       <div className="absolute -top-4 -right-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
                         <Image
                           src={testimonials[pairIndex * 2].avatar}
@@ -921,8 +921,8 @@ export default function StudyBuddyHomepage() {
 
                 {/* Right testimonial */}
                 {testimonials[pairIndex * 2 + 1] && (
-                  <div className="relative">
-                    <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-8 rounded-full max-w-md relative">
+                  <div className="relative border-4 border-white border-solid rounded-xl p-0.5 shadow-2xl">
+                    <div className="bg-gradient-to-br from-purple-500 to-purple-700 text-white p-8 rounded-xl max-w-md relative">
                       <div className="absolute -top-4 -left-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden">
                         <Image
                           src={testimonials[pairIndex * 2 + 1].avatar}
