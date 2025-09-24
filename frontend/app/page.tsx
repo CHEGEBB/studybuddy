@@ -457,19 +457,19 @@ export default function StudyBuddyHomepage() {
 
                   {/* Floating Achievement Badges */}
                   <div className="absolute -top-4 -right-8 animate-bounce">
-                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
+                    <div className="bg-white backdrop-blur-lg rounded-xl p-3 border border-white/20">
                       <div className="flex items-center gap-2">
                         <Award className="w-5 h-5 text-emerald-400" />
-                        <span className="text-white text-sm font-medium">Top Performer</span>
+                        <span className="text-black text-sm font-medium">Top Performer</span>
                       </div>
                     </div>
                   </div>
 
                   <div className="absolute -bottom-6 -left-6 animate-pulse">
-                    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
+                    <div className="bg-white backdrop-blur-lg rounded-xl p-3 border border-white/20">
                       <div className="flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-green-400" />
-                        <span className="text-white text-sm font-medium">95% Success</span>
+                        <span className="text-black text-sm font-medium">95% Success</span>
                       </div>
                     </div>
                   </div>
