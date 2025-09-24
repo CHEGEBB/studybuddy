@@ -1,7 +1,26 @@
 // about.scss
 
-// Particle animation for hero section
-.hero-section {
+// Fade in animation for elements
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: all 0.8s ease-out;
+    
+    &.fade-in-up {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  // Staggered animation delays
+  .animate-on-scroll:nth-child(1) { animation-delay: 0.1s; }
+  .animate-on-scroll:nth-child(2) { animation-delay: 0.2s; }
+  .animate-on-scroll:nth-child(3) { animation-delay: 0.3s; }
+  .animate-on-scroll:nth-child(4) { animation-delay: 0.4s; }
+  .animate-on-scroll:nth-child(5) { animation-delay: 0.5s; }
+  
+  // Particle animation for hero section
+  .hero-section {
     position: relative;
     
     .hero-particles {
@@ -19,8 +38,8 @@
         width: 100%;
         height: 100%;
         background-image: 
-          radial-gradient(circle, rgba(0, 255, 209, 0.1) 2px, transparent 2px),
-          radial-gradient(circle, rgba(0, 255, 209, 0.05) 1px, transparent 1px);
+          radial-gradient(circle, rgba(16, 185, 129, 0.1) 2px, transparent 2px),
+          radial-gradient(circle, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
         background-size: 50px 50px, 100px 100px;
         animation: particlesAnimation 10s linear infinite;
       }
@@ -31,11 +50,6 @@
         animation-direction: reverse;
       }
     }
-  }
-  
-  // Background pattern
-  .bg-pattern {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
   // Floating animations for hero badges
@@ -93,34 +107,37 @@
     }
   }
   
-  // Team images hover effect
-  .team-image-container {
-    position: relative;
-    overflow: hidden;
+//   // Team images hover effect
+//   .team-image-container {
+//     position: relative;
+//     overflow: hidden;
     
-    .team-image {
-      transition: transform 0.5s ease;
-    }
+//     .team-image {
+//       transition: transform 0.5s ease;
+//     }
     
-    &:hover .team-image {
-      transform: scale(1.05);
-    }
-  }
+//     &:hover .team-image {
+//       transform: scale(1.05);
+//     }
+//   }
   
-  // Value cards hover effects
-  .value-card {
+//   // Value cards hover effects
+//   .value-card {
+//     &:hover {
+//       .rounded-2xl {
+//         transform: scale(1.1) rotate(5deg);
+//       }
+//     }
+//   }
+  
+  // Stats cards animation
+  .stat-card {
+    transition: all 0.5s ease;
+    
     &:hover {
-      .rounded-2xl {
-        transform: scale(1.1) rotate(5deg);
-      }
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     }
-  }
-  
-  // Counter animation for stats
-  @counter-style custom-bullet {
-    system: cyclic;
-    symbols: "➀" "➁" "➂" "➃" "➄" "➅" "➆" "➇" "➈" "➉";
-    suffix: " ";
   }
   
   // Testimonial cards with subtle hover effect
@@ -130,6 +147,41 @@
     &:hover {
       transform: translateY(-10px);
     }
+  }
+  
+  // Team card animations
+  .team-card {
+    transition: all 0.5s ease;
+    
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+  
+  // Smooth scroll reveal animation
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  // Apply fade in animation to elements when they have the class
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  // Stagger children animations
+  .stagger-children {
+    .animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
+    .animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+    .animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+    .animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
+    .animate-on-scroll:nth-child(5) { transition-delay: 0.5s; }
   }
   
   // Animations
@@ -169,6 +221,43 @@
     }
   }
   
+  // Scale animation for interactive elements
+  @keyframes scaleIn {
+    0% {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  // Bounce animation for buttons
+  @keyframes bounceIn {
+    0% {
+      transform: scale(0.3);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+  // Button hover effects
+  button {
+    &:hover {
+      animation: none; // Prevent conflicting animations
+    }
+  }
+  
   // Responsive styles
   @media (max-width: 768px) {
     .hero-image-container {
@@ -192,9 +281,14 @@
         width: 80%;
       }
     }
+  
+    // Adjust animation delays for mobile
+    .animate-on-scroll {
+      animation-delay: 0.1s !important;
+    }
   }
   
-  // Timeline section
+  // Timeline section (if needed)
   .timeline {
     position: relative;
     padding: 2rem 0;
@@ -212,6 +306,12 @@
     .timeline-item {
       position: relative;
       margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease-out forwards;
+      
+      &:nth-child(1) { animation-delay: 0.1s; }
+      &:nth-child(2) { animation-delay: 0.2s; }
+      &:nth-child(3) { animation-delay: 0.3s; }
+      &:nth-child(4) { animation-delay: 0.4s; }
       
       &:nth-child(odd) {
         .timeline-content {
@@ -249,6 +349,7 @@
         border-radius: 50%;
         transform: translateX(-50%);
         z-index: 10;
+        animation: pulse 2s infinite;
       }
       
       .timeline-content {
@@ -257,6 +358,12 @@
         background: rgba(255, 255, 255, 0.1);
         border-radius: 0.5rem;
         position: relative;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
         
         &::before {
           content: '';
@@ -293,5 +400,80 @@
           }
         }
       }
+    }
+  }
+  
+  // Counter animation enhancement
+  .counter {
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+  }
+  
+  // Enhanced background overlays
+  .bg-overlay {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+    
+    > * {
+      position: relative;
+      z-index: 2;
+    }
+  }
+  
+  // Gradient text animation
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  .gradient-text-animated {
+    background: linear-gradient(-45deg, #10b981, #059669, #047857, #065f46);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s ease infinite;
+  }
+  
+  // Loading animation for images
+  .image-loading {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+  }
+  
+  @keyframes shimmer {
+    0% {
+      left: -100%;
+    }
+    100% {
+      left: 100%;
     }
   }

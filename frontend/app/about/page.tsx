@@ -200,21 +200,21 @@ const AboutPage = () => {
             <div className="relative hidden lg:block animate-on-scroll">
               <div className="hero-image-container">
                 <Image 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80" 
+                  src="/assets/images/hero.png" 
                   alt="Students learning together"
-                  width={600}
-                  height={700}
-                  className="rounded-3xl object-cover student-image"
+                  width={800}
+                  height={900}
+                  className=" object-cover student-image"
                 />
                 
                 <div className="floating-badge top-badge">
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
+                  <div className="bg-white backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
                     <div className="flex items-center">
                       <div className="bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg p-2 mr-3">
                         <Trophy className="text-white" size={20} />
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">Top Rated</p>
+                        <p className="text-black text-sm font-medium">Top Rated</p>
                         <p className="text-emerald-300 text-xs">Education Platform</p>
                       </div>
                     </div>
@@ -222,13 +222,13 @@ const AboutPage = () => {
                 </div>
                 
                 <div className="floating-badge bottom-badge">
-                  <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
+                  <div className="bg-white backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
                     <div className="flex items-center">
                       <div className="bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg p-2 mr-3">
                         <Users className="text-white" size={20} />
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">15,000+</p>
+                        <p className="text-black text-sm font-medium">15,000+</p>
                         <p className="text-emerald-300 text-xs">Students Nationwide</p>
                       </div>
                     </div>
@@ -509,13 +509,13 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-emerald-600 to-green-600 relative overflow-hidden">
-        <div 
+      <section className="py-24 bg-gradient-to-r from-emerald-400 to-green-600 relative overflow-hidden">
+        {/* <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
           }}
-        ></div>
+        ></div> */}
         
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="animate-on-scroll">
