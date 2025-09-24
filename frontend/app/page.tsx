@@ -15,6 +15,7 @@ import Link from 'next/link';
 import Navbar from '../components/layout/Navbar';
 import Footer from '../components/layout/Footer';
 import '../styles/animations.scss';
+import Image from 'next/image';
 
 // Parallax hook
 const useParallax = () => {
@@ -176,7 +177,7 @@ const subjects = [
     color: "from-red-400 to-red-600", 
     students: "14,600",
     description: "Lugha, Fasihi na Utamaduni",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1746601637729-dac1386ffbfa?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     category: "LANGUAGES"
   }
 ];
@@ -304,142 +305,176 @@ useEffect(() => {
     <div className="min-h-screen">
       <Navbar />
 
-      {/* Enhanced Hero Section with Parallax */}
-      <section id="home" className="relative h-screen overflow-hidden">
-        {/* Parallax Background Carousel */}
-        {heroSlides.map((slide, index) => (
-          <div 
-            key={index}
-            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            } parallax-bg`}
-            style={{
-              backgroundImage: `url('${slide.image}')`,
-              transform: `translateY(${scrollY * 0.5}px)`,
-            }}
-          />
-        ))}
-        
-        {/* Dynamic Overlay with Parallax Effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-slate-800/70 to-slate-900/90" />
-        
-        {/* Floating Particles */}
-        {/* <div className="absolute inset-0 overflow-hidden">
-          {[...Array(50)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute floating-particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 20}s`,
-                animationDuration: `${Math.random() * 15 + 10}s`
-              }}
-            >
-              {Math.random() > 0.7 ? (
-                <Sparkles className="w-3 h-3 text-green-400/30" />
-              ) : (
-                <div className="w-1 h-1 bg-green-400/40 rounded-full" />
-              )}
-            </div>
-          ))}
-        </div> */}
+      {/* Modern Hero Section with Fixed Background */}
+<section id="home" className="relative h-screen overflow-hidden">
+  {/* Fixed Background Images Carousel */}
+  {heroSlides.map((slide, index) => (
+    <div 
+      key={index}
+      className={`fixed inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+        index === currentSlide ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{
+        backgroundImage: `url('${slide.image}')`,
+        backgroundAttachment: 'fixed',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+      }}
+    />
+  ))}
+  
+  {/* Modern Gradient Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-800/40 to-emerald-900/50" />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+  
+  {/* Floating Elements - Minimal */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="floating-element absolute top-20 right-20 w-16 h-16 border border-emerald-400/20 rounded-full"></div>
+    <div className="floating-element absolute bottom-40 left-16 w-12 h-12 bg-emerald-500/10 rounded-full blur-sm"></div>
+    <div className="floating-element absolute top-1/3 right-1/4 w-8 h-8 border border-green-400/30 rounded-full"></div>
+    <BookOpen className="floating-element absolute top-1/4 left-1/4 w-6 h-6 text-emerald-400/30" />
+    <GraduationCap className="floating-element absolute bottom-1/3 right-1/3 w-8 h-8 text-green-400/20" />
+    <Award className="floating-element absolute top-1/2 left-1/6 w-5 h-5 text-green-400/25" />
+  </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="mb-8 slide-down">
-              <span className="text-green-400 text-lg font-medium tracking-wide uppercase pulse-animation">
-                Personal & Online Teachers for Kenyan High School Students
-              </span>
-            </div>
+  {/* Hero Content */}
+  <div className="relative z-10 h-full flex items-center px-4 sm:px-6 lg:px-8">
+    <div className="max-w-7xl mx-auto w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+        
+        {/* Left Content */}
+        <div className="space-y-8 slide-left">
+          <div className="space-y-4">
+            <span className="inline-block text-emerald-400 text-sm sm:text-base font-semibold tracking-wide uppercase bg-emerald-400/10 px-4 py-2 rounded-full border border-emerald-400/20 backdrop-blur-sm">
+              Personal & Online Teachers for Kenyan Students
+            </span>
             
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-              <span className="slide-left block">{typewriterText}</span>
-              {currentSlide !== null && (
-                <span className="text-green-400 text-3xl md:text-5xl block mt-4 slide-right">
-                  {heroSlides[currentSlide]?.title}
-                </span>
-              )}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
+              <span className="block mb-2">Excel in School</span>
+              <span className="text-emerald-400 block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
+                {currentSlide !== null && heroSlides[currentSlide]?.title}
+              </span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-gray-300 mb-12 fade-up-delayed max-w-4xl mx-auto">
-              {heroSlides[currentSlide]?.subtitle}
+            <p className="text-lg sm:text-xl text-gray-300 max-w-2xl leading-relaxed">
+              {currentSlide !== null && heroSlides[currentSlide]?.subtitle}
             </p>
-            
-            <div className="bounce-gentle">
-              <button className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-10 py-5 rounded-full text-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-green-500/25 glow-button">
-                FIND YOUR TEACHER NOW
-              </button>
-            </div>
+          </div>
 
-            {/* Slide Indicators */}
-            <div className="flex justify-center mt-12 space-x-3">
-              {heroSlides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide ? 'bg-green-400 w-8' : 'bg-white/40'
-                  }`}
-                />
-              ))}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-emerald-500/25 flex items-center justify-center gap-3">
+              <Rocket className="w-5 h-5" />
+              Find Your Teacher
+            </button>
+            
+            <button className="border-2 border-white/30 text-white hover:bg-white hover:text-emerald-600 px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 backdrop-blur-sm flex items-center justify-center gap-3">
+              <Play className="w-5 h-5" />
+              Watch Demo
+            </button>
+          </div>
+
+          {/* Quick Stats */}
+          <div className="flex flex-wrap gap-8 pt-4">
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                <Users className="w-6 h-6 text-emerald-400" />
+                15K+
+              </div>
+              <div className="text-sm text-gray-400">Active Students</div>
+            </div>
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                <Star className="w-6 h-6 text-emerald-400" />
+                4.9
+              </div>
+              <div className="text-sm text-gray-400">Average Rating</div>
+            </div>
+            <div className="text-center sm:text-left">
+              <div className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2">
+                <Trophy className="w-6 h-6 text-emerald-400" />
+                95%
+              </div>
+              <div className="text-sm text-gray-400">Success Rate</div>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Search Bar */}
-        <div className="absolute bottom-0 left-0 right-0 z-20">
-          <div className="bg-slate-900/95 backdrop-blur-lg py-8 border-t border-white/10">
-            <div className="max-w-7xl mx-auto px-4">
-              <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-                <div className="relative group">
-                  <label className="block text-green-400 text-sm font-medium mb-2">Find Your</label>
-                  <select className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all backdrop-blur-sm">
-                    <option>Subject Teacher</option>
-                    <option>Expert Tutor</option>
-                    <option>Mentor</option>
-                  </select>
+        {/* Right Visual Element */}
+        <div className="relative slide-right lg:block hidden">
+          <div className="relative">
+            {/* Main Visual Card */}
+            <div className="bg-white backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl text-black">
+              <div className="space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
+                    <GraduationCap className="w-6 h-6 text-black" />
+                  </div>
+                  <div>
+                    <div className="text-white font-semibold">StudyBuddy Platform</div>
+                    <div className="text-gray-300 text-sm">Your Success Partner</div>
+                  </div>
                 </div>
-                <div className="relative group">
-                  <label className="block text-green-400 text-sm font-medium mb-2">Select Subject</label>
-                  <select className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all backdrop-blur-sm">
-                    <option>Mathematics</option>
-                    <option>Physics</option>
-                    <option>Chemistry</option>
-                    <option>Biology</option>
-                    <option>English</option>
-                    <option>Kiswahili</option>
-                  </select>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 text-white">
+                    <CheckCircle className="w-5 h-5 text-emerald-400" />
+                    <span>Kenyan Curriculum Expert Teachers</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-white">
+                    <CheckCircle className="w-5 h-5 text-emerald-400" />
+                    <span>Personalized Learning Plans</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-white">
+                    <CheckCircle className="w-5 h-5 text-emerald-400" />
+                    <span>24/7 Academic Support</span>
+                  </div>
                 </div>
-                <div className="relative group">
-                  <label className="block text-green-400 text-sm font-medium mb-2">Location</label>
-                  <input 
-                    type="text" 
-                    placeholder="Nairobi, Mombasa..." 
-                    className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white placeholder-white/50 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all backdrop-blur-sm"
-                  />
+                
+                <div className="bg-emerald-500/20 rounded-2xl p-4 border border-emerald-400/30">
+                  <div className="text-emerald-400 text-sm font-medium">Latest Achievement</div>
+                  <div className="text-white font-semibold">Mathematics Grade: A</div>
+                  <div className="text-gray-300 text-sm">Improved by 2 grades!</div>
                 </div>
-                <div className="relative group">
-                  <label className="block text-green-400 text-sm font-medium mb-2">Class Level</label>
-                  <select className="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-4 text-white focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 transition-all backdrop-blur-sm">
-                    <option>Form 1</option>
-                    <option>Form 2</option>
-                    <option>Form 3</option>
-                    <option>Form 4</option>
-                  </select>
+              </div>
+            </div>
+
+            {/* Floating Achievement Badges */}
+            <div className="floating-badge absolute -top-4 -right-8">
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
+                <div className="flex items-center gap-2">
+                  <Award className="w-5 h-5 text-emerald-400" />
+                  <span className="text-white text-sm font-medium">Top Performer</span>
                 </div>
-                <div className="flex items-end">
-                  <button className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 px-8 py-4 rounded-xl text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25">
-                    <Search className="w-5 h-5 inline mr-2" />
-                    SEARCH NOW
-                  </button>
+              </div>
+            </div>
+
+            <div className="floating-badge absolute -bottom-6 -left-6">
+              <div className="bg-white/10 backdrop-blur-lg rounded-xl p-3 border border-white/20">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-green-400" />
+                  <span className="text-white text-sm font-medium">95% Success</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Slide Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+        {heroSlides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-emerald-400 w-8' : 'bg-white/40 w-2'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Enhanced Statistics Section */}
       <section className="py-20 bg-white relative overflow-hidden">
@@ -1013,138 +1048,206 @@ useEffect(() => {
         </div>
       </section>
 
-      {/* Enhanced Network Section with Parallax */}
-      <section className="py-24 bg-gradient-to-br from-slate-50 to-white relative">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Network Visualization */}
-            <div className="relative slide-left">
-              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-12 h-96 relative overflow-hidden network-card">
-                {/* Animated Network Nodes */}
-                <div className="absolute inset-0">
-                  {[
-                    { top: '20%', left: '30%', color: 'bg-green-500', size: 'w-4 h-4' },
-                    { top: '15%', left: '60%', color: 'bg-blue-500', size: 'w-3 h-3' },
-                    { top: '40%', left: '20%', color: 'bg-purple-500', size: 'w-5 h-5' },
-                    { top: '50%', left: '70%', color: 'bg-orange-500', size: 'w-3 h-3' },
-                    { top: '70%', left: '40%', color: 'bg-red-500', size: 'w-4 h-4' },
-                    { top: '65%', left: '80%', color: 'bg-teal-500', size: 'w-3 h-3' },
-                    { top: '30%', left: '85%', color: 'bg-pink-500', size: 'w-2 h-2' },
-                    { top: '80%', left: '15%', color: 'bg-indigo-500', size: 'w-3 h-3' }
-                  ].map((node, index) => (
-                    <div key={index} className="absolute network-pulse" style={{ top: node.top, left: node.left, animationDelay: `${index * 0.5}s` }}>
-                      <div className={`${node.size} ${node.color} rounded-full shadow-lg`} />
-                      <div className={`${node.size} ${node.color} rounded-full absolute inset-0 ping-animation opacity-20`} />
-                    </div>
-                  ))}
-                  
-                  {/* Connection Lines */}
-                  <svg className="absolute inset-0 w-full h-full">
-                    <defs>
-                      <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-                        <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.1" />
-                      </linearGradient>
-                    </defs>
-                    {/* Animated connecting lines */}
-                    <path
-                      d="M 30% 20% Q 45% 10% 60% 15%"
-                      stroke="url(#lineGradient)"
-                      strokeWidth="2"
-                      fill="none"
-                      className="draw-line"
-                    />
-                    <path
-                      d="M 20% 40% Q 35% 30% 70% 50%"
-                      stroke="url(#lineGradient)"
-                      strokeWidth="2"
-                      fill="none"
-                      className="draw-line"
-                      style={{animationDelay: '1s'}}
-                    />
-                    <path
-                      d="M 40% 70% Q 60% 60% 80% 65%"
-                      stroke="url(#lineGradient)"
-                      strokeWidth="2"
-                      fill="none"
-                      className="draw-line"
-                      style={{animationDelay: '2s'}}
-                    />
-                  </svg>
-                </div>
-                
-                <div className="relative z-10 text-center h-full flex items-center justify-center">
-                  <div>
-                    <Globe className="w-16 h-16 text-green-600 mx-auto mb-4 spin-slow" />
-                    <h4 className="text-2xl font-bold text-slate-800 mb-2">47 Counties</h4>
-                    <p className="text-gray-600">Connected Nationwide</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Network Info */}
-            <div className="slide-right">
-              <div className="mb-6">
-                <span className="text-green-500 font-semibold uppercase tracking-wide">Nationwide Coverage</span>
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-800 mt-4 mb-6">
-                  Kenya's Largest Educational Network
+      
+      {/* Enhanced Impact Section */}
+      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 to-white relative overflow-hidden">
+        {/* Background overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-green-500/5"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            
+            {/* Left Content */}
+            <div className="slide-left order-2 lg:order-1">
+              <div className="mb-8">
+                <span className="text-green-500 font-semibold uppercase tracking-wide text-sm">
+                  Our Impact
+                </span>
+                <h2 className="impact-title text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-800 mt-4 mb-6 leading-tight">
+                  Transforming Kenyan Students' Academic Journey
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                  From Turkana to Kwale, from Mandera to Busia - our network spans every corner of Kenya, 
-                  connecting students with qualified teachers regardless of location.
+                  StudyBuddy has helped thousands of Kenyan high school students excel in their studies 
+                  with comprehensive learning resources, expert guidance, and proven results across all subjects.
                 </p>
               </div>
-
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                {[
-                  { number: "50,000+", label: "Teachers", icon: Users },
-                  { number: "47", label: "Counties", icon: MapPin },
-                  { number: "500+", label: "Schools", icon: GraduationCap },
-                  { number: "24/7", label: "Support", icon: Clock }
-                ].map((stat, index) => (
-                  <div key={index} className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: `${index * 150}ms`}}>
-                    <stat.icon className="w-8 h-8 text-green-500 mx-auto mb-2" />
-                    <div className="text-2xl font-bold text-slate-800">{stat.number}</div>
-                    <div className="text-gray-600 text-sm">{stat.label}</div>
+      
+              <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-8">
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
                   </div>
-                ))}
+                  <div className="text-2xl sm:text-3xl font-bold text-slate-800">15,000+</div>
+                  <div className="text-gray-600 text-xs sm:text-sm">Students Enrolled</div>
+                </div>
+                
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: '150ms'}}>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-bold text-slate-800">85%</div>
+                  <div className="text-gray-600 text-xs sm:text-sm">Grade Improvement</div>
+                </div>
+                
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: '300ms'}}>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Star className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-bold text-slate-800">4.9/5</div>
+                  <div className="text-gray-600 text-xs sm:text-sm">Student Rating</div>
+                </div>
+                
+                <div className="text-center p-4 bg-white rounded-2xl shadow-md hover:shadow-lg transition-all fade-up" style={{animationDelay: '450ms'}}>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" />
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-bold text-slate-800">95%</div>
+                  <div className="text-gray-600 text-xs sm:text-sm">Pass Rate</div>
+                </div>
               </div>
-
-              <button className="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
-                <Rocket className="w-5 h-5 inline mr-2" />
-                Join Our Network
+      
+              <button className="bg-green-500 hover:bg-green-600 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-sm sm:text-base">
+                <Rocket className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" />
+                Start Your Success Story
               </button>
+            </div>
+      
+            {/* Right Visual */}
+            <div className="relative slide-right order-1 lg:order-2">
+              <div className="relative max-w-md mx-auto lg:max-w-lg">
+                {/* Main Image */}
+                <div className="relative">
+                  <Image 
+                    src="/assets/images/person4.png" 
+                    alt="StudyBuddy Student" 
+                    width={400}
+                    height={500}
+                    className="w-full h-auto object-cover rounded-2xl "
+                    priority
+                  />
+                  
+                  {/* Floating Achievement Badges */}
+                  <div className="floating-badge absolute -top-2 -left-4 sm:-top-4 sm:-left-8">
+                    <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg border border-green-100">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-gray-800">Top Performer</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div className="floating-badge absolute -top-1 -right-6 sm:-top-2 sm:-right-12">
+                    <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg border border-blue-100">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-500 rounded-full flex items-center justify-center">
+                          <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-gray-800">Study Streak</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+      
+                  <div className="floating-badge absolute -bottom-3 -right-4 sm:-bottom-4 sm:-right-8">
+                    <div className="bg-white rounded-xl p-2 sm:p-3 shadow-lg border border-purple-100">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-purple-500 rounded-full flex items-center justify-center">
+                          <Trophy className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
+                        </div>
+                        <div>
+                          <div className="text-xs font-semibold text-gray-800">Achievement</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+                {/* Background decorative circles */}
+                <div className="absolute top-4 right-8 sm:top-8 sm:right-16 w-12 h-12 sm:w-20 sm:h-20 bg-green-200 rounded-full opacity-20"></div>
+                <div className="absolute bottom-4 left-8 sm:bottom-8 sm:left-16 w-10 h-10 sm:w-16 sm:h-16 bg-blue-200 rounded-full opacity-20"></div>
+                <div className="absolute top-1/2 left-4 sm:left-8 w-8 h-8 sm:w-12 sm:h-12 bg-purple-200 rounded-full opacity-20"></div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Parallax Section with Transparent Overlay */}
-      <section className="relative h-96 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center parallax-bg"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop')",
-            transform: `translateY(${scrollY * 0.3}px)`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-green-900/80 to-blue-900/80"></div>
+      {/* Hero CTA Section with Background Image */}
+<section className="relative h-96 md:h-[500px] lg:h-[600px] overflow-hidden">
+  {/* Background Image */}
+  <div
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+    style={{
+      backgroundImage: "url('https://images.unsplash.com/photo-1462536943532-57a629f6cc60?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+    }}
+  />
+  
+  {/* Modern Dark Emerald to Black Gradient Overlay */}
+  <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/30 via-emerald-700/50 to-black/70"></div>
+  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/20 via-emerald-800/40 to-slate-900/60"></div>
+         
+  <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
+    <div className="max-w-4xl mx-auto">
+      {/* Animated Title */}
+      <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight transform hover:scale-105 transition-all duration-500">
+        Transform Your Academic Journey Today
+      </h2>
+      
+      {/* Subtitle with glow effect */}
+      <p className="text-xl sm:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed font-light drop-shadow-lg">
+        Join over <span className="font-bold text-emerald-300">125,000 students</span> who have improved their grades with StudyBuddy
+      </p>
+      
+      {/* CTA Button with awesome effects */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <button className="bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 transform hover:scale-110 hover:shadow-2xl hover:bg-emerald-50 shadow-xl border-2 border-transparent hover:border-emerald-300 flex items-center gap-2">
+          <Rocket className="w-5 h-5" />
+          Get Started Now
+        </button>
         
-        <div className="relative z-10 h-full flex items-center justify-center text-center px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 pop-in">
-              Transform Your Academic Journey Today
-            </h2>
-            <p className="text-xl text-white/90 mb-8 fade-up-delayed">
-              Join over 125,000 students who have improved their grades with StudyBuddy
-            </p>
-            <button className="bg-white text-green-600 px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-xl glow-button-white">
-              Get Started Now
-            </button>
+        <button className="border-2 border-white text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-110 hover:bg-white hover:text-emerald-600 hover:shadow-2xl backdrop-blur-sm flex items-center gap-2">
+          <BookOpen className="w-5 h-5" />
+          Learn More
+        </button>
+      </div>
+      
+      {/* Stats row */}
+      <div className="flex flex-wrap justify-center gap-8 mt-12 text-white">
+        <div className="text-center">
+          <div className="text-3xl font-bold text-emerald-300 flex items-center justify-center gap-2">
+            <Users className="w-6 h-6" />
+            15K+
           </div>
+          <div className="text-sm opacity-90">Students</div>
         </div>
-      </section>
+        <div className="text-center">
+          <div className="text-3xl font-bold text-teal-300 flex items-center justify-center gap-2">
+            <TrendingUp className="w-6 h-6" />
+            95%
+          </div>
+          <div className="text-sm opacity-90">Success Rate</div>
+        </div>
+        <div className="text-center">
+          <div className="text-3xl font-bold text-green-300 flex items-center justify-center gap-2">
+            <Star className="w-6 h-6" />
+            4.9
+          </div>
+          <div className="text-sm opacity-90">Rating</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {/* Floating elements for extra awesomeness */}
+  <div className="absolute top-20 left-10 w-20 h-20 bg-emerald-400/20 rounded-full blur-xl animate-pulse"></div>
+  <div className="absolute bottom-32 right-16 w-16 h-16 bg-teal-400/30 rounded-full blur-lg animate-bounce"></div>
+  <div className="absolute top-40 right-20 w-12 h-12 bg-green-400/25 rounded-full blur-md animate-ping"></div>
+</section>
 
       <Footer />
     </div>
