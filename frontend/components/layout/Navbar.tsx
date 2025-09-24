@@ -75,14 +75,14 @@ const Navbar = () => {
           >
             <div className="relative">
               <motion.div 
-                className="w-12 h-12 bg-gradient-to-br from-emerald-600 via-teal-600 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg"
+                className="w-12 h-12 bg-gradient-to-br from-emerald-600 via-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-lg"
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.6 }}
               >
                 <span className="text-white font-bold text-xl">SB</span>
               </motion.div>
               <motion.div 
-                className="absolute -top-1 -right-1 w-4 h-4 bg-sky-400 rounded-full"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
@@ -192,7 +192,7 @@ const Navbar = () => {
             {/* CTA Button */}
             <motion.a
               href="/pricing"
-              className="ml-4 px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              className="ml-4 px-6 py-3 bg-gradient-to-r from-emerald-400 to-green-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -289,7 +289,7 @@ const Navbar = () => {
               
               <motion.a
                 href="/pricing"
-                className="block mt-6 py-3 px-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl text-center"
+                className="block mt-6 py-3 px-4 bg-gradient-to-r from-emerald-400 to-green-600 text-white font-semibold rounded-xl text-center"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navItems.length * 0.1 }}
