@@ -54,13 +54,13 @@ const Footer = () => {
           >
             <div className="flex items-center space-x-3 mb-6">
               <motion.div 
-                className="w-14 h-14 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-xl flex items-center justify-center shadow-lg"
+                className="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-400 rounded-xl flex items-center justify-center shadow-lg"
                 whileHover={{ rotate: 360, scale: 1.05 }}
                 transition={{ duration: 0.6 }}
               >
                 <BookOpen size={24} className="text-white" />
               </motion.div>
-              <span className="font-bold text-3xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">StudyBuddy</span>
+              <span className="font-bold text-3xl bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent">StudyBuddy</span>
             </div>
             <p className="text-blue-200 mb-8 max-w-md leading-relaxed">
               Empowering high school students across Kenya with comprehensive learning resources. Join thousands of students achieving academic excellence.
@@ -75,7 +75,7 @@ const Footer = () => {
                 <motion.a
                   key={social.label}
                   href={social.href}
-                  className="w-12 h-12 rounded-xl bg-blue-800 flex items-center justify-center hover:bg-blue-700 transition-all duration-300 hover:shadow-lg"
+                  className="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center hover:bg-emerald-500 transition-all duration-300 hover:shadow-lg"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
@@ -93,7 +93,7 @@ const Footer = () => {
             <h4 className="font-semibold text-xl text-white mb-6 relative">
               Quick Links
               <motion.div 
-                className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-teal-400 to-blue-400"
+                className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-emerald-300 to-green-600"
                 initial={{ width: 0 }}
                 whileInView={{ width: 32 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -126,7 +126,7 @@ const Footer = () => {
             <h4 className="font-semibold text-xl text-white mb-6 relative">
               Subjects
               <motion.div 
-                className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-teal-400 to-blue-400"
+                className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-emerald-300 to-green-600"
                 initial={{ width: 0 }}
                 whileInView={{ width: 32 }}
                 transition={{ duration: 0.8, delay: 0.3 }}
@@ -155,7 +155,7 @@ const Footer = () => {
                   whileHover={{ x: 5 }}
                   transition={{ duration: 0.2 }}
                 >
-                  <Link href="/subjects" className="text-teal-300 hover:text-white transition-colors font-medium">
+                  <Link href="/subjects" className="text-green-300 hover:text-white transition-colors font-medium">
                     View All Subjects →
                   </Link>
                 </motion.div>
@@ -168,7 +168,7 @@ const Footer = () => {
             <h4 className="font-semibold text-xl text-white mb-6 relative">
               Contact Us
               <motion.div 
-                className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-teal-400 to-blue-400"
+                className="absolute -bottom-2 left-0 w-8 h-0.5 bg-gradient-to-r from-emerald-300 to-green-600"
                 initial={{ width: 0 }}
                 whileInView={{ width: 32 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -187,7 +187,7 @@ const Footer = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <contact.icon size={18} className="text-teal-300 mt-1" />
+                    <contact.icon size={18} className="text-green-300 mt-1" />
                   </motion.div>
                   <span className="text-blue-200 text-sm">{contact.text}</span>
                 </li>
@@ -208,7 +208,7 @@ const Footer = () => {
                 />
                 <motion.button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 px-3 py-2 rounded-lg font-medium text-sm transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="w-full bg-gradient-to-r from-emarld-300 to-green-500 hover:from-teal-600 hover:to-blue-600 px-3 py-2 rounded-lg font-medium text-sm transition-all duration-300 flex items-center justify-center space-x-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   disabled={isSubscribed}
@@ -232,7 +232,7 @@ const Footer = () => {
         
         {/* Horizontal Line */}
         <motion.div 
-          className="border-t border-blue-800 my-10"
+          className="border-t border-green-600 my-10"
           variants={itemVariants}
         />
         
