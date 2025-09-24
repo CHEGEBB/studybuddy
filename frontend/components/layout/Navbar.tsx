@@ -75,14 +75,14 @@ const Navbar = () => {
           >
             <div className="relative">
               <motion.div 
-                className="w-12 h-12 bg-gradient-to-br from-blue-600 via-purple-600 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg"
+                className="w-12 h-12 bg-gradient-to-br from-emerald-600 via-teal-600 to-teal-500 rounded-2xl flex items-center justify-center shadow-lg"
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.6 }}
               >
                 <span className="text-white font-bold text-xl">SB</span>
               </motion.div>
               <motion.div 
-                className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full"
+                className="absolute -top-1 -right-1 w-4 h-4 bg-sky-400 rounded-full"
                 animate={{ scale: [1, 1.2, 1] }}
                 transition={{ duration: 2, repeat: Infinity }}
               />
@@ -114,7 +114,7 @@ const Navbar = () => {
                   href={item.path}
                   className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 relative flex items-center space-x-1 ${
                     isActivePath(item.path)
-                      ? 'text-blue-600 bg-blue-50'
+                      ? 'text-emerald-600 bg-blue-50'
                       : isScrolled 
                         ? 'text-gray-700 hover:text-blue-600 hover:bg-blue-50' 
                         : 'text-white hover:text-blue-200 hover:bg-white/10'
@@ -155,13 +155,13 @@ const Navbar = () => {
                                 href={subItem.path}
                                 className={`flex items-center space-x-3 p-3 rounded-xl transition-all duration-200 ${
                                   isActivePath(subItem.path)
-                                    ? 'bg-blue-50 text-blue-600'
+                                    ? 'bg-blue-50 text-teal-600'
                                     : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600'
                                 }`}
                                 whileHover={{ x: 5 }}
                               >
                                 <div className="w-8 h-8 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg flex items-center justify-center">
-                                  <IconComponent className="w-4 h-4 text-blue-600" />
+                                  <IconComponent className="w-4 h-4 text-teal-600" />
                                 </div>
                                 <span className="text-sm font-medium">{subItem.name}</span>
                               </motion.a>
