@@ -407,24 +407,24 @@ useEffect(() => {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
-                    <GraduationCap className="w-6 h-6 text-black" />
+                    <GraduationCap className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-white font-semibold">StudyBuddy Platform</div>
-                    <div className="text-gray-300 text-sm">Your Success Partner</div>
+                    <div className="text-black font-semibold">StudyBuddy Platform</div>
+                    <div className="text-gray-500 text-sm">Your Success Partner</div>
                   </div>
                 </div>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center gap-3 text-white">
+                  <div className="flex items-center gap-3 text-emerald-500">
                     <CheckCircle className="w-5 h-5 text-emerald-400" />
                     <span>Kenyan Curriculum Expert Teachers</span>
                   </div>
-                  <div className="flex items-center gap-3 text-white">
+                  <div className="flex items-center gap-3 text-emerald-500">
                     <CheckCircle className="w-5 h-5 text-emerald-400" />
                     <span>Personalized Learning Plans</span>
                   </div>
-                  <div className="flex items-center gap-3 text-white">
+                  <div className="flex items-center gap-3 text-emerald-500">
                     <CheckCircle className="w-5 h-5 text-emerald-400" />
                     <span>24/7 Academic Support</span>
                   </div>
@@ -432,8 +432,8 @@ useEffect(() => {
                 
                 <div className="bg-emerald-500/20 rounded-2xl p-4 border border-emerald-400/30">
                   <div className="text-emerald-400 text-sm font-medium">Latest Achievement</div>
-                  <div className="text-white font-semibold">Mathematics Grade: A</div>
-                  <div className="text-gray-300 text-sm">Improved by 2 grades!</div>
+                  <div className="text-black font-semibold">Mathematics Grade: A</div>
+                  <div className="text-black text-sm">Improved by 2 grades!</div>
                 </div>
               </div>
             </div>
