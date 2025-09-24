@@ -210,12 +210,12 @@ const AboutPage = () => {
                 <div className="floating-badge top-badge">
                   <div className="bg-[#85E092] backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
                     <div className="flex items-center">
-                      <div className="bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg p-2 mr-3">
+                      <div className="bg-gradient-to-r from-cyan-400 to-green-500 rounded-lg p-2 mr-3">
                         <Trophy className="text-white" size={20} />
                       </div>
                       <div>
                         <p className="text-white text-sm font-medium">Top Rated</p>
-                        <p className="text-emerald-300 text-xs">Education Platform</p>
+                        <p className="text-white text-xs">Education Platform</p>
                       </div>
                     </div>
                   </div>
@@ -224,12 +224,12 @@ const AboutPage = () => {
                 <div className="floating-badge bottom-badge">
                   <div className="bg-[#36B9AE] backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
                     <div className="flex items-center">
-                      <div className="bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg p-2 mr-3">
+                      <div className="bg-gradient-to-r from-cyan-400 to-green-500 rounded-lg p-2 mr-3">
                         <Users className="text-white" size={20} />
                       </div>
                       <div>
                         <p className="text-white text-sm font-medium">15,000+</p>
-                        <p className="text-emerald-300 text-xs">Students Nationwide</p>
+                        <p className="text-white text-xs">Students Nationwide</p>
                       </div>
                     </div>
                   </div>
@@ -314,11 +314,11 @@ const AboutPage = () => {
       </div>
       
       <div className="relative animate-on-scroll">
-        <div className="mission-images-container relative h-[600px] w-full">
+        <div className="mission-images-container relative h-[600px] w-full ">
           {/* Top Left Image */}
-          <div className="absolute top-0 left-0 w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll">
+          <div className="absolute -top-2 left-0 w-48 h-48 md:w-56 md:h-60 lg:w-64 lg:h-70 rounded-[30px] overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll">
             <Image 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+              src="https://images.unsplash.com/photo-1669929949688-44fe908e7709?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Student learning online"
               width={256}
               height={256}
@@ -327,9 +327,9 @@ const AboutPage = () => {
           </div>
           
           {/* Bottom Left Image */}
-          <div className="absolute top-40 left-8 md:top-48 md:left-12 w-44 h-44 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll" style={{ animationDelay: '0.2s' }}>
+          <div className="absolute top-40 left-8 md:top-48 md:left-12 lg:top-70 lg:-left-1 w-48 h-44 md:w-48 md:h-48 lg:w-64 lg:h-56 rounded-[30px] overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll" style={{ animationDelay: '0.2s' }}>
             <Image 
-              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+              src="https://images.unsplash.com/photo-1747173708417-06828e9970ab?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Professional educator"
               width={224}
               height={224}
@@ -338,7 +338,7 @@ const AboutPage = () => {
           </div>
           
           {/* Right Large Image */}
-          <div className="absolute -top-8 right-0 lg:left-64 w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-96 rounded-3xl overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll" style={{ animationDelay: '0.4s' }}>
+          <div className="absolute -top-8 right-0 lg:left-84 w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-110 rounded-3xl overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll" style={{ animationDelay: '0.4s' }}>
             <Image 
               src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80"
               alt="Students in classroom"
@@ -360,11 +360,11 @@ const AboutPage = () => {
           </div>
           
           {/* Decorative elements */}
-          <div className="absolute bottom-16 left-16 w-16 h-16 md:w-20 md:h-20 bg-emerald-500/20 rounded-full flex items-center justify-center shadow-lg animate-on-scroll backdrop-blur-sm border border-emerald-400/30" style={{ animationDelay: '0.8s' }}>
+          {/* <div className="absolute bottom-16 left-16 w-16 h-16 md:w-20 md:h-20 bg-emerald-500/20 rounded-full flex items-center justify-center shadow-lg animate-on-scroll backdrop-blur-sm border border-emerald-400/30" style={{ animationDelay: '0.8s' }}>
             <div className="w-8 h-8 md:w-12 md:h-12 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full flex items-center justify-center">
               <Trophy className="text-white w-4 h-4 md:w-6 md:h-6" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
