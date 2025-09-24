@@ -37,7 +37,7 @@ const Footer = () => {
 
   return (
     <motion.footer 
-      className="bg-gradient-to-br from-slate-700 to-gray-900 text-white relative overflow-hidden"
+      className="bg-gradient-to-br bg-slate-900/95 to-slate-900 text-white relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
@@ -54,13 +54,13 @@ const Footer = () => {
           >
             <div className="flex items-center space-x-3 mb-6">
               <motion.div 
-                className="w-14 h-14 bg-gradient-to-r from-blue-500 to-teal-400 rounded-xl flex items-center justify-center shadow-lg"
+                className="w-14 h-14 bg-gradient-to-r from-blue-500 to-emerald-400 rounded-xl flex items-center justify-center shadow-lg"
                 whileHover={{ rotate: 360, scale: 1.05 }}
                 transition={{ duration: 0.6 }}
               >
                 <BookOpen size={24} className="text-white" />
               </motion.div>
-              <span className="font-bold text-3xl bg-gradient-to-r from-teal-400 to-blue-400 bg-clip-text text-transparent">StudyBuddy</span>
+              <span className="font-bold text-3xl bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text text-transparent">StudyBuddy</span>
             </div>
             <p className="text-blue-200 mb-8 max-w-md leading-relaxed">
               Empowering high school students across Kenya with comprehensive learning resources. Join thousands of students achieving academic excellence.
