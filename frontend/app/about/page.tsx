@@ -150,12 +150,12 @@ const AboutPage = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="hero-section relative min-h-[90vh] bg-gradient-to-br from-slate-900 via-emerald-900/20 to-slate-900 overflow-hidden flex items-center">
+      <section className="hero-section relative min-h-[90vh] bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 overflow-hidden flex items-center">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
+            backgroundImage: "url('/assets/images/studen.jpg')"
           }}
         ></div>
         
@@ -165,7 +165,7 @@ const AboutPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-left animate-on-scroll">
               <div className="mb-6">
-                <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase">
+                <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase ">
                   About StudyBuddy
                 </span>
               </div>
@@ -203,18 +203,18 @@ const AboutPage = () => {
                   src="/assets/images/hero.png" 
                   alt="Students learning together"
                   width={800}
-                  height={900}
-                  className=" object-cover student-image"
+                  height={1000}
+                  className=" object-cover student-image shadow-2xl"
                 />
                 
                 <div className="floating-badge top-badge">
-                  <div className="bg-white backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
+                  <div className="bg-[#85E092] backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
                     <div className="flex items-center">
                       <div className="bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg p-2 mr-3">
                         <Trophy className="text-white" size={20} />
                       </div>
                       <div>
-                        <p className="text-black text-sm font-medium">Top Rated</p>
+                        <p className="text-white text-sm font-medium">Top Rated</p>
                         <p className="text-emerald-300 text-xs">Education Platform</p>
                       </div>
                     </div>
@@ -222,13 +222,13 @@ const AboutPage = () => {
                 </div>
                 
                 <div className="floating-badge bottom-badge">
-                  <div className="bg-white backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
+                  <div className="bg-[#36B9AE] backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
                     <div className="flex items-center">
                       <div className="bg-gradient-to-r from-emerald-400 to-green-500 rounded-lg p-2 mr-3">
                         <Users className="text-white" size={20} />
                       </div>
                       <div>
-                        <p className="text-black text-sm font-medium">15,000+</p>
+                        <p className="text-white text-sm font-medium">15,000+</p>
                         <p className="text-emerald-300 text-xs">Students Nationwide</p>
                       </div>
                     </div>
@@ -267,74 +267,109 @@ const AboutPage = () => {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-24 bg-gradient-to-br from-slate-900 to-emerald-900 relative overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
-          }}
-        ></div>
-        
-        <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="animate-on-scroll">
-              <div className="mb-8">
-                <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase mb-4">
-                  Our Mission
-                </span>
-                <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-                  Transforming Education in 
-                  <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent"> Kenya</span>
-                </h2>
-                <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                  At StudyBuddy, we believe every Kenyan high school student deserves access to world-class 
-                  educational resources. Our mission is to bridge the gap between traditional learning methods 
-                  and modern educational technology, creating an inclusive environment where every student can thrive.
-                </p>
-                
-                <div className="space-y-4">
-                  {[
-                    "Comprehensive curriculum aligned with Kenyan education system",
-                    "Interactive learning experiences that engage and inspire",
-                    "Personalized support to address individual learning needs",
-                    "Affordable pricing to ensure accessibility for all families"
-                  ].map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center space-x-3 animate-on-scroll"
-                      style={{ animationDelay: `${index * 0.2}s` }}
-                    >
-                      <CheckCircle className="text-emerald-400 flex-shrink-0" size={20} />
-                      <span className="text-gray-300">{item}</span>
-                    </div>
-                  ))}
-                </div>
+     {/* Mission & Vision */}
+<section className="py-24 bg-gradient-to-br from-slate-900 to-emerald-900 relative overflow-hidden">
+  <div 
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+    style={{
+      backgroundImage: "url('https://images.unsplash.com/photo-1571260899304-425eee4c7efc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
+    }}
+  ></div>
+  
+  <div className="container mx-auto px-4">
+    <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <div className="animate-on-scroll">
+        <div className="mb-8">
+          <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase mb-4">
+            Our Mission
+          </span>
+          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
+            Transforming Education in 
+            <span className="bg-gradient-to-r from-emerald-400 to-green-400 bg-clip-text text-transparent"> Kenya</span>
+          </h2>
+          <p className="text-gray-300 text-lg leading-relaxed mb-8">
+            At StudyBuddy, we believe every Kenyan high school student deserves access to world-class 
+            educational resources. Our mission is to bridge the gap between traditional learning methods 
+            and modern educational technology, creating an inclusive environment where every student can thrive.
+          </p>
+          
+          <div className="space-y-4">
+            {[
+              "Comprehensive curriculum aligned with Kenyan education system",
+              "Interactive learning experiences that engage and inspire",
+              "Personalized support to address individual learning needs",
+              "Affordable pricing to ensure accessibility for all families"
+            ].map((item, index) => (
+              <div
+                key={index}
+                className="flex items-center space-x-3 animate-on-scroll"
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
+                <CheckCircle className="text-emerald-400 flex-shrink-0" size={20} />
+                <span className="text-gray-300">{item}</span>
               </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <div className="relative animate-on-scroll">
+        <div className="mission-images-container relative h-[600px] w-full">
+          {/* Top Left Image */}
+          <div className="absolute top-0 left-0 w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll">
+            <Image 
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+              alt="Student learning online"
+              width={256}
+              height={256}
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          
+          {/* Bottom Left Image */}
+          <div className="absolute top-40 left-8 md:top-48 md:left-12 w-44 h-44 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll" style={{ animationDelay: '0.2s' }}>
+            <Image 
+              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+              alt="Professional educator"
+              width={224}
+              height={224}
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          
+          {/* Right Large Image */}
+          <div className="absolute -top-8 right-0 lg:left-64 w-56 h-72 md:w-64 md:h-80 lg:w-72 lg:h-96 rounded-3xl overflow-hidden border-6 border-white/20 shadow-2xl animate-on-scroll" style={{ animationDelay: '0.4s' }}>
+            <Image 
+              src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80"
+              alt="Students in classroom"
+              width={288}
+              height={384}
+              className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          
+          {/* Vision Card Overlay */}
+          <div className="absolute bottom-0 right-4 lg:right-8 w-48 md:w-56 lg:w-64 vision-card animate-on-scroll" style={{ animationDelay: '0.6s' }}>
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-4 md:p-6 border border-white/20 shadow-xl">
+              <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-2 md:mb-4">Our Vision</h3>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                To create a future where every Kenyan student has the tools, resources, 
+                and support they need to achieve academic excellence and pursue their dreams.
+              </p>
             </div>
-            
-            <div className="relative animate-on-scroll">
-              <div className="mission-image-container">
-                <Image 
-                  src="https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1024&q=80" 
-                  alt="Students in classroom"
-                  width={600}
-                  height={400}
-                  className="rounded-3xl object-cover"
-                />
-                <div className="vision-card">
-                  <div className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 shadow-xl">
-                    <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
-                    <p className="text-gray-300 leading-relaxed">
-                      To create a future where every Kenyan student has the tools, resources, 
-                      and support they need to achieve academic excellence and pursue their dreams.
-                    </p>
-                  </div>
-                </div>
-              </div>
+          </div>
+          
+          {/* Decorative elements */}
+          <div className="absolute bottom-16 left-16 w-16 h-16 md:w-20 md:h-20 bg-emerald-500/20 rounded-full flex items-center justify-center shadow-lg animate-on-scroll backdrop-blur-sm border border-emerald-400/30" style={{ animationDelay: '0.8s' }}>
+            <div className="w-8 h-8 md:w-12 md:h-12 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full flex items-center justify-center">
+              <Trophy className="text-white w-4 h-4 md:w-6 md:h-6" />
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Values Section */}
       <section className="py-24 bg-gradient-to-br from-gray-50 to-emerald-50 relative">
