@@ -290,21 +290,21 @@ const MathematicsPage = () => {
     {
       title: "KCSE Mathematics Revision Guide",
       description: "Comprehensive review of all KCSE math topics with practice questions and solutions.",
-      image: "/assets/images/revision-guide.jpg",
+      image: "https://images.unsplash.com/photo-1632571401005-458e9d244591?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Study Guide",
       downloads: "3.4k"
     },
     {
       title: "Mathematics Formula Sheet",
       description: "Quick reference guide with all essential formulas organized by topic for easy access.",
-      image: "/assets/images/formula-sheet.jpg",
+      image: "https://images.unsplash.com/photo-1754304342329-3c5aff22a39c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Reference",
       downloads: "8.9k"
     },
     {
       title: "Problem-Solving Strategies",
       description: "Step-by-step approaches to tackle complex mathematics problems in exams.",
-      image: "/assets/images/problem-solving.jpg",
+      image: "https://images.unsplash.com/photo-1520569495996-b5e1219cb625?q=80&w=1094&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "Tutorial",
       downloads: "2.7k"
     }
@@ -381,7 +381,7 @@ const MathematicsPage = () => {
             <div className="relative hidden lg:block">
               <div className="student-image-container">
                 <Image 
-                  src="/assets/images/hero-math.png" 
+                  src="/assets/images/hero2.png" 
                   alt="Student solving math problems"
                   width={600}
                   height={800}
@@ -748,7 +748,7 @@ const MathematicsPage = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1613553474179-e1eda3ea5734?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80')"
+            backgroundImage: "url('https://images.unsplash.com/photo-1648201637025-1c77b9be3013?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"
           }}
         ></div>
         
