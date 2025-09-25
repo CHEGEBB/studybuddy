@@ -22,7 +22,8 @@ import {
   Twitter,
   Linkedin,
   X,
-  Instagram
+  Instagram,
+  LucideTwitter
 } from 'lucide-react';
 import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
@@ -467,10 +468,10 @@ const AboutPage = () => {
     <div className="flex justify-center gap-6 mb-12 max-w-6xl mx-auto">
       {team.slice(0, 4).map((member, index) => {
         const colors = [
-          { bg: 'bg-emerald-500', text: 'text-white' },
-          { bg: 'bg-green-500', text: 'text-white' },
-          { bg: 'bg-teal-500', text: 'text-white' },
-          { bg: 'bg-emerald-400', text: 'text-white' }
+          { bg: 'bg-emerald-500', text: 'text-slate-500' },
+          { bg: 'bg-green-500', text: 'text-slate-500' },
+          { bg: 'bg-teal-500', text: 'text-slate-500' },
+          { bg: 'bg-emerald-400', text: 'text-slate-500' }
         ];
         const colorSet = colors[index % colors.length];
         
@@ -484,17 +485,17 @@ const AboutPage = () => {
               {/* Social Media Icons - appear on hover */}
               <div className="absolute top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
                 <div className="flex space-x-3">
-                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Facebook className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  <a href="#" className="w-10 h-10 bg-green-400 bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Facebook className="w-5 h-5 text-white hover:text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <X className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  <a href="#" className="w-10 h-10 bg-green-400  bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <LucideTwitter className="w-5 h-5 text-white hover:text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Linkedin className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  <a href="#" className="w-10 h-10 bg-green-400  bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Linkedin className="w-5 h-5 text-white hover:text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-white bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Instagram className="w-5 h-5 text-emerald-600 hover:text-white" />
+                  <a href="#" className="w-10 h-10 bg-green-400  bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Instagram className="w-5 h-5 text-white hover:text-white" />
                   </a>
                 </div>
               </div>
@@ -511,7 +512,7 @@ const AboutPage = () => {
               </div>
               
               {/* Member Info - positioned at bottom with background */}
-              <div className="relative z-10 bg-black bg-opacity-40 w-full py-6 px-4 rounded-b-full">
+              <div className="relative z-10  bg-transparent bg-opacity-40 w-full py-6 px-4 rounded-b-full">
                 <h3 className={`text-xl font-bold ${colorSet.text} mb-1`}>{member.name}</h3>
                 <p className={`${colorSet.text} text-sm font-medium opacity-90 uppercase tracking-wide`}>
                   {member.role}
