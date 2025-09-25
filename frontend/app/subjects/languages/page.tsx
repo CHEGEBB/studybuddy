@@ -407,135 +407,184 @@ const EnglishPage = () => {
     <div className="english-page min-h-screen bg-white">
       <Navbar />
       
-      {/* Hero Section with Literary Animation */}
-      <section 
-        ref={heroRef}
-        className="hero-section relative h-[90vh] flex items-center overflow-hidden"
-      >
-        <div className="hero-background absolute inset-0 bg-gradient-to-r from-emerald-300/40 via-green-800 to-transparent z-10"></div>
+      {/* Enhanced Hero Section */}
+<section 
+  ref={heroRef}
+  className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-900 via-emerald-900 to-green-800"
+>
+  {/* Animated Background Elements */}
+  <div className="absolute inset-0">
+    {/* Primary gradient overlay */}
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/90 via-emerald-900/80 to-transparent"></div>
+    
+    {/* Floating orbs */}
+    <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/20 rounded-full blur-3xl animate-pulse"></div>
+    <div className="absolute bottom-20 right-20 w-96 h-96 bg-green-500/15 rounded-full blur-3xl animate-pulse delay-1000"></div>
+    <div className="absolute top-1/2 left-1/3 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl animate-pulse delay-2000"></div>
+    
+    {/* Grid pattern overlay */}
+    <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.3) 1px, transparent 0)`,
+        backgroundSize: '50px 50px'
+      }}></div>
+    </div>
+  </div>
+
+  {/* Main Content Container */}
+  <div className="container mx-auto px-4 relative z-10">
+    <div className="grid lg:grid-cols-2 gap-16 items-center">
+      
+      {/* Left Content */}
+      <div className="text-left space-y-8">
+       
         
-        <div className="absolute inset-0 bg-cover bg-center opacity-60" 
-             style={{backgroundImage: "url('https://images.unsplash.com/photo-1519682577862-22b62b24e493?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3')"}}></div>
+        {/* Main Heading */}
+        <div className="space-y-4">
+          <h1 className="text-4xl lg:text-6xl font-bold leading-none">
+          Master <span className="block text-green-400">Language & Literature</span>
+          </h1>
+        </div>
         
-        <div className="absolute right-0 top-0 h-full w-1/2 literary-overlay"></div>
+        {/* Subtitle */}
+        <p className="text-xl lg:text-2xl text-gray-300 max-w-2xl leading-relaxed font-light">
+          Unlock the power of words through our comprehensive English and Kiswahili programs. 
+          Transform your communication skills and excel in KCSE examinations.
+        </p>
         
-        <div className="container mx-auto px-4 relative z-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-left animate-on-scroll">
-              <div className="mb-6 flex items-center">
-                <span className="inline-block bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">
-                  <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-white bg-clip-text font-semibold text-lg tracking-wide uppercase">
-                    Languages
-                  </span>
-                </span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight hero-title">
-                <span className="text-white">Craft Your</span>
-                <br />
-                <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-400 bg-clip-text text-white">
-                  Literary Voice
-                </span>
-              </h1>
-              
-              <p className="text-xl text-white mb-8 leading-relaxed max-w-2xl typewriter-text">
-                Explore the enchanting world of language and literature, where words dance
-                across pages and ideas bloom into powerful expressions of human experience.
-              </p>
-              
-              <div className="flex flex-wrap gap-4">
-                <button className="cta-button bg-gradient-to-r from-emerald-700 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
-                  Begin Your Journey <ArrowRight className="ml-2" size={20} />
-                </button>
-                <button className="secondary-button bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center">
-                  <PlayCircle className="mr-2" size={20} />
-                  Watch Student Stories
-                </button>
-              </div>
-              
-              {/* Floating language stats */}
-              <div className="mt-12 hidden lg:flex space-x-6">
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 flex items-center space-x-3">
-                  <BookOpen className="text-emerald-400" size={24} />
-                  <span className="text-white font-semibold">English Literature</span>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 flex items-center space-x-3">
-                  <PenTool className="text-emerald-400" size={24} />
-                  <span className="text-white font-semibold">Creative Writing</span>
-                </div>
-                <div className="bg-white/10 backdrop-blur-md rounded-xl p-4 border border-white/20 flex items-center space-x-3">
-                  <Mic className="text-emerald-400" size={24} />
-                  <span className="text-white font-semibold">Kiswahili Fasaha</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="relative hidden lg:block">
-              <div className="literary-visual-container">
-                <div className="book-stack">
-                  <div className="book book-1">
-                    <div className="book-spine"></div>
-                    <div className="book-cover">
-                      <h3>Poetry</h3>
-                    </div>
-                  </div>
-                  <div className="book book-2">
-                    <div className="book-spine"></div>
-                    <div className="book-cover">
-                      <h3>Novels</h3>
-                    </div>
-                  </div>
-                  <div className="book book-3">
-                    <div className="book-spine"></div>
-                    <div className="book-cover">
-                      <h3>Essays</h3>
-                    </div>
-                  </div>
-                  <div className="book book-4">
-                    <div className="book-spine"></div>
-                    <div className="book-cover">
-                      <h3>Drama</h3>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="floating-quill">
-                  <div className="quill-pen"></div>
-                  <div className="ink-drops">
-                    <div className="ink-drop drop-1"></div>
-                    <div className="ink-drop drop-2"></div>
-                    <div className="ink-drop drop-3"></div>
-                  </div>
-                </div>
-                
-                <div className="floating-scroll">
-                  <div className="scroll-paper">
-                    <div className="scroll-text">
-                      <p>Words have the power to inspire, transform, and illuminate the human experience...</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="typewriter-animation">
-                  <div className="typewriter">
-                    <div className="typewriter-keys"></div>
-                    <div className="typewriter-paper">
-                      <div className="typed-text">Language is the dress of thought.</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        {/* Feature Pills */}
+        <div className="flex flex-wrap gap-3">
+          <div className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+            <BookOpen className="text-emerald-400 mr-2" size={18} />
+            <span className="text-white font-medium">Creative Writing</span>
+          </div>
+          <div className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+            <Feather className="text-emerald-400 mr-2" size={18} />
+            <span className="text-white font-medium">Poetry Analysis</span>
+          </div>
+          <div className="flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
+            <MessageSquare className="text-emerald-400 mr-2" size={18} />
+            <span className="text-white font-medium">Grammar Mastery</span>
           </div>
         </div>
         
-        {/* Animated scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-          <div className="scroll-indicator">
-            <div className="scroll-arrow"></div>
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 pt-4">
+          <button className="group bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/25 flex items-center justify-center">
+            Start Learning Now
+            <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={20} />
+          </button>
+          
+          <button className="group bg-white/10 backdrop-blur-md border-2 border-white/30 hover:bg-white/20 text-white px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 hover:scale-105 flex items-center justify-center">
+            <PlayCircle className="mr-2 group-hover:scale-110 transition-transform duration-300" size={20} />
+            Watch Demo
+          </button>
+        </div>
+        
+        {/* Stats */}
+        <div className="flex items-center gap-8 pt-8">
+          <div className="text-center">
+            <div className="text-3xl font-bold text-white">94%</div>
+            <div className="text-emerald-300 text-sm">Success Rate</div>
+          </div>
+          <div className="w-px h-12 bg-white/20"></div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-white">8.5K+</div>
+            <div className="text-emerald-300 text-sm">Students</div>
+          </div>
+          <div className="w-px h-12 bg-white/20"></div>
+          <div className="text-center">
+            <div className="text-3xl font-bold text-white">5★</div>
+            <div className="text-emerald-300 text-sm">Rating</div>
           </div>
         </div>
-      </section>
+      </div>
+      
+      {/* Right Visual Content */}
+      <div className="relative hidden lg:block">
+        <div className="relative w-full h-[600px]">
+          
+          {/* Central Book/Learning Visual */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="relative">
+              {/* Main book */}
+              <div className="w-80 h-96 bg-gradient-to-br from-white via-gray-50 to-gray-100 rounded-2xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-700">
+                <div className="p-8 h-full flex flex-col">
+                  <div className="text-emerald-600 text-2xl font-bold mb-4">English Literature</div>
+                  <div className="flex-1 space-y-3">
+                    <div className="h-2 bg-gray-200 rounded w-full"></div>
+                    <div className="h-2 bg-gray-200 rounded w-5/6"></div>
+                    <div className="h-2 bg-gray-200 rounded w-4/5"></div>
+                    <div className="h-2 bg-emerald-200 rounded w-3/4"></div>
+                    <div className="h-2 bg-gray-200 rounded w-full"></div>
+                    <div className="h-2 bg-gray-200 rounded w-2/3"></div>
+                  </div>
+                  <div className="mt-auto pt-4">
+                    <div className="text-sm text-gray-500">Chapter 3: Poetry Analysis</div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating elements */}
+              <div className="absolute -top-8 -left-8 w-16 h-16 bg-emerald-500 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                <Feather className="text-white" size={24} />
+              </div>
+              
+              <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-green-500 rounded-full flex items-center justify-center shadow-lg animate-pulse">
+                <BookText className="text-white" size={28} />
+              </div>
+              
+              <div className="absolute top-1/3 -right-12 w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center shadow-lg animate-ping">
+                <Star className="text-white" size={16} />
+              </div>
+            </div>
+          </div>
+          
+          {/* Floating quote cards */}
+          <div className="absolute top-16 left-0 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs animate-float">
+            <div className="text-emerald-600 text-sm font-semibold mb-2">Student Achievement</div>
+            <div className="text-gray-700 text-sm">"I improved my essay writing by 40% in just 3 months!"</div>
+            <div className="text-xs text-gray-500 mt-2">- Sarah M., Form 3</div>
+          </div>
+          
+          <div className="absolute bottom-16 right-0 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs animate-float delay-1000">
+            <div className="text-green-600 text-sm font-semibold mb-2">KCSE Success</div>
+            <div className="text-gray-700 text-sm">"Scored A- in both English papers!"</div>
+            <div className="text-xs text-gray-500 mt-2">- James K., Graduate</div>
+          </div>
+          
+          {/* Background decoration */}
+          <div className="absolute inset-0 -z-10">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-green-500/20 rounded-full blur-2xl"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  {/* Scroll Indicator */}
+  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
+      <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
+    </div>
+  </div>
+</section>
+
+<style jsx>{`
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  .delay-1000 {
+    animation-delay: 1s;
+  }
+`}</style>
       
       {/* Literary Quote Showcase */}
       <section className="py-16 bg-gradient-to-b from-white to-green-50 overflow-hidden">
