@@ -31,8 +31,6 @@ const Navbar = () => {
         { name: 'Biology', path: '/subjects/biology', icon: Dna },
         { name: 'English', path: '/subjects/english', icon: BookOpen },
         { name: 'Geography', path: '/subjects/geography', icon: Globe },
-        { name: 'Economics', path: '/subjects/economics', icon: DollarSign },
-        { name: 'Computer Science', path: '/subjects/computer-science', icon: BookOpen },
       ]
     },
     { name: 'Pricing', path: '/pricing' },

@@ -574,7 +574,7 @@ const MathematicsPage = () => {
                         ))}
                       </ul>
                       
-                      <div className="mt-8 pt-6 border-t border-gray-100">
+                      <div className="mt-8 pt-6  border-t-2 border-dotted border-gray-300">
                         <button className="w-full flex items-center justify-center text-emerald-600 hover:text-emerald-700 font-medium transition-colors duration-300">
                           Explore Module <ArrowRight className="ml-2" size={16} />
                         </button>
