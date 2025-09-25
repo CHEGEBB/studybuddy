@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Menu, X, ChevronDown, Calculator, Zap, TestTube, Dna, BookOpen, Globe, DollarSign, MapPin, Mail, Phone } from 'lucide-react';
+import { Search, Menu, X, ChevronDown, Calculator, Zap, TestTube, Dna, BookOpen, Globe, DollarSign, MapPin, Mail, Phone, Languages } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
         { name: 'Physics', path: '/subjects/physics', icon: Zap },
         { name: 'Chemistry', path: '/subjects/chemistry', icon: TestTube },
         { name: 'Biology', path: '/subjects/biology', icon: Dna },
-        { name: 'English', path: '/subjects/english', icon: BookOpen },
+        { name: 'Languages', path: '/subjects/languages', icon:Languages },
         { name: 'Geography', path: '/subjects/geography', icon: Globe },
       ]
     },
@@ -66,6 +66,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
           {/* Enhanced Logo */}
+
           <motion.div 
             className="flex items-center space-x-3 cursor-pointer"
             whileHover={{ scale: 1.05 }}
@@ -73,7 +74,7 @@ const Navbar = () => {
           >
             <div className="relative">
               <motion.div 
-                className="w-12 h-12 bg-gradient-to-br from-emerald-600 via-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-lg"
+                className="w-12 h-12 bg-gradient-to-br from-emerald-300 via-green-400 to-green-300 rounded-2xl flex items-center justify-center shadow-lg"
                 whileHover={{ rotate: [0, -10, 10, 0] }}
                 transition={{ duration: 0.6 }}
               >

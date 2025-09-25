@@ -1,0 +1,599 @@
+// /styles/english.scss
+
+// Main colors palette
+$emerald-50: #ecfdf5;
+$emerald-100: #d1fae5;
+$emerald-200: #a7f3d0;
+$emerald-300: #6ee7b7;
+$emerald-400: #34d399;
+$emerald-500: #10b981;
+$emerald-600: #059669;
+$emerald-700: #047857;
+$emerald-800: #065f46;
+$emerald-900: #064e3b;
+
+$green-50: #f0fdf4;
+$green-100: #dcfce7;
+$green-200: #bbf7d0;
+$green-300: #86efac;
+$green-400: #4ade80;
+$green-500: #22c55e;
+$green-600: #16a34a;
+$green-700: #15803d;
+$green-800: #166534;
+$green-900: #14532d;
+
+$jade-400: #3dd798;
+
+// Animation durations
+$slow: 4s;
+$medium: 2s;
+$fast: 1s;
+
+// Element-specific animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes inkDrop {
+  0% {
+    transform: scale(0) translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1) translateY(100px);
+    opacity: 0;
+  }
+}
+
+@keyframes quillWrite {
+  0% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(20px) rotate(2deg);
+  }
+  50% {
+    transform: translateX(0) rotate(0deg);
+  }
+  75% {
+    transform: translateX(-20px) rotate(-2deg);
+  }
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+@keyframes unrollScroll {
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: 200px;
+    opacity: 1;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes bookSpine {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes pageTurn {
+  0% {
+    transform: rotateY(0deg);
+    z-index: 1;
+  }
+  100% {
+    transform: rotateY(-180deg);
+    z-index: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+  }
+}
+
+@keyframes quoteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes statProgress {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+// Hero section animations
+.english-page {
+  .hero-section {
+    .hero-title {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out forwards;
+    }
+
+    .literary-overlay {
+      background: radial-gradient(circle at center, rgba($emerald-900, 0.2), rgba($emerald-900, 0.6));
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23047857' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+        opacity: 0.3;
+      }
+    }
+
+    .typewriter-text {
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.5s forwards;
+    }
+
+    .cta-button {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+        transform: translateX(-100%);
+        transition: transform 0.6s;
+        z-index: -1;
+      }
+      
+      &:hover::before {
+        transform: translateX(100%);
+      }
+    }
+
+    .scroll-indicator {
+      width: 30px;
+      height: 50px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      position: relative;
+      
+      .scroll-arrow {
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        width: 6px;
+        height: 6px;
+        margin-left: -3px;
+        border-left: 2px solid rgba(255, 255, 255, 0.7);
+        border-bottom: 2px solid rgba(255, 255, 255, 0.7);
+        transform: rotate(-45deg);
+        animation: scrollDown 2s infinite;
+        opacity: 0;
+        
+        &:nth-child(1) {
+          animation-delay: 0s;
+        }
+        
+        &:nth-child(2) {
+          top: 16px;
+          animation-delay: 0.15s;
+        }
+        
+        &:nth-child(3) {
+          top: 24px;
+          animation-delay: 0.3s;
+        }
+      }
+    }
+  }
+
+  // Book stack and literary visual animations
+  .literary-visual-container {
+    position: relative;
+    height: 500px;
+    
+    .book-stack {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      perspective: 1000px;
+      
+      .book {
+        position: absolute;
+        width: 180px;
+        height: 250px;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+        
+        .book-spine {
+          position: absolute;
+          width: 30px;
+          height: 100%;
+          top: 0;
+          left: -15px;
+          transform-origin: right;
+          transform: rotateY(90deg);
+          background: linear-gradient(to right, $emerald-800, $emerald-700);
+        }
+        
+        .book-cover {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, $emerald-600, $emerald-700);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 0 3px 3px 0;
+          box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+          
+          h3 {
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transform: rotateZ(-90deg);
+          }
+        }
+        
+        &.book-1 {
+          bottom: 0;
+          z-index: 4;
+          transform: translateX(-20px) rotateZ(-5deg);
+          
+          .book-cover {
+            background: linear-gradient(135deg, $emerald-600, $emerald-700);
+          }
+        }
+        
+        &.book-2 {
+          bottom: 30px;
+          z-index: 3;
+          transform: translateX(0) rotateZ(3deg);
+          
+          .book-cover {
+            background: linear-gradient(135deg, $green-600, $green-700);
+          }
+        }
+        
+        &.book-3 {
+          bottom: 60px;
+          z-index: 2;
+          transform: translateX(20px) rotateZ(-2deg);
+          
+          .book-cover {
+            background: linear-gradient(135deg, $emerald-500, $emerald-600);
+          }
+        }
+        
+        &.book-4 {
+          bottom: 90px;
+          z-index: 1;
+          transform: translateX(40px) rotateZ(5deg);
+          
+          .book-cover {
+            background: linear-gradient(135deg, $green-500, $green-600);
+          }
+        }
+        
+        &:hover {
+          transform: translateY(-20px) rotateZ(0);
+          z-index: 10;
+        }
+      }
+    }
+    
+    .floating-quill {
+      position: absolute;
+      top: 100px;
+      right: 80px;
+      animation: float $slow ease-in-out infinite, quillWrite $medium ease-in-out infinite;
+      
+      .quill-pen {
+        width: 120px;
+        height: 30px;
+        background: linear-gradient(90deg, transparent 70%, $emerald-300 70%, $emerald-300 85%, white 85%);
+        position: relative;
+        
+        &::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 10px;
+          height: 2px;
+          background: $emerald-900;
+          transform: translateX(5px) rotate(-45deg);
+        }
+      }
+      
+      .ink-drops {
+        position: absolute;
+        bottom: -10px;
+        right: 15px;
+        
+        .ink-drop {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: $emerald-800;
+          opacity: 0;
+          
+          &.drop-1 {
+            animation: inkDrop $fast ease-in-out infinite;
+          }
+          
+          &.drop-2 {
+            animation: inkDrop $fast ease-in-out 0.3s infinite;
+          }
+          
+          &.drop-3 {
+            animation: inkDrop $fast ease-in-out 0.6s infinite;
+          }
+        }
+      }
+    }
+    
+    .floating-scroll {
+      position: absolute;
+      top: 180px;
+      left: 80px;
+      animation: float $slow ease-in-out 0.5s infinite;
+      
+      .scroll-paper {
+        width: 180px;
+        height: 0;
+        background: $emerald-50;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        overflow: hidden;
+        animation: unrollScroll 3s ease-out forwards;
+        
+        .scroll-text {
+          padding: 20px;
+          font-family: 'Times New Roman', serif;
+          font-style: italic;
+          color: $emerald-900;
+          font-size: 14px;
+          line-height: 1.6;
+          opacity: 0;
+          animation: fadeInUp 1s ease-out 1s forwards;
+        }
+      }
+    }
+    
+    .typewriter-animation {
+      position: absolute;
+      bottom: 80px;
+      right: 40px;
+      
+      .typewriter {
+        width: 220px;
+        height: 100px;
+        background: $emerald-800;
+        border-radius: 10px;
+        padding: 15px;
+        position: relative;
+        
+        .typewriter-keys {
+          position: absolute;
+          bottom: 10px;
+          left: 20px;
+          right: 20px;
+          height: 20px;
+          background: $emerald-900;
+          border-radius: 5px;
+          
+          &::before, &::after {
+            content: '';
+            position: absolute;
+            top: -15px;
+            width: 10px;
+            height: 30px;
+            background: $emerald-700;
+          }
+          
+          &::before {
+            left: 30%;
+          }
+          
+          &::after {
+            right: 30%;
+          }
+        }
+        
+        .typewriter-paper {
+          width: 180px;
+          height: 50px;
+          margin: 0 auto;
+          background: white;
+          padding: 10px;
+          overflow: hidden;
+          
+          .typed-text {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            font-family: 'Courier New', monospace;
+            border-right: 2px solid $emerald-900;
+            width: 0;
+            animation: 
+              typewriter 3s steps(40, end) 1s forwards,
+              blink 0.75s step-end infinite;
+          }
+        }
+      }
+    }
+  }
+
+  // Quote carousel animation
+  .quote-carousel {
+    animation: quoteScroll 30s linear infinite;
+  }
+
+  // Feature item animations
+  .feature-item {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    
+    &.fade-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Storybook animations
+  .storybook-container {
+    .story-page {
+      position: relative;
+      transform-origin: left;
+      transition: transform 0.8s ease-in-out;
+      transform-style: preserve-3d;
+      
+      &.page-turned {
+        transform: rotateY(-20deg);
+        box-shadow: 10px 5px 15px rgba(0,0,0,0.1);
+      }
+    }
+  }
+
+  // Creative writing animations
+  .writing-sample {
+    .typewriter-effect {
+      overflow: hidden;
+      border-right: 2px solid $emerald-600;
+      white-space: nowrap;
+      margin: 0;
+      width: 0;
+      animation: 
+        typewriter 4s steps(60, end) forwards,
+        blink 0.75s step-end infinite;
+    }
+  }
+
+  // Stats card animations
+  .stat-card {
+    .stat-progress {
+      width: 0;
+      animation: statProgress 2s ease-out 0.5s forwards;
+    }
+  }
+
+  // CTA animations
+  .cta-button-pulse {
+    animation: pulse 2s infinite;
+  }
+
+  // Library pattern for background
+  .library-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23047857' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .literary-visual-container {
+      height: 300px;
+      
+      .book-stack {
+        transform: scale(0.7) translateX(-50%);
+      }
+      
+      .floating-quill, .floating-scroll {
+        display: none;
+      }
+      
+      .typewriter-animation {
+        right: 20px;
+        bottom: 40px;
+        transform: scale(0.7);
+      }
+    }
+    
+    .storybook-container {
+      transform: scale(0.9);
+    }
+  }
+}
+
+@keyframes scrollDown {
+  0% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(0, 0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-45deg) translate(10px, 10px);
+  }
+}

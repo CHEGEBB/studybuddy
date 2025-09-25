@@ -412,7 +412,7 @@ const EnglishPage = () => {
         ref={heroRef}
         className="hero-section relative h-[90vh] flex items-center overflow-hidden"
       >
-        <div className="hero-background absolute inset-0 bg-gradient-to-r from-emerald-900 via-green-800 to-transparent z-10"></div>
+        <div className="hero-background absolute inset-0 bg-gradient-to-r from-emerald-300/40 via-green-800 to-transparent z-10"></div>
         
         <div className="absolute inset-0 bg-cover bg-center opacity-60" 
              style={{backgroundImage: "url('https://images.unsplash.com/photo-1519682577862-22b62b24e493?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.0.3')"}}></div>
@@ -424,7 +424,7 @@ const EnglishPage = () => {
             <div className="text-left animate-on-scroll">
               <div className="mb-6 flex items-center">
                 <span className="inline-block bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">
-                  <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase">
+                  <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-white bg-clip-text font-semibold text-lg tracking-wide uppercase">
                     Languages
                   </span>
                 </span>
@@ -433,18 +433,18 @@ const EnglishPage = () => {
               <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight hero-title">
                 <span className="text-white">Craft Your</span>
                 <br />
-                <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-jade-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-emerald-400 bg-clip-text text-white">
                   Literary Voice
                 </span>
               </h1>
               
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl typewriter-text">
+              <p className="text-xl text-white mb-8 leading-relaxed max-w-2xl typewriter-text">
                 Explore the enchanting world of language and literature, where words dance
                 across pages and ideas bloom into powerful expressions of human experience.
               </p>
               
               <div className="flex flex-wrap gap-4">
-                <button className="cta-button bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
+                <button className="cta-button bg-gradient-to-r from-emerald-700 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
                   Begin Your Journey <ArrowRight className="ml-2" size={20} />
                 </button>
                 <button className="secondary-button bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center">
