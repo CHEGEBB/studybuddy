@@ -130,22 +130,22 @@ const AboutPage = () => {
 
   const team = [
     {
-      name: "Dr. Sarah Kimani",
+      name: "Sarah Nafula",
       role: "Education Director",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
     },
     {
-      name: "Prof. David Maina",
+      name: "David Maina",
       role: "Academic Lead",
       image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
     },
     {
-      name: "Jane Odhiambo",
+      name: "Jane Wanjiru",
       role: "Technology Director",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+      image: "/assets/images/image.jpg"
     },
     {
-      name: "Michael Wanjau",
+      name: "Michael Odhiambo",
       role: "Student Success Lead",
       image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
     }
@@ -414,7 +414,7 @@ const AboutPage = () => {
       </section>
 
      {/* Team Section */}
-<section className="py-24 bg-gray-50 relative overflow-hidden">
+<section className="py-24 bg-gray-100 relative overflow-hidden">
   {/* Decorative Elements */}
   <div className="absolute top-20 left-10 w-20 h-20">
     <div className="grid grid-cols-4 gap-1">
@@ -468,10 +468,10 @@ const AboutPage = () => {
     <div className="flex justify-center gap-6 mb-12 max-w-6xl mx-auto">
       {team.slice(0, 4).map((member, index) => {
         const colors = [
-          { bg: 'bg-emerald-500', text: 'text-slate-500' },
-          { bg: 'bg-green-500', text: 'text-slate-500' },
-          { bg: 'bg-teal-500', text: 'text-slate-500' },
-          { bg: 'bg-emerald-400', text: 'text-slate-500' }
+          { bg: 'bg-emerald-500', text: 'text-white' },
+          { bg: 'bg-green-500', text: 'text-white' },
+          { bg: 'bg-teal-500', text: 'text-white' },
+          { bg: 'bg-emerald-400', text: 'text-white' }
         ];
         const colorSet = colors[index % colors.length];
         
@@ -506,13 +506,13 @@ const AboutPage = () => {
                   src={member.image} 
                   alt={member.name}
                   width={288}
-                  height={384}
+                  height={394}
                   className="object-cover object-top w-full h-full rounded-full"
                 />
               </div>
               
               {/* Member Info - positioned at bottom with background */}
-              <div className="relative z-10  bg-transparent bg-opacity-40 w-full py-6 px-4 rounded-b-full">
+              <div className="relative z-10  bg-green-400/80 bg-opacity-40 w-full py-6 px-4 rounded-b-full">
                 <h3 className={`text-xl font-bold ${colorSet.text} mb-1`}>{member.name}</h3>
                 <p className={`${colorSet.text} text-sm font-medium opacity-90 uppercase tracking-wide`}>
                   {member.role}
