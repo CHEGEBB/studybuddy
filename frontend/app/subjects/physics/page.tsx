@@ -728,7 +728,7 @@ const PhysicsPage = () => {
                 </div>
               </div> */}
               
-              <div className="absolute -top-8 -right-20 w-16 h-16 physics-equipment animate-bounce" style={{ animationDelay: '1s' }}>
+              {/* <div className="absolute -top-8 -right-20 w-16 h-16 physics-equipment animate-bounce" style={{ animationDelay: '1s' }}>
                 <div className="w-full h-full bg-gradient-to-br from-white/20 to-purple-500/20 rounded-2xl backdrop-blur-sm border border-white/30 flex items-center justify-center">
                   <Compass className="text-purple-400" size={24} />
                 </div>
@@ -738,7 +738,7 @@ const PhysicsPage = () => {
                 <div className="w-full h-full bg-gradient-to-br from-white/20 to-indigo-500/20 rounded-2xl backdrop-blur-sm border border-white/30 flex items-center justify-center">
                   <Lightbulb className="text-indigo-400" size={28} />
                 </div>
-              </div>
+              </div> */}
               
               <div className="absolute -bottom-12 -left-12 w-16 h-16 physics-equipment animate-bounce" style={{ animationDelay: '2s' }}>
                 <div className="w-full h-full bg-gradient-to-br from-white/20 to-green-500/20 rounded-2xl backdrop-blur-sm border border-white/30 flex items-center justify-center">
@@ -751,10 +751,10 @@ const PhysicsPage = () => {
           {/* Floating achievement cards */}
           <div className="absolute top-16 right-0 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs animate-float">
             <div className="flex items-center mb-2">
-              <div className="bg-blue-500 rounded-full p-2 mr-3">
+              <div className="bg-green-500 rounded-full p-2 mr-3">
                 <Award className="text-white" size={16} />
               </div>
-              <div className="text-blue-600 text-sm font-semibold">Physics Mastery</div>
+              <div className="text-green-600 text-sm font-semibold">Physics Mastery</div>
             </div>
             <div className="text-gray-700 text-sm">"Finally understand mechanics - problems make sense now!"</div>
             <div className="text-xs text-gray-500 mt-2">- Sarah K., Form 4</div>
