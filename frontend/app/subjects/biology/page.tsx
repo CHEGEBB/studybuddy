@@ -197,7 +197,7 @@ const BiologyPage = () => {
         className="hero-section relative h-[80vh] flex items-center overflow-hidden"
       >
         <div className="absolute inset-0 bg-cover bg-center" 
-             style={{backgroundImage: "url('/assets/images/biology-hero.jpg')"}}></div>
+             style={{backgroundImage: "url('/assets/images/herobio.jpg')"}}></div>
         
         <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/90 via-emerald-800/80 to-transparent"></div>
         
@@ -267,7 +267,7 @@ const BiologyPage = () => {
             <div className="animate-on-scroll order-2 lg:order-1">
               <div className="rounded-2xl overflow-hidden shadow-lg">
                 <Image 
-                  src="/assets/images/biology-visualization.jpg"
+                  src="https://images.unsplash.com/photo-1559757296-c68c34d39551?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Biology visualization"
                   width={600}
                   height={400}
@@ -432,16 +432,16 @@ const BiologyPage = () => {
               <div className="grid grid-cols-2 gap-6">
                 <div className="rounded-2xl overflow-hidden shadow-lg">
                   <Image 
-                    src="/assets/images/biology-exam1.jpg"
+                    src="/assets/images/bio2.jpg"
                     alt="Biology exam preparation"
                     width={300}
-                    height={400}
-                    className="w-full h-auto object-cover"
+                    height={700}
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-lg mt-10">
                   <Image 
-                    src="/assets/images/biology-exam2.jpg"
+                    src="/assets/images/bio1.jpg"
                     alt="Biology practical"
                     width={300}
                     height={400}
@@ -450,7 +450,7 @@ const BiologyPage = () => {
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-lg col-span-2">
                   <Image 
-                    src="/assets/images/biology-exam3.jpg"
+                    src="/assets/images/bio3.jpg"
                     alt="Biology study group"
                     width={600}
                     height={300}

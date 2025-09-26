@@ -1,907 +1,824 @@
-// Main physics page animations and styles
+// /styles/physics.scss
+
+// Core animations
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
   
-  // 3D card hover effect
-  @keyframes cardHoverGlow {
-    0% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.2); }
-    50% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), 0 0 60px rgba(16, 185, 129, 0.2); }
-    100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.2); }
+  @keyframes fadeInUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(50px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
   }
   
-  // Floating animation with natural easing
-  @keyframes naturalFloat {
-    0% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-10px) rotate(1deg); }
-    50% { transform: translateY(-15px) rotate(-1deg); }
-    75% { transform: translateY(-8px) rotate(0.5deg); }
-    100% { transform: translateY(0) rotate(0deg); }
+  @keyframes slideDown {
+    from { 
+      opacity: 0; 
+      transform: translateY(-50px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
   }
   
-  // Atomic electron orbit animation
-  @keyframes electronOrbit {
-    0% { transform: rotateZ(0deg) translateX(50px) rotateZ(0deg); }
-    100% { transform: rotateZ(360deg) translateX(50px) rotateZ(-360deg); }
+  @keyframes slideInLeft {
+    from { 
+      opacity: 0; 
+      transform: translateX(-100px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
   }
   
-  // Wave function animation
-  @keyframes wavePulse {
-    0% { stroke-dashoffset: 0; }
-    100% { stroke-dashoffset: 200; }
+  @keyframes slideInRight {
+    from { 
+      opacity: 0; 
+      transform: translateX(100px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
   }
   
-  // Magnetic field visualization
-  @keyframes magneticPulse {
-    0% { transform: scale(1); opacity: 0.8; }
-    50% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.8; }
+  @keyframes slideIn {
+    from { 
+      opacity: 0; 
+      transform: translateX(-30px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
   }
   
-  // Quantum particle movement
-  @keyframes quantumFluctuation {
-    0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(5px, -5px); }
-    50% { transform: translate(-5px, -8px); }
-    75% { transform: translate(-7px, 3px); }
+  @keyframes zoomIn {
+    from { 
+      opacity: 0; 
+      transform: scale(0.8); 
+    }
+    to { 
+      opacity: 1; 
+      transform: scale(1); 
+    }
   }
   
-  // Scroll indicator animation
-  @keyframes scrollIndicator {
-    0% { transform: translateY(0); opacity: 0.6; }
-    50% { transform: translateY(10px); opacity: 1; }
-    100% { transform: translateY(0); opacity: 0.6; }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
   }
   
-  // Laboratory beaker bubbles
-  @keyframes beakerBubble {
-    0% { transform: translateY(40px); opacity: 0; }
-    50% { transform: translateY(20px); opacity: 1; }
-    100% { transform: translateY(0); opacity: 0; }
+  @keyframes pulseSlow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
   }
   
-  // Circuit board LED blinking
-  @keyframes ledBlink {
-    0%, 100% { opacity: 0.3; box-shadow: 0 0 2px currentColor; }
-    50% { opacity: 1; box-shadow: 0 0 10px currentColor, 0 0 20px currentColor; }
+  @keyframes pulseGlow {
+    0%, 100% { 
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+      transform: scale(1.05);
+    }
   }
   
-  // Prism light spectrum
-  @keyframes spectrumShift {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
   
-  // Rotating hexagon for icons
-  @keyframes hexagonRotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  @keyframes floatSlow {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-25px) rotate(3deg); }
   }
   
-  // Stats counter icon pulse
-  @keyframes statIconPulse {
-    0% { transform: scale(1); }
-    15% { transform: scale(1.2); }
-    30% { transform: scale(1); }
-    45% { transform: scale(1.15); }
-    60% { transform: scale(1); }
-    100% { transform: scale(1); }
+  @keyframes floatMedium {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(-2deg); }
   }
   
-  // CTA background energy field
-  @keyframes energyField {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes floatFast {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
   }
   
-  // Text glow effect
-  @keyframes textGlow {
-    0%, 100% { text-shadow: 0 0 5px rgba(16, 185, 129, 0.3); }
-    50% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.7), 0 0 30px rgba(16, 185, 129, 0.4); }
+  @keyframes orbit {
+    from { transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg); }
+    to { transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg); }
   }
   
-  // Animated gradient text
-  @keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  @keyframes rotateSlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
   
-  // Physics page global styles
-//   .physics-page {
-//     .fade-in {
-//       animation: fadeIn 0.8s ease-out forwards;
-//     }
-    
-//     .animate-on-scroll {
-//       opacity: 0;
-//       transform: translateY(20px);
-//     }
-    
-//     // 3D Perspective elements
-//     .perspective {
-//       perspective: 1000px;
-      
-//       .perspective-element {
-//         transform-style: preserve-3d;
-//       }
-//     }
-//   }
+  @keyframes bounceX {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(0); }
+    40% { transform: translateX(-3px); }
+    60% { transform: translateX(3px); }
+  }
   
-  // Hero section with dynamic elements
+  @keyframes glow {
+    0%, 100% { text-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+    50% { text-shadow: 0 0 20px rgba(16, 185, 129, 0.8), 0 0 30px rgba(16, 185, 129, 0.6); }
+  }
+  
+  @keyframes textWave {
+    0%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-2px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(2px); }
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  
+  @keyframes countUp {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  
+  @keyframes particle {
+    0% { 
+      opacity: 0; 
+      transform: translateY(100px) translateX(0) scale(0); 
+    }
+    10% { 
+      opacity: 1; 
+      transform: translateY(0) translateX(10px) scale(1); 
+    }
+    90% { 
+      opacity: 1; 
+      transform: translateY(-100px) translateX(-10px) scale(1); 
+    }
+    100% { 
+      opacity: 0; 
+      transform: translateY(-200px) translateX(0) scale(0); 
+    }
+  }
+  
+  @keyframes waveMotion {
+    0% { 
+      transform: translateX(-100%) scaleY(1); 
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateX(0%) scaleY(1.5);
+      opacity: 1;
+    }
+    100% { 
+      transform: translateX(100%) scaleY(1); 
+      opacity: 0.7;
+    }
+  }
+  
+  // Utility classes
+  .fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  .animate-on-scroll.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-down {
+    animation: slideDown 0.8s ease-out forwards;
+  }
+  
+  .animate-zoom-in {
+    animation: zoomIn 0.8s ease-out forwards;
+  }
+  
+  .slide-in-left {
+    animation: slideInLeft 1s ease-out forwards;
+  }
+  
+  .slide-in-right {
+    animation: slideInRight 1s ease-out forwards;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.6s ease-out forwards;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulseSlow 3s ease-in-out infinite;
+  }
+  
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite;
+  }
+  
+  .animate-text-wave {
+    animation: textWave 2s ease-in-out infinite;
+  }
+  
+  .animate-text-glow {
+    animation: glow 3s ease-in-out infinite;
+  }
+  
+  .animate-rotate-slow {
+    animation: rotateSlow 20s linear infinite;
+  }
+  
+  .animate-bounce-x {
+    animation: bounceX 1s ease-in-out infinite;
+  }
+  
+  .animate-count-up {
+    animation: countUp 0.8s ease-out forwards;
+  }
+  
+  // Animation delay utilities
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  
+  // Hero section styles
   .hero-section {
+    perspective: 1000px;
     position: relative;
-    
-    .hero-background {
-      transition: transform 0.5s ease-out;
-    }
-    
-    .hero-title {
-      position: relative;
-      
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100px;
-        height: 4px;
-        background: linear-gradient(to right, #10b981, #059669);
-        border-radius: 2px;
-      }
-    }
-    
-    .animated-gradient-text {
-      background-size: 200% auto;
-      animation: gradientFlow 5s ease infinite;
-    }
-    
-    .drop-shadow-glow {
-      text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    }
-    
-    .glow-text {
-      animation: textGlow 3s ease-in-out infinite;
-    }
-    
-    .hero-description {
-      position: relative;
-      
-      &::before {
-        content: '';
-        position: absolute;
-        left: -15px;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background: linear-gradient(to bottom, rgba(16, 185, 129, 0), rgba(16, 185, 129, 0.8), rgba(16, 185, 129, 0));
-      }
-    }
-    
-    .cta-button {
-      position: relative;
-      overflow: hidden;
-      
-      &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateX(-100%);
-        transition: transform 0.6s ease-out;
-      }
-      
-      &:hover::before {
-        transform: translateX(0);
-      }
-      
-      &:hover {
-        box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
-      }
-    }
-    
-    .hover-float {
-      animation: naturalFloat 6s ease-in-out infinite;
-    }
-    
-    .hover-float-delayed {
-      animation: naturalFloat 6s ease-in-out infinite;
-      animation-delay: 1s;
-    }
-    
-    .hover-float-more-delayed {
-      animation: naturalFloat 6s ease-in-out infinite;
-      animation-delay: 2s;
-    }
+    overflow: hidden;
   }
   
-  // Particle physics container
-  .particle-container {
-    canvas {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  
-  // Advanced floating physics formulas
-  .floating-formula {
+  // Floating particles
+  .particle {
     position: absolute;
-    transition: transform 0.3s ease-out;
-    z-index: 15;
-    
-    &.formula-1 { 
-      animation: naturalFloat 7s ease-in-out infinite; 
-    }
-    &.formula-2 { 
-      animation: naturalFloat 9s ease-in-out infinite; 
-      animation-delay: 1s;
-    }
-    &.formula-3 { 
-      animation: naturalFloat 8s ease-in-out infinite; 
-      animation-delay: 2s;
-    }
-    &.formula-4 { 
-      animation: naturalFloat 10s ease-in-out infinite; 
-      animation-delay: 1.5s;
-    }
-    &.formula-5 { 
-      animation: naturalFloat 6s ease-in-out infinite; 
-      animation-delay: 0.5s;
-    }
+    width: 6px;
+    height: 6px;
+    background: rgba(16, 185, 129, 0.6);
+    border-radius: 50%;
+    animation: particle 8s ease-in-out infinite;
   }
   
-  // Atomic model visualization
-  .physics-visualization {
-    width: 100%;
-    height: 400px;
+  .particle-1 {
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 8s;
+  }
+  
+  .particle-2 {
+    left: 20%;
+    animation-delay: 2s;
+    animation-duration: 10s;
+  }
+  
+  .particle-3 {
+    right: 15%;
+    animation-delay: 4s;
+    animation-duration: 12s;
+  }
+  
+  .particle-4 {
+    right: 30%;
+    animation-delay: 1s;
+    animation-duration: 9s;
+  }
+  
+  .particle-5 {
+    left: 50%;
+    animation-delay: 6s;
+    animation-duration: 11s;
+  }
+  
+  // Energy waves
+  .energy-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.1), transparent);
+    animation: waveMotion 6s ease-in-out infinite;
+  }
+  
+  .wave-1 {
+    animation-delay: 0s;
+  }
+  
+  .wave-2 {
+    animation-delay: 2s;
+    height: 80px;
+  }
+  
+  .wave-3 {
+    animation-delay: 4s;
+    height: 60px;
+  }
+  
+  // Glow effect
+  .glow-effect {
     position: relative;
     
-    .atom-model {
+    &::before {
+      content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 200px;
-      height: 200px;
-      
-      .nucleus {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 30px;
-        height: 30px;
-        background: radial-gradient(circle at 30% 30%, #10b981, #064e3b);
-        border-radius: 50%;
-        box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
-        z-index: 2;
-      }
-      
-      .electron-orbit {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 50%;
-        
-        &.orbit-1 {
-          width: 100px;
-          height: 100px;
-          transform: translate(-50%, -50%) rotate(0deg);
-        }
-        
-        &.orbit-2 {
-          width: 150px;
-          height: 150px;
-          transform: translate(-50%, -50%) rotate(60deg);
-        }
-        
-        &.orbit-3 {
-          width: 200px;
-          height: 200px;
-          transform: translate(-50%, -50%) rotate(-45deg);
-        }
-        
-        .electron {
-          position: absolute;
-          width: 10px;
-          height: 10px;
-          background: #10b981;
-          border-radius: 50%;
-          box-shadow: 0 0 10px #10b981;
-          
-          &:nth-child(1) {
-            animation: electronOrbit 6s linear infinite;
-          }
-        }
-      }
-      
-      .orbit-1 .electron { animation: electronOrbit 3s linear infinite; }
-      .orbit-2 .electron { animation: electronOrbit 5s linear infinite; }
-      .orbit-3 .electron { animation: electronOrbit 7s linear infinite; }
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #10b981, #059669, #047857, #065f46);
+      border-radius: inherit;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
     
-    .wave-function {
-      position: absolute;
-      bottom: 50px;
-      left: 0;
-      width: 100%;
-      height: 80px;
-      
-      .wave-svg {
-        width: 100%;
-        height: 100%;
-        
-        .wave-path {
-          fill: none;
-          stroke: rgba(16, 185, 129, 0.6);
-          stroke-width: 2;
-          stroke-dasharray: 100;
-          animation: wavePulse 10s linear infinite;
-        }
-      }
-    }
-    
-    .magnetic-field {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      width: 100px;
-      height: 50px;
-      
-      .magnet {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        height: 20px;
-        
-        .pole {
-          width: 20px;
-          height: 20px;
-          border-radius: 4px;
-          
-          &.north {
-            background: linear-gradient(135deg, #10b981, #059669);
-            animation: magneticPulse 3s ease-in-out infinite;
-          }
-          
-          &.south {
-            background: linear-gradient(135deg, #059669, #047857);
-            animation: magneticPulse 3s ease-in-out infinite;
-            animation-delay: 1.5s;
-          }
-        }
-      }
-      
-      .field-lines {
-        position: relative;
-        height: 30px;
-        width: 100%;
-        background-image: 
-          radial-gradient(circle at 10% 0%, transparent 95%, rgba(16, 185, 129, 0.4) 100%),
-          radial-gradient(circle at 90% 0%, transparent 95%, rgba(16, 185, 129, 0.4) 100%);
-        background-size: 50% 100%;
-        background-repeat: no-repeat;
-        opacity: 0.7;
-      }
+    &:hover::before {
+      opacity: 0.7;
+      animation: pulseGlow 2s ease-in-out infinite;
     }
   }
   
-  // Modern scroll indicator animation
-  .scroll-indicator-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    
-    .scroll-indicator-dot {
-      width: 8px;
-      height: 8px;
-      background-color: white;
-      border-radius: 50%;
-      margin: 3px 0;
-      opacity: 0.6;
-      animation: scrollIndicator 1.5s ease-in-out infinite;
-      
-      &.delay-1 {
-        animation-delay: 0.2s;
-      }
-      
-      &.delay-2 {
-        animation-delay: 0.4s;
-      }
-    }
-  }
-  
-  // Hexagon shaped icons
-  .hexagon-icon-container {
+  // Atom animation
+  .atom-container {
     position: relative;
-    width: 70px;
-    height: 70px;
-    
-    .hexagon-icon {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      
-      &::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: inherit;
-        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-        z-index: -1;
-        transition: transform 0.5s ease;
-      }
-      
-      &:hover::before {
-        transform: rotate(30deg);
-      }
-    }
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: pulse 6s infinite ease-in-out;
   }
   
-  // Feature icon container with hover effect
-  .feature-icon-container {
-    position: relative;
-    width: 56px;
-    height: 56px;
-    
-    .feature-icon {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      
-      &:hover {
-        transform: rotate(10deg) scale(1.05);
-      }
-    }
+  .atom-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
   }
   
-  // Career icon container with pulse effect
-  .career-icon-container {
-    position: relative;
+  .nucleus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 50px;
     height: 50px;
-    
-    .career-icon {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      
-      &:hover {
-        transform: scale(1.1);
-        box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
-      }
-    }
+    background: radial-gradient(circle at 30% 30%, #10b981, #059669);
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+    animation: pulse 4s infinite ease-in-out;
   }
   
-  // Module icon container with 3D rotate effect
-  .module-icon-container {
-    position: relative;
-    width: 64px;
-    height: 64px;
-    
-    .module-icon {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      
-      &:hover {
-        transform: perspective(500px) rotateY(15deg) rotateX(10deg);
-      }
-    }
+  .animate-pulse-glow {
+    animation: pulseGlow 3s ease-in-out infinite;
   }
   
-  // Formula card with 3D effect
-  .formula-3d-card {
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  .electron-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 50%;
     transform-style: preserve-3d;
-    perspective: 1000px;
+    transform: translate(-50%, -50%) rotateX(60deg) rotateZ(0deg);
     
-    &:hover {
-      transform: perspective(1000px) rotateX(5deg) rotateY(5deg);
-      animation: cardHoverGlow 3s ease-in-out infinite;
+    &:nth-child(2) {
+      width: 80%;
+      height: 80%;
+      transform: translate(-50%, -50%) rotateX(30deg) rotateZ(40deg);
+      border-color: rgba(5, 150, 105, 0.4);
     }
     
-    .formula-text {
-      transition: all 0.5s ease;
-      
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
-  }
-  
-  // Transform card hover effect
-  .transform-card {
-    transition: transform 0.5s ease;
-    
-    &:hover {
-      transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateZ(10px);
+    &:nth-child(3) {
+      width: 60%;
+      height: 60%;
+      transform: translate(-50%, -50%) rotateX(80deg) rotateZ(80deg);
+      border-color: rgba(4, 120, 87, 0.5);
     }
     
-    .hover-transform-step {
-      transform: translateX(10px) scale(1.02);
+    &:nth-child(4) {
+      width: 40%;
+      height: 40%;
+      transform: translate(-50%, -50%) rotateX(20deg) rotateZ(120deg);
+      border-color: rgba(6, 95, 70, 0.6);
     }
   }
   
-  // Card hover effect with border glow
-  .card-hover-effect {
-    transition: all 0.5s ease;
+  .electron {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981, 0 0 20px rgba(16, 185, 129, 0.5);
+    transform: translateX(-50%);
+    animation: orbit 6s linear infinite;
     
-    &:hover {
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      border-color: rgba(16, 185, 129, 0.3);
+    .electron-orbit:nth-child(2) & {
+      animation-duration: 4s;
+      background: #059669;
+      box-shadow: 0 0 10px #059669, 0 0 20px rgba(5, 150, 105, 0.5);
+    }
+    
+    .electron-orbit:nth-child(3) & {
+      animation-duration: 8s;
+      background: #047857;
+      box-shadow: 0 0 10px #047857, 0 0 20px rgba(4, 120, 87, 0.5);
+    }
+    
+    .electron-orbit:nth-child(4) & {
+      animation-duration: 5s;
+      background: #065f46;
+      box-shadow: 0 0 10px #065f46, 0 0 20px rgba(6, 95, 70, 0.5);
     }
   }
   
-  // Application card hover effect
-  .application-hover-effect {
-    transition: all 0.5s ease;
-    
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    }
-  }
-  
-  // Career card hover effect
-  .career-card-hover {
-    transition: all 0.5s ease;
-    
-    &:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    }
-  }
-  
-  // Testimonial card hover effect
-  .testimonial-hover-effect {
-    transition: all 0.5s ease;
-    
-    &:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    }
-    
-    .testimonial-image-container {
-      overflow: hidden;
-      transition: all 0.5s ease;
-      
-      .testimonial-image {
-        transition: transform 0.5s ease;
-      }
-      
-      &:hover .testimonial-image {
-        transform: scale(1.1);
-      }
-    }
-  }
-  
-  // Stats card hover effect
-  .stats-card-hover {
+  // Physics equations
+  .physics-equation {
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 15px currentColor;
     transition: all 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.1);
+      text-shadow: 0 0 25px currentColor;
+    }
+  }
+  
+  .animate-float-slow {
+    animation: floatSlow 8s ease-in-out infinite;
+  }
+  
+  .animate-float-medium {
+    animation: floatMedium 6s ease-in-out infinite;
+    animation-delay: 1s;
+  }
+  
+  .animate-float-fast {
+    animation: floatFast 4s ease-in-out infinite;
+    animation-delay: 2s;
+  }
+  
+  // Button hover effects
+  .bounce-hover {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      animation: pulse 0.6s ease-in-out;
+      transform: translateY(-2px);
+    }
+  }
+  
+  .glass-hover {
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      backdrop-filter: blur(20px);
+      transform: scale(1.02);
+    }
+  }
+  
+  // Card hover effects
+  .feature-card-hover {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    &:hover {
+      transform: translateY(-8px) rotateX(5deg);
+      box-shadow: 0 25px 50px rgba(16, 185, 129, 0.15);
+    }
+  }
+  
+  .module-card-special {
+    transition: all 0.4s ease;
     
     &:hover {
       transform: translateY(-5px);
     }
-    
-    .stats-icon-pulse {
-      animation: statIconPulse 3s ease-in-out infinite;
-    }
   }
   
-  // Lab equipment animation
-  .lab-equipment {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-    width: 300px;
-    height: 300px;
-    
-    .equipment-item {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      position: relative;
-      overflow: hidden;
-      
-      &.beaker {
-        .beaker-liquid {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 70%;
-          background: linear-gradient(to bottom, rgba(16, 185, 129, 0.3), rgba(16, 185, 129, 0.7));
-          border-radius: 0 0 16px 16px;
-        }
-        
-        .beaker-bubbles {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 70%;
-          
-          .bubble {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 50%;
-            
-            &.b1 {
-              left: 30%;
-              animation: beakerBubble 3s ease-in-out infinite;
-            }
-            
-            &.b2 {
-              left: 50%;
-              animation: beakerBubble 2.5s ease-in-out infinite;
-              animation-delay: 0.5s;
-            }
-            
-            &.b3 {
-              left: 70%;
-              animation: beakerBubble 3.5s ease-in-out infinite;
-              animation-delay: 1s;
-            }
-          }
-        }
-      }
-      
-      &.pendulum-setup {
-        .pendulum-string {
-          position: absolute;
-          top: 10px;
-          left: 50%;
-          width: 2px;
-          height: 70%;
-          background: rgba(255, 255, 255, 0.7);
-          transform-origin: top center;
-          animation: pendulumSwing 2s ease-in-out infinite;
-        }
-        
-        .pendulum-bob {
-          position: absolute;
-          left: 50%;
-          bottom: 20%;
-          width: 20px;
-          height: 20px;
-          background: radial-gradient(circle at 30% 30%, #10b981, #064e3b);
-          border-radius: 50%;
-          transform: translateX(-50%);
-          box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
-          animation: pendulumSwing 2s ease-in-out infinite;
-        }
-      }
-      
-      &.circuit-board {
-        background: rgba(0, 0, 0, 0.3);
-        
-        .circuit-leds {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          
-          .led {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            
-            &.led1 {
-              background-color: #10b981;
-              animation: ledBlink 1.5s ease-in-out infinite;
-            }
-            
-            &.led2 {
-              background-color: #10b981;
-              animation: ledBlink 1.5s ease-in-out infinite;
-              animation-delay: 0.5s;
-            }
-            
-            &.led3 {
-              background-color: #10b981;
-              animation: ledBlink 1.5s ease-in-out infinite;
-              animation-delay: 1s;
-            }
-          }
-        }
-      }
-      
-      &.prism {
-        overflow: visible;
-        
-        .prism-shape {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          width: 60px;
-          height: 50px;
-          background: rgba(255, 255, 255, 0.2);
-          clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-        }
-        
-        .light-ray {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          height: 2px;
-          width: 50%;
-          background: white;
-        }
-        
-        .light-spectrum {
-          position: absolute;
-          top: 60%;
-          right: 0;
-          height: 10px;
-          width: 50%;
-          background: linear-gradient(to right, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
-          border-radius: 5px;
-          opacity: 0.7;
-          animation: spectrumShift 5s ease-in-out infinite;
-        }
-      }
-    }
-  }
-  
-  // Formula background pattern
-  .formula-bg-pattern {
-    background-image: 
-      linear-gradient(to right, rgba(16, 185, 129, 0.1) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(16, 185, 129, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-  
-  // Tab module styles
-  .module-tabs {
-    button {
-      transition: all 0.3s ease;
-      
-      &:hover {
-        transform: translateY(-2px);
-      }
-    }
-  }
-  
-  // Module button hover effect
-  .module-button {
+  .card-glow-hover {
     position: relative;
-    overflow: hidden;
     
-    &::after {
+    &:hover {
+      box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+    }
+    
+    &::before {
       content: '';
       position: absolute;
-      bottom: -2px;
+      top: 0;
       left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(to right, #10b981, #059669);
-      transition: width 0.3s ease;
+      right: 0;
+      bottom: 0;
+      border-radius: inherit;
+      background: linear-gradient(45deg, transparent, rgba(16, 185, 129, 0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
     }
     
-    &:hover::after {
-      width: 100%;
+    &:hover::before {
+      opacity: 1;
     }
   }
   
-  // Pattern dots background
-  .pattern-dots {
-    background-image: radial-gradient(#10b981 1px, transparent 1px);
-    background-size: 20px 20px;
+  // Icon animations
+  .icon-bounce {
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      animation: bounceX 0.6s ease-in-out;
+    }
   }
   
-  // CTA section background animation
-  .cta-background-animation {
+  .icon-spin-hover {
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .icon-pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  // Pulse effects
+  .pulse-green {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+  
+  // Step item animations
+  .step-item {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateX(10px);
+      
+      .pulse-green {
+        animation: spin 0.5s ease-in-out;
+      }
+    }
+  }
+  
+  // Arrow hover effect
+  .arrow-hover {
+    .animate-bounce-x {
+      transition: transform 0.3s ease;
+    }
+    
+    &:hover .animate-bounce-x {
+      transform: translateX(5px);
+    }
+  }
+  
+  // Topic badge hover
+  .topic-badge {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+    }
+  }
+  
+  // Image hover effects
+  .image-hover-zoom {
+    overflow: hidden;
+    transition: all 0.4s ease;
+    
+    img {
+      transition: transform 0.4s ease;
+    }
+    
+    &:hover {
+      transform: scale(1.02);
+      
+      img {
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  // Floating icons
+  .image-container {
+    position: relative;
+  }
+  
+  .floating-icons {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(120deg, #059669, #10b981, #065f46, #047857);
-    background-size: 400% 400%;
-    animation: energyField 15s ease infinite;
-    opacity: 0.6;
+    pointer-events: none;
   }
   
-  .cta-glow-text {
-    animation: textGlow 3s ease-in-out infinite;
+  .floating-icon {
+    position: absolute;
+    color: #10b981;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+    animation: float 3s ease-in-out infinite;
   }
   
-  // Physics patterns for backgrounds
-  .physics-patterns {
-    width: 100%;
-    height: 100%;
-    background-size: 20px 20px;
-    background-image: 
-      radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
-      linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  .icon-1 {
+    top: 20%;
+    right: 10%;
+    animation-delay: 0s;
   }
   
-  // Media queries for responsiveness
-  @media (max-width: 768px) {
-    .hero-title {
-      font-size: 2.5rem;
-    }
-    
-    .floating-formula {
-      display: none;
-    }
-    
-    .physics-visualization,
-    .atom-model,
-    .wave-function,
-    .magnetic-field {
-      display: none;
-    }
-    
-    .hexagon-icon-container {
-      width: 50px;
-      height: 50px;
-    }
-    
-    .feature-icon-container {
-      width: 40px;
-      height: 40px;
-    }
-    
-    .module-icon-container {
-      width: 50px;
-      height: 50px;
-    }
-    
-    .lab-equipment {
-      width: 240px;
-      height: 240px;
-    }
+  .icon-2 {
+    top: 60%;
+    left: 15%;
+    animation-delay: 1s;
   }
   
-  // Custom animations for pendulum swing
-  @keyframes pendulumSwing {
-    0% { transform: rotate(-15deg); }
-    50% { transform: rotate(15deg); }
-    100% { transform: rotate(-15deg); }
+  .icon-3 {
+    bottom: 25%;
+    right: 20%;
+    animation-delay: 2s;
   }
   
-  // Shadow hover glow effect
-  .hover-shadow-glow {
+  // Prep card animations
+  .prep-card {
+    transition: all 0.4s ease;
+    
     &:hover {
-      box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+      transform: translateX(10px);
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+  }
+  
+  // Stats animations
+  .stat-card {
+    transition: all 0.4s ease;
+  }
+  
+  .stat-glow {
+    &:hover {
+      box-shadow: 0 10px 25px rgba(16, 185, 129, 0.15);
+    }
+  }
+  
+  // Testimonial animations
+  .testimonial-card {
+    transition: all 0.4s ease;
+  }
+  
+  .testimonial-hover {
+    &:hover {
+      transform: translateY(-5px) rotateY(2deg);
+      box-shadow: 0 15px 35px rgba(16, 185, 129, 0.1);
+    }
+  }
+  
+  .star-twinkle {
+    animation: twinkle 1.5s ease-in-out infinite;
+  }
+  
+  .quote-text {
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      left: -10px;
+      top: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, #10b981, #059669);
+      transform: scaleY(0);
+      transition: transform 0.4s ease;
+    }
+    
+    .testimonial-hover:hover & {
+      &::before {
+        transform: scaleY(1);
+      }
+    }
+  }
+  
+  // CTA section
+  .cta-section {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+      animation: rotateSlow 20s linear infinite;
+      pointer-events: none;
+    }
+  }
+  
+  // Image gallery
+  .image-gallery {
+    .image-hover-zoom:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    
+    .image-hover-zoom:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .image-hover-zoom:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+  }
+  
+  // Responsive design
+  @media (max-width: 768px) {
+    .atom-container {
+      width: 200px;
+      height: 200px;
+    }
+    
+    .nucleus {
+      width: 30px;
+      height: 30px;
+    }
+    
+    .electron {
+      width: 8px;
+      height: 8px;
+    }
+    
+    .physics-equation {
+      font-size: 2rem;
+    }
+    
+    .floating-icon {
+      padding: 6px;
+    }
+  }
+  
+  // Performance optimizations
+  * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .animate-on-scroll,
+  .atom-container,
+  .electron-orbit,
+  .floating-icon {
+    will-change: transform, opacity;
+  }
+  
+  // Accessibility
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  // Print styles
+  @media print {
+    .particle,
+    .energy-wave,
+    .floating-icon,
+    .atom-container {
+      display: none;
     }
   }
