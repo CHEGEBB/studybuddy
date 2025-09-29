@@ -1,0 +1,250 @@
+// Blog Page Animations and Styling
+@keyframes floatingCard {
+    0% {
+      transform: translateY(0) rotate(var(--rotate, 0deg));
+    }
+    50% {
+      transform: translateY(-15px) rotate(var(--rotate, 0deg));
+    }
+    100% {
+      transform: translateY(0) rotate(var(--rotate, 0deg));
+    }
+  }
+  
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+  }
+  
+  // Apply animations to elements
+  .fade-in-left {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+  
+  .fade-in-right {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+  
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .animate-on-scroll {
+    opacity: 0;
+  }
+  
+  // Hero section styling
+  .blog-hero {
+    &-bg {
+      img {
+        transition: transform 20s ease-out;
+      }
+      
+      &:hover img {
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  .blog-gradient-text {
+    background: linear-gradient(to right, #10b981, #34d399, #6ee7b7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-size: 200% auto;
+    animation: gradientFlow 3s linear infinite;
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  }
+  
+  // Blog cards animation
+  .blog-card-floating {
+    position: absolute;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    
+    &.blog-card-1 {
+      --rotate: 6deg;
+      animation: floatingCard 6s ease-in-out infinite;
+      animation-delay: 0s;
+      z-index: 3;
+    }
+    
+    &.blog-card-2 {
+      --rotate: -3deg;
+      animation: floatingCard 7s ease-in-out infinite;
+      animation-delay: 0.5s;
+      z-index: 2;
+    }
+    
+    &.blog-card-3 {
+      --rotate: 1deg;
+      animation: floatingCard 8s ease-in-out infinite;
+      animation-delay: 1s;
+      z-index: 1;
+    }
+  }
+  
+  // Categories section
+  .categories-section {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .category-pill {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+    
+    &.active {
+      animation: pulseGlow 2s infinite;
+    }
+  }
+  
+  .hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+  }
+  
+  // Blog post cards
+  .blog-post-card, .featured-post-card {
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-8px);
+    }
+  }
+  
+  // Make blog cards have nice rounded corners and shadows
+  .blog-post-card, .featured-post-card, .topic-card {
+    > div {
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.3s ease-out;
+    }
+  }
+  
+  // Responsive adjustments
+  @media (max-width: 768px) {
+    .blog-hero {
+      min-height: 60vh;
+    }
+    
+    .blog-card-floating {
+      display: none;
+    }
+  }
+  
+  // Newsletter section glow effect
+  .newsletter-glow {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, #10b981, #34d399);
+      filter: blur(20px);
+      opacity: 0.4;
+      z-index: -1;
+      border-radius: 30px;
+    }
+  }
+  
+  // Prevent content jump when scrolling
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  // Pulsating effect for featured badges
+  .blog-badge {
+    position: relative;
+    
+    span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(16, 185, 129, 0.3);
+      border-radius: 9999px;
+      z-index: 0;
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.15;
+    }
+  }
