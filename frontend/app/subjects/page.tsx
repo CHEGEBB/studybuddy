@@ -154,7 +154,7 @@ const SubjectsPage = () => {
       description: "Discover cell biology, genetics, ecology, and human physiology with detailed visualizations and virtual labs.",
       path: "/subjects/biology",
       topics: ["Cell Biology", "Genetics", "Ecology", "Human Physiology"],
-      bgImage: "/assets/images/biology-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "English",
@@ -163,7 +163,7 @@ const SubjectsPage = () => {
       description: "Develop grammar, writing, comprehension, and literature analysis skills through guided practice and examples.",
       path: "/subjects/english",
       topics: ["Grammar", "Writing", "Comprehension", "Literature"],
-      bgImage: "/assets/images/english-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1565022536102-f7645c84354a?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "History",
@@ -172,7 +172,7 @@ const SubjectsPage = () => {
       description: "Explore world history, local history, and historical analysis through engaging timelines and primary sources.",
       path: "/subjects/history",
       topics: ["World History", "Local History", "Historical Analysis", "Civilizations"],
-      bgImage: "/assets/images/history-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Geography",
@@ -181,7 +181,7 @@ const SubjectsPage = () => {
       description: "Study physical, human, and environmental geography with interactive maps and case studies.",
       path: "/subjects/geography",
       topics: ["Physical Geography", "Human Geography", "Environmental Geography", "Cartography"],
-      bgImage: "/assets/images/geography-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1500534623283-312aade485b7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Economics",
@@ -190,25 +190,16 @@ const SubjectsPage = () => {
       description: "Learn microeconomics, macroeconomics, and business studies through real-world examples and data analysis.",
       path: "/subjects/economics",
       topics: ["Microeconomics", "Macroeconomics", "Business Studies", "Economic Development"],
-      bgImage: "/assets/images/economics-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      name: "Literature",
-      icon: BookOpen,
-      color: "indigo",
-      description: "Analyze poetry, novels, and drama with guided literary analysis and contextual interpretations.",
-      path: "/subjects/literature",
-      topics: ["Poetry", "Novels", "Drama", "Literary Theory"],
-      bgImage: "/assets/images/literature-bg.jpg"
-    },
-    {
-      name: "Computer Science",
+      name: "Computer Studies",
       icon: Code,
       color: "cyan",
       description: "Develop programming skills, web development, and computational thinking through hands-on coding projects.",
       path: "/subjects/computer-science",
       topics: ["Programming", "Web Development", "Data Structures", "Algorithms"],
-      bgImage: "/assets/images/cs-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
   ];
 
@@ -300,7 +291,7 @@ const SubjectsPage = () => {
     className="absolute inset-0 bg-cover bg-center z-0 hero-background"
     style={{
       backgroundImage:
-        "url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=1920&q=80')",
+        "url('https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
     }}
   ></div>
 
@@ -347,7 +338,7 @@ const SubjectsPage = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll">
-            <span className="bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">Why StudyBuddy</span>
+            <span className="bg-blue-50 text-green-600 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">Why StudyBuddy</span>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mt-6 mb-4">
               A Better Way to Learn All Subjects
             </h2>
@@ -363,7 +354,7 @@ const SubjectsPage = () => {
                 className="animate-on-scroll"
               >
                 <div className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 h-full">
-                  <div className="w-14 h-14 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-5">
+                  <div className="w-14 h-14 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl flex items-center justify-center mb-5">
                     <benefit.icon size={24} className="text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-800 mb-3">{benefit.title}</h3>
@@ -379,7 +370,7 @@ const SubjectsPage = () => {
       <section id="subjects" ref={subjectsRef} className="py-20 bg-gradient-to-b from-white to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16 animate-on-scroll">
-            <span className="bg-purple-50 text-purple-600 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">Our Curriculum</span>
+            <span className="bg-purple-50 text-emerald-600 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wide">Our Curriculum</span>
             <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mt-6 mb-4">
               Explore All 10 High School Subjects
             </h2>
@@ -389,55 +380,75 @@ const SubjectsPage = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {subjects.map((subject, index) => (
-              <div key={subject.name} className="subject-card">
-                <Link href={subject.path} className="block h-full">
-                  <div className={`relative rounded-2xl overflow-hidden shadow-lg h-full group transition-all duration-300 hover:shadow-xl border border-gray-100 bg-white`}>
-                    <div className="relative h-48 overflow-hidden">
-                      <div className={`absolute inset-0 bg-gradient-to-br from-${subject.color}-600 to-${subject.color}-800 opacity-90 transition-all duration-300 group-hover:opacity-100`}></div>
-                      <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
-                        <div className="flex justify-between items-start">
-                          <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center">
-                            <subject.icon size={24} className="text-white" />
-                          </div>
-                          <div className="bg-white/15 backdrop-blur-md px-3 py-1 rounded-full">
-                            <span className="text-sm font-medium">KCSE Aligned</span>
-                          </div>
-                        </div>
-                        <h3 className="text-2xl font-bold">{subject.name}</h3>
-                      </div>
-                    </div>
-                    
-                    <div className="p-6">
-                      <p className="text-gray-600 mb-5">{subject.description}</p>
-                      
-                      <div className="mb-6">
-                        <h4 className="text-sm font-semibold text-gray-700 mb-3">Key Topics:</h4>
-                        <div className="flex flex-wrap gap-2">
-                          {subject.topics.map((topic, i) => (
-                            <span key={i} className={`bg-${subject.color}-50 text-${subject.color}-700 px-3 py-1 rounded-full text-sm`}>
-                              {topic}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                      
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center space-x-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} size={16} className="text-yellow-400" fill="#FACC15" />
-                          ))}
-                        </div>
-                        <span className={`inline-flex items-center text-${subject.color}-600 font-medium group-hover:underline`}>
-                          Learn more <ArrowRight size={16} className="ml-1" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
+  {subjects.map((subject) => (
+    <div key={subject.name} className="subject-card">
+      <Link href={subject.path} className="block h-full">
+        <div className="relative rounded-2xl overflow-hidden shadow-lg h-full group transition-all duration-300 hover:shadow-xl border border-gray-100 bg-white">
+
+          {/* Fixed header section with bgImage */}
+          <div className="relative h-48 overflow-hidden">
+            <div
+              className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+              style={{ backgroundImage: `url(${subject.bgImage})` }}
+            ></div>
+
+            <div className={`absolute inset-0 bg-gradient-to-br from-${subject.color}-700/80 to-${subject.color}-900/60`}></div>
+
+            <div className="absolute inset-0 flex flex-col justify-between p-6 text-white">
+              <div className="flex justify-between items-start">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-md rounded-xl flex items-center justify-center">
+                  <subject.icon size={24} className="text-white" />
+                </div>
+                <div className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-sm font-medium">
+                  KCSE Aligned
+                </div>
               </div>
-            ))}
+              <h3 className="text-2xl font-bold">{subject.name}</h3>
+            </div>
           </div>
+
+          {/* Bottom content */}
+          <div className="p-6">
+            <p className="text-gray-600 mb-5">{subject.description}</p>
+
+            <div className="mb-6">
+              <h4 className="text-sm font-semibold text-gray-700 mb-3">Key Topics:</h4>
+              <div className="flex flex-wrap gap-2">
+                {subject.topics.map((topic, i) => (
+                  <span
+                    key={i}
+                    className={`bg-${subject.color}-50 text-${subject.color}-700 px-3 py-1 rounded-full text-sm`}
+                  >
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <div className="flex items-center space-x-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={16}
+                    className="text-yellow-400"
+                    fill="#FACC15"
+                  />
+                ))}
+              </div>
+              <span
+                className={`inline-flex items-center text-${subject.color}-600 font-medium group-hover:underline`}
+              >
+                Learn more <ArrowRight size={16} className="ml-1" />
+              </span>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </div>
+  ))}
+</div>
+
           
           <div className="text-center mt-12 animate-on-scroll">
             <Link href="/pricing" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:from-blue-600 hover:to-purple-700">
