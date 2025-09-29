@@ -8,7 +8,7 @@ import {
   BookOpen, 
   GraduationCap, 
   Heart, 
-  Star, 
+
   Trophy, 
   Lightbulb, 
   Rocket,
@@ -16,12 +16,8 @@ import {
   Quote,
   ArrowRight,
   PlayCircle,
-  Calendar,
-  MapPin,
   Facebook,
-  Twitter,
   Linkedin,
-  X,
   Instagram,
   LucideTwitter
 } from 'lucide-react';

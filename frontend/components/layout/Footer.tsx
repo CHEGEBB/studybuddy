@@ -8,7 +8,7 @@ const Footer = () => {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const currentYear = new Date().getFullYear();
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     if (email) {
       setIsSubscribed(true);

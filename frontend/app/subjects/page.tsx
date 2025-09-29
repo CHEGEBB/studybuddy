@@ -10,7 +10,6 @@ import {
   Microscope,
   Globe,
   History as HistoryIcon,
-  LandPlot,
   BookText,
   LineChart,
   Code,
@@ -18,7 +17,6 @@ import {
   BrainCircuit,
   Award,
   Users,
-  Clock,
   ArrowRight,
   CheckCircle,
   Star,
@@ -277,34 +275,6 @@ const SubjectsPage = () => {
       description:
         "Adaptive learning paths that adjust to your strengths, weaknesses, and learning pace.",
       icon: Users,
-    },
-  ];
-
-  // Success stats
-  const stats = [
-    {
-      icon: Award,
-      number: "93%",
-      label: "Students Improved Grades",
-      color: "from-blue-500 to-purple-500",
-    },
-    {
-      icon: BookOpen,
-      number: "10",
-      label: "Comprehensive Subjects",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: Users,
-      number: "45,000+",
-      label: "Students Enrolled",
-      color: "from-emerald-500 to-teal-500",
-    },
-    {
-      icon: Clock,
-      number: "12,500+",
-      label: "Hours of Content",
-      color: "from-orange-500 to-amber-500",
     },
   ];
 
@@ -755,7 +725,7 @@ const SubjectsPage = () => {
                       Progress Tracking
                     </h3>
                     <p className="text-gray-600">
-                      Monitor your child's progress across all subjects through
+                      Monitor your child&apos;s progress across all subjects through
                       our parent dashboard.
                     </p>
                   </div>
