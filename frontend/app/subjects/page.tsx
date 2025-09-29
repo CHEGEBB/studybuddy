@@ -695,7 +695,7 @@ const SubjectsPage = () => {
                   </div>
 
                   <p className="text-gray-700 italic mb-6 flex-grow">
-                    "{testimonial.quote}"
+                    &ldquo;{testimonial.quote}&rdquo;
                   </p>
 
                   <div>
@@ -725,8 +725,8 @@ const SubjectsPage = () => {
                 Why Parents Choose StudyBuddy for Their Children
               </h2>
               <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                Investing in your child's education is the most important
-                decision you'll make. Here's why StudyBuddy is the smart choice
+                Investing in your child&apos;s education is the most important
+                decision you&apos;ll make. Here&apos;s why StudyBuddy is the smart choice
                 for comprehensive subject mastery.
               </p>
 

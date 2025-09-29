@@ -544,7 +544,7 @@ const BiologyPage = () => {
                     ))}
                   </div>
                   
-                  <p className="text-gray-700 italic mb-6 flex-grow">"{testimonial.quote}"</p>
+                  <p className="text-gray-700 italic mb-6 flex-grow">&ldquo;{testimonial.quote}&rdquo;</p>
                   
                   <div>
                     <div className="font-bold text-gray-800">{testimonial.name}</div>

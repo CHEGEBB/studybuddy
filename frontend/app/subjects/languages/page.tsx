@@ -543,13 +543,13 @@ const EnglishPage = () => {
           {/* Floating quote cards */}
           <div className="absolute top-16 left-0 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs animate-float">
             <div className="text-emerald-600 text-sm font-semibold mb-2">Student Achievement</div>
-            <div className="text-gray-700 text-sm">"I improved my essay writing by 40% in just 3 months!"</div>
+            <div className="text-gray-700 text-sm">&ldquo;I improved my essay writing by 40% in just 3 months!&rdquo;</div>
             <div className="text-xs text-gray-500 mt-2">- Sarah M., Form 3</div>
           </div>
           
           <div className="absolute bottom-16 right-0 bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg max-w-xs animate-float delay-1000">
             <div className="text-green-600 text-sm font-semibold mb-2">KCSE Success</div>
-            <div className="text-gray-700 text-sm">"Scored A- in both English papers!"</div>
+            <div className="text-gray-700 text-sm">&ldquo;Scored A- in both English papers!&rdquo;</div>
             <div className="text-xs text-gray-500 mt-2">- James K., Graduate</div>
           </div>
           
@@ -597,7 +597,7 @@ const EnglishPage = () => {
                   className="quote-card min-w-full md:min-w-[50%] lg:min-w-[33.333%] px-4 py-8"
                 >
                   <div className="bg-white rounded-2xl p-8 shadow-lg border border-emerald-100 h-full">
-                    <div className="quote-mark text-6xl text-emerald-200 leading-none mb-4">"</div>
+                    <div className="quote-mark text-6xl text-emerald-200 leading-none mb-4">&rdquo;</div>
                     <p className="text-xl text-gray-700 italic mb-6">{quote.quote}</p>
                     <p className="text-emerald-600 font-medium">— {quote.author}</p>
                   </div>
@@ -940,11 +940,11 @@ const EnglishPage = () => {
                 
                 <div className="typewriter-scene relative z-10">
                   <div className="writing-sample bg-emerald-50 rounded-2xl p-6 mb-8 shadow-inner">
-                    <h3 className="text-xl font-bold text-emerald-800 mb-4">A Student's Journey</h3>
+                    <h3 className="text-xl font-bold text-emerald-800 mb-4">A Student&apos;s Journey</h3>
                     <div className="prose text-gray-700">
                       <p className="typewriter-effect">The words appeared on the page, hesitant at first, like raindrops before a storm. But soon they flowed freely, creating rivers of thought and oceans of possibility.</p>
                       <p className="typewriter-effect" style={{ animationDelay: '3s' }}>Through our workshop, I discovered my voice—a unique blend of experiences, observations, and imagination that no one else possesses.</p>
-                      <p className="typewriter-effect" style={{ animationDelay: '6s' }}>Now, writing isn't just an assignment. It's how I explore the world, both real and imagined.</p>
+                      <p className="typewriter-effect" style={{ animationDelay: '6s' }}>Now, writing isn&apos;t just an assignment. It&apos;s how I explore the world, both real and imagined.</p>
                     </div>
                     <div className="mt-4 text-right">
                       <span className="text-emerald-600 font-medium italic">— Form 3 Student</span>
@@ -1171,7 +1171,7 @@ const EnglishPage = () => {
                 {reviews.map((review, index) => (
                   <div key={index} className="min-w-full">
                     <div className="bg-white p-8 md:p-12 relative">
-                      <div className="absolute top-6 left-6 text-7xl text-emerald-200 opacity-50 font-serif">"</div>
+                      <div className="absolute top-6 left-6 text-7xl text-emerald-200 opacity-50 font-serif">&rdquo;</div>
                       
                       <div className="relative z-10">
                         <p className="text-xl md:text-2xl text-gray-700 italic mb-8 leading-relaxed">

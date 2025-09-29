@@ -661,7 +661,7 @@ const GeographyPage = () => {
                     ))}
                   </div>
                   
-                  <p className="text-gray-700 italic mb-6 flex-grow quote-text">"{testimonial.quote}"</p>
+                  <p className="text-gray-700 italic mb-6 flex-grow quote-text">&ldquo;{testimonial.quote}&rdquo;</p>
                   
                   <div>
                     <div className="font-bold text-gray-800">{testimonial.name}</div>

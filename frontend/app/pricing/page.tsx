@@ -7,7 +7,6 @@ import {
   Award, 
   Target, 
   Users, 
-  Book, 
   GraduationCap,
   Trophy,
   ArrowRight,
@@ -17,7 +16,6 @@ import {
   Clock,
   PlayCircle
 } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
@@ -430,9 +428,9 @@ const PricingPage = () => {
               <div className="md:w-2/3 text-white">
                 <h3 className="text-3xl font-bold mb-6">Trusted by Over 15,000 Students Across Kenya</h3>
                 <p className="text-xl mb-6 leading-relaxed italic text-emerald-100">
-                  "StudyBuddy has completely transformed my academic performance. The Standard Plan provided 
+                  &ldquo;StudyBuddy has completely transformed my academic performance. The Standard Plan provided 
                   exactly what I needed to excel in my national exams. The personalized study plan 
-                  and weekly tutor sessions made all the difference."
+                  and weekly tutor sessions made all the difference.&rdquo;
                 </p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center mr-4">
@@ -479,7 +477,7 @@ const PricingPage = () => {
             </div>
             
             <div className="text-center mt-12">
-              <p className="text-gray-600 mb-6">Still have questions? We're here to help.</p>
+              <p className="text-gray-600 mb-6">Still have questions? We&apos;re here to help.</p>
               <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300 flex items-center mx-auto">
                 Contact Support
                 <ArrowRight className="ml-2" size={18} />
@@ -517,7 +515,7 @@ const PricingPage = () => {
               Benefits of Our Platform
             </h2>
             <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
-              Here's why thousands of Kenyan students trust StudyBuddy for their academic success.
+              Here&apos;s why thousands of Kenyan students trust StudyBuddy for their academic success.
             </p>
           </div>
           

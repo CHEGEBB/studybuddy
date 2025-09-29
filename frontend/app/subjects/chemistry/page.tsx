@@ -1085,7 +1085,7 @@ const ChemistryPage = () => {
                   </div>
                   
                   <p className="text-gray-700 italic mb-8 leading-relaxed flex-grow">
-                    "{review.quote}"
+                    &ldquo;{review.quote}&rdquo;
                   </p>
                   
                   <div className="flex items-center">
