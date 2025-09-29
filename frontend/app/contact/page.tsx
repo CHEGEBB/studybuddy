@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect} from 'react';
 import { 
   MapPin, 
   Phone, 
@@ -11,9 +11,7 @@ import {
   Twitter,
   Linkedin,
   Instagram,
-  MessageSquare,
   Clock,
-  Calendar,
   CheckCircle
 } from 'lucide-react';
 import Image from 'next/image';
@@ -85,7 +83,7 @@ const ContactPage = () => {
             </div>
             
             <h1 className="text-5xl lg:text-6xl font-bold mb-8 leading-tight">
-              <span className="text-white">We're Here To</span>
+              <span className="text-white">We&apos;re Here To</span>
               <br />
               <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
                 Help You Succeed
@@ -220,7 +218,7 @@ const ContactPage = () => {
                   </h2>
                   <p className="text-gray-600 leading-relaxed">
                     Fill out the form below and our team will get back to you within 24 hours.
-                    We're here to answer any questions you have about our programs.
+                    We&apos;re here to answer any questions you have about our programs.
                   </p>
                 </div>
                 
@@ -335,7 +333,7 @@ const ContactPage = () => {
             </h2>
             <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed">
               Find answers to the most common questions about our programs and services.
-              If you don't see your question here, feel free to contact us.
+              If you don&apos;t see your question here, feel free to contact us.
             </p>
           </div>
           

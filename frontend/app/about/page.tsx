@@ -622,7 +622,7 @@ const AboutPage = () => {
                   <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 h-full">
                     <Quote className="text-emerald-400 mb-6" size={48} />
                     <p className="text-gray-300 italic mb-8 leading-relaxed">
-                      "{testimonial.quote}"
+                      &ldquo;{testimonial.quote}&rdquo;
                     </p>
                     <div className="flex items-center">
                       <div className="w-12 h-12 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full flex items-center justify-center mr-4">
