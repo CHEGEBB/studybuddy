@@ -451,7 +451,7 @@ const SubjectsPage = () => {
 
           
           <div className="text-center mt-12 animate-on-scroll">
-            <Link href="/pricing" className="inline-flex items-center bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:from-blue-600 hover:to-purple-700">
+            <Link href="/pricing" className="inline-flex items-center bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-semibold text-lg transition-all duration-300 hover:shadow-xl hover:from-blue-600 hover:to-purple-700">
               Get Access to All Subjects <ArrowRight className="ml-2" size={20} />
             </Link>
           </div>
