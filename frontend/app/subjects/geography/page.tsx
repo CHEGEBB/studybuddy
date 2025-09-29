@@ -382,7 +382,7 @@ const GeographyPage = () => {
             <div className="animate-on-scroll slide-in-left">
               <div className="image-container">
                 <Image 
-                  src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src="https://images.unsplash.com/photo-1736117703416-f260ee174bac?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Geography spatial analysis"
                   width={600}
                   height={400}
@@ -581,7 +581,7 @@ const GeographyPage = () => {
                 </div>
                 <div className="rounded-2xl overflow-hidden shadow-lg col-span-2 image-hover-zoom">
                   <Image 
-                    src="https://images.unsplash.com/photo-1597149389072-b5e7175ecf7d?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    src="https://images.unsplash.com/photo-1740635551152-7fa6854a0a10?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                     alt="Geography students"
                     width={600}
                     height={300}

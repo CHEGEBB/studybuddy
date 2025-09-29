@@ -124,7 +124,7 @@ CountUp.displayName = 'CountUp';
 // Static data moved outside component to prevent recreation
 const heroSlides = [
   {
-    image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1583026411217-9d05a70d5230?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     title: "For Excellence",
     subtitle: "Connect with qualified tutors who understand the Kenyan curriculum and exams"
   },
@@ -532,7 +532,7 @@ export default function StudyBuddyHomepage() {
             <div className="animate-slide-in-left border-4 border-dotted  border-green-400 rounded-[60px] p-1">
               <div className="relative">
                 <Image 
-                  src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 
+                  src="https://images.unsplash.com/photo-1583026411217-9d05a70d5230?q=80&w=1331&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
                   alt="Students collaborating" 
                   width={600}
                   height={400}

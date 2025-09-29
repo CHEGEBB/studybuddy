@@ -49,10 +49,10 @@ const AboutPage = () => {
             const timer = setInterval(() => {
               current += step;
               if (current >= target) {
-                counter.textContent = counter.textContent?.replace(/[0-9]+/, target.toString());
+                counter.textContent = (counter.textContent || '').replace(/[0-9]+/, target.toString());
                 clearInterval(timer);
               } else {
-                counter.textContent = counter.textContent?.replace(/[0-9]+/, current.toString());
+                counter.textContent = (counter.textContent || '').replace(/[0-9]+/, current.toString());
               }
             }, 16);
           };
@@ -156,95 +156,90 @@ const AboutPage = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="hero-section relative min-h-[90vh] bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 overflow-hidden flex items-center">
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-          style={{
-            backgroundImage: "url('/assets/images/studen.jpg')"
-          }}
-        ></div>
+<section className="hero-section relative min-h-[70vh] sm:mt-[20px] sm:min-h-[80vh] lg:min-h-[90vh] bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900 overflow-hidden flex items-center">
+  {/* Background Image */}
+  <div 
+    className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+    style={{
+      backgroundImage: "url('/assets/images/studen.jpg')"
+    }}
+  ></div>
+  
+  <div className="hero-particles absolute inset-0"></div>
+  
+  <div className="container mx-auto px-4 sm:px-6 z-10 relative py-12 sm:py-16">
+    <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 items-center">
+      <div className="text-left animate-on-scroll">
         
-        <div className="hero-particles absolute inset-0"></div>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 lg:mb-8 leading-tight">
+          <span className="text-white">Empowering</span>
+          <br />
+          <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
+            Kenyan Students
+          </span>
+          <br />
+          <span className="text-white">To Excel</span>
+        </h1>
         
-        <div className="container mx-auto px-4 z-10 relative">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="text-left animate-on-scroll">
-              <div className="mb-6">
-                <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase ">
-                  About StudyBuddy
-                </span>
-              </div>
-              
-              <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight">
-                <span className="text-white">Empowering</span>
-                <br />
-                <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
-                  Kenyan Students
-                </span>
-                <br />
-                <span className="text-white">To Excel</span>
-              </h1>
-              
-              <p className="text-xl text-gray-300 mb-8 leading-relaxed max-w-2xl">
-                Since 2020, we've been on a mission to revolutionize high school education in Kenya. 
-                Through innovative learning resources and dedicated support, we've helped thousands 
-                of students achieve academic excellence.
-              </p>
-              
-              <div className="flex flex-wrap gap-4">
-                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
-                  Our Story <ArrowRight className="ml-2" size={20} />
-                </button>
-                <button className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center">
-                  <PlayCircle className="mr-2" size={20} />
-                  Watch Video
-                </button>
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 mb-6 sm:mb-8 leading-relaxed max-w-2xl">
+          Since 2020, we&apos;ve been on a mission to revolutionize high school education in Kenya. 
+          Through innovative learning resources and dedicated support, we&apos;ve helped thousands 
+          of students achieve academic excellence.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4">
+          <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center">
+            Our Story <ArrowRight className="ml-2" size={18} />
+          </button>
+          <button className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-6 sm:px-8 py-3 sm:py-4 rounded-2xl font-semibold text-base sm:text-lg transition-all duration-300 hover:scale-105 flex items-center justify-center">
+            <PlayCircle className="mr-2" size={18} />
+            Watch Video
+          </button>
+        </div>
+      </div>
+      
+      <div className="relative block animate-on-scroll mt-8 lg:mt-0">
+        <div className="hero-image-container relative">
+          <Image 
+            src="/assets/images/hero.png" 
+            alt="Students learning together"
+            width={800}
+            height={1000}
+            className="object-cover student-image shadow-2xl w-full h-auto max-h-[400px] sm:max-h-[500px] lg:max-h-none"
+          />
+          
+          <div className="floating-badge top-badge absolute top-4 sm:top-8 right-4 sm:right-8 lg:top-12 lg:right-12">
+            <div className="bg-[#85E092] backdrop-blur-md rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/20 shadow-xl">
+              <div className="flex items-center">
+                <div className="bg-gradient-to-r from-cyan-400 to-green-500 rounded-lg p-1.5 sm:p-2 mr-2 sm:mr-3">
+                  <Trophy className="text-white" size={16} />
+                </div>
+                <div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Top Rated</p>
+                  <p className="text-white text-[10px] sm:text-xs">Education Platform</p>
+                </div>
               </div>
             </div>
-            
-            <div className="relative hidden lg:block animate-on-scroll">
-              <div className="hero-image-container">
-                <Image 
-                  src="/assets/images/hero.png" 
-                  alt="Students learning together"
-                  width={800}
-                  height={1000}
-                  className=" object-cover student-image shadow-2xl"
-                />
-                
-                <div className="floating-badge top-badge">
-                  <div className="bg-[#85E092] backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
-                    <div className="flex items-center">
-                      <div className="bg-gradient-to-r from-cyan-400 to-green-500 rounded-lg p-2 mr-3">
-                        <Trophy className="text-white" size={20} />
-                      </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">Top Rated</p>
-                        <p className="text-white text-xs">Education Platform</p>
-                      </div>
-                    </div>
-                  </div>
+          </div>
+          
+          <div className="floating-badge bottom-badge absolute bottom-4 sm:bottom-8 left-4 sm:left-8 lg:bottom-12 lg:left-12">
+            <div className="bg-[#36B9AE] backdrop-blur-md rounded-lg sm:rounded-xl p-3 sm:p-4 border border-white/20 shadow-xl">
+              <div className="flex items-center">
+                <div className="bg-gradient-to-r from-cyan-400 to-green-500 rounded-lg p-1.5 sm:p-2 mr-2 sm:mr-3">
+                  <Users className="text-white" size={16} />
                 </div>
-                
-                <div className="floating-badge bottom-badge">
-                  <div className="bg-[#36B9AE] backdrop-blur-md rounded-xl p-4 border border-white/20 shadow-xl">
-                    <div className="flex items-center">
-                      <div className="bg-gradient-to-r from-cyan-400 to-green-500 rounded-lg p-2 mr-3">
-                        <Users className="text-white" size={20} />
-                      </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">15,000+</p>
-                        <p className="text-white text-xs">Students Nationwide</p>
-                      </div>
-                    </div>
-                  </div>
+                <div>
+                  <p className="text-white text-xs sm:text-sm font-medium">15,000+</p>
+                  <p className="text-white text-[10px] sm:text-xs">Students Nationwide</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Stats Section */}
       <section 
@@ -413,10 +408,10 @@ const AboutPage = () => {
         </div>
       </section>
 
-     {/* Team Section */}
-<section className="py-24 bg-gray-100 relative overflow-hidden">
-  {/* Decorative Elements */}
-  <div className="absolute top-20 left-10 w-20 h-20">
+    {/* Team Section */}
+<section className="py-12 sm:py-16 md:py-24 bg-gray-100 relative overflow-hidden">
+  {/* Decorative Elements - Hidden on mobile */}
+  <div className="hidden md:block absolute top-20 left-10 w-20 h-20">
     <div className="grid grid-cols-4 gap-1">
       {[...Array(16)].map((_, i) => (
         <div key={i} className="w-2 h-2 bg-orange-400 rounded-full opacity-60"></div>
@@ -424,7 +419,7 @@ const AboutPage = () => {
     </div>
   </div>
   
-  <div className="absolute top-32 right-20 w-16 h-16">
+  <div className="hidden md:block absolute top-32 right-20 w-16 h-16">
     <div className="grid grid-cols-3 gap-1">
       {[...Array(9)].map((_, i) => (
         <div key={i} className="w-3 h-3 bg-teal-400 rounded-full opacity-50"></div>
@@ -433,7 +428,7 @@ const AboutPage = () => {
   </div>
 
   {/* Kite/Paper Plane */}
-  <div className="absolute top-16 right-32">
+  <div className="hidden md:block absolute top-16 right-32">
     <svg width="60" height="60" viewBox="0 0 60 60" className="text-pink-300 opacity-70">
       <path d="M30 5L45 20L30 35L15 20Z" fill="currentColor" stroke="white" strokeWidth="2"/>
       <path d="M30 35L35 55L30 50L25 55Z" fill="currentColor" opacity="0.7"/>
@@ -441,31 +436,31 @@ const AboutPage = () => {
   </div>
 
   {/* Cloud decorations */}
-  <div className="absolute top-40 left-1/4">
+  <div className="hidden md:block absolute top-40 left-1/4">
     <svg width="40" height="25" viewBox="0 0 40 25" className="text-blue-200 opacity-60">
       <path d="M10 15a5 5 0 0 1 5-5h4a8 8 0 1 1 11 7.5H10z" fill="currentColor"/>
     </svg>
   </div>
 
   <div className="container mx-auto px-4">
-    <div className="text-center mb-16">
-      <span className="inline-block bg-emerald-500 text-white text-sm font-semibold px-4 py-2 rounded-full uppercase mb-4 tracking-wide">
+    <div className="text-center mb-8 sm:mb-12 md:mb-16">
+      <span className="inline-block bg-emerald-500 text-white text-xs sm:text-sm font-semibold px-3 sm:px-4 py-1.5 sm:py-2 rounded-full uppercase mb-3 sm:mb-4 tracking-wide">
         👥 OUR TEAM MEMBERS
       </span>
-      <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
+      <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6 px-4">
         Meet Our Great Teachers
         <br />
         <span className="text-gray-700">& Best Instructors</span>
       </h2>
-      <div className="flex justify-end mb-8">
-        <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-6 py-3 rounded-full transition-all duration-300 transform hover:scale-105">
+      <div className="flex justify-center md:justify-end mb-6 sm:mb-8">
+        <button className="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold px-4 sm:px-6 py-2 sm:py-3 rounded-full transition-all duration-300 transform hover:scale-105 text-sm sm:text-base">
           VIEW ALL TEAM
         </button>
       </div>
     </div>
     
-    {/* Team Cards Layout - First Row: 4 cards */}
-    <div className="flex justify-center gap-6 mb-12 max-w-6xl mx-auto">
+    {/* Team Cards Layout - Responsive Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:justify-center gap-4 sm:gap-6 mb-8 sm:mb-12 max-w-6xl mx-auto">
       {team.slice(0, 4).map((member, index) => {
         const colors = [
           { bg: 'bg-emerald-500', text: 'text-white' },
@@ -478,24 +473,24 @@ const AboutPage = () => {
         return (
           <div
             key={member.name}
-            className="team-card group relative"
+            className="team-card group relative mx-auto"
             style={{ animationDelay: `${index * 0.2}s` }}
           >
-            <div className={`${colorSet.bg} rounded-full w-72 h-96 flex flex-col items-center justify-end text-center transition-all duration-500 group-hover:scale-105 relative overflow-hidden shadow-xl cursor-pointer`}>
+            <div className={`${colorSet.bg} rounded-full w-64 h-80 sm:w-72 sm:h-96 flex flex-col items-center justify-end text-center transition-all duration-500 group-hover:scale-105 relative overflow-hidden shadow-xl cursor-pointer`}>
               {/* Social Media Icons - appear on hover */}
-              <div className="absolute top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                <div className="flex space-x-3">
-                  <a href="#" className="w-10 h-10 bg-green-400 bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Facebook className="w-5 h-5 text-white hover:text-white" />
+              <div className="absolute top-8 sm:top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                <div className="flex space-x-2 sm:space-x-3">
+                  <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-green-400 bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Facebook className="w-4 h-4 sm:w-5 sm:h-5 text-white hover:text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-green-400  bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <LucideTwitter className="w-5 h-5 text-white hover:text-white" />
+                  <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-green-400 bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <LucideTwitter className="w-4 h-4 sm:w-5 sm:h-5 text-white hover:text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-green-400  bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Linkedin className="w-5 h-5 text-white hover:text-white" />
+                  <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-green-400 bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Linkedin className="w-4 h-4 sm:w-5 sm:h-5 text-white hover:text-white" />
                   </a>
-                  <a href="#" className="w-10 h-10 bg-green-400  bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
-                    <Instagram className="w-5 h-5 text-white hover:text-white" />
+                  <a href="#" className="w-8 h-8 sm:w-10 sm:h-10 bg-green-400 bg-opacity-90 rounded-full flex items-center justify-center cursor-pointer hover:bg-emerald-500 hover:scale-110 transition-all duration-300 shadow-lg">
+                    <Instagram className="w-4 h-4 sm:w-5 sm:h-5 text-white hover:text-white" />
                   </a>
                 </div>
               </div>
@@ -512,9 +507,9 @@ const AboutPage = () => {
               </div>
               
               {/* Member Info - positioned at bottom with background */}
-              <div className="relative z-10  bg-green-400/80 bg-opacity-40 w-full py-6 px-4 rounded-b-full">
-                <h3 className={`text-xl font-bold ${colorSet.text} mb-1`}>{member.name}</h3>
-                <p className={`${colorSet.text} text-sm font-medium opacity-90 uppercase tracking-wide`}>
+              <div className="relative z-10 bg-green-400/80 bg-opacity-40 w-full py-4 sm:py-6 px-4 rounded-b-full">
+                <h3 className={`text-lg sm:text-xl font-bold ${colorSet.text} mb-1`}>{member.name}</h3>
+                <p className={`${colorSet.text} text-xs sm:text-sm font-medium opacity-90 uppercase tracking-wide`}>
                   {member.role}
                 </p>
               </div>
@@ -527,28 +522,28 @@ const AboutPage = () => {
     {/* Second Row - Single centered card if exists */}
     {team.length > 4 && (
       <div className="flex justify-center">
-        <div className="team-card group relative" style={{ animationDelay: `${4 * 0.2}s` }}>
-          <div className="bg-emerald-500 rounded-full w-72 h-96 flex flex-col items-center justify-end text-center transition-all duration-500 group-hover:scale-105 relative overflow-hidden shadow-xl cursor-pointer">
+        <div className="team-card group relative mx-auto" style={{ animationDelay: `${4 * 0.2}s` }}>
+          <div className="bg-emerald-500 rounded-full w-64 h-80 sm:w-72 sm:h-96 flex flex-col items-center justify-end text-center transition-all duration-500 group-hover:scale-105 relative overflow-hidden shadow-xl cursor-pointer">
             {/* Social Media Overlay */}
             <div className="absolute inset-0 bg-emerald-600 bg-opacity-95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full flex items-center justify-center z-20">
-              <div className="flex space-x-4">
-                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <div className="flex space-x-3 sm:space-x-4">
+                <a href="#" className="w-10 h-10 sm:w-12 sm:h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
                   </svg>
                 </a>
-                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <a href="#" className="w-10 h-10 sm:w-12 sm:h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                   </svg>
                 </a>
-                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <a href="#" className="w-10 h-10 sm:w-12 sm:h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                   </svg>
                 </a>
-                <a href="#" className="w-12 h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                  <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <a href="#" className="w-10 h-10 sm:w-12 sm:h-12 bg-white bg-opacity-25 rounded-full flex items-center justify-center cursor-pointer hover:bg-opacity-40 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20.947 8.305a6.53 6.53 0 0 0-.419-2.216 4.61 4.61 0 0 0-2.633-2.633 6.606 6.606 0 0 0-2.186-.42c-.962-.043-1.267-.055-3.709-.055s-2.755 0-3.71.055a6.606 6.606 0 0 0-2.185.42 4.607 4.607 0 0 0-2.633 2.633 6.554 6.554 0 0 0-.419 2.185c-.043.963-.056 1.268-.056 3.71s0 2.754.056 3.71c.015.748.156 1.486.419 2.187a4.61 4.61 0 0 0 2.634 2.632 6.584 6.584 0 0 0 2.185.45c.963.043 1.268.056 3.71.056s2.755 0 3.71-.056a6.59 6.59 0 0 0 2.186-.419 4.615 4.615 0 0 0 2.633-2.633c.263-.7.404-1.438.419-2.187.043-.962.056-1.267.056-3.71-.002-2.442-.002-2.752-.058-3.709zm-8.953 8.297c-2.554 0-4.623-2.069-4.623-4.623s2.069-4.623 4.623-4.623a4.623 4.623 0 0 1 0 9.246zm4.807-8.339a1.077 1.077 0 0 1-1.078-1.078 1.077 1.077 0 1 1 2.155 0c0 .596-.482 1.078-1.077 1.078z"/>
                     <circle cx="11.994" cy="11.979" r="3.003"/>
                   </svg>
@@ -568,9 +563,9 @@ const AboutPage = () => {
             </div>
             
             {/* Member Info - positioned at bottom with background */}
-            <div className="relative z-10 bg-black bg-opacity-40 w-full py-6 px-4 rounded-b-full">
-              <h3 className="text-xl font-bold text-white mb-1">{team[4].name}</h3>
-              <p className="text-white text-sm font-medium opacity-90 uppercase tracking-wide">
+            <div className="relative z-10 bg-black bg-opacity-40 w-full py-4 sm:py-6 px-4 rounded-b-full">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-1">{team[4].name}</h3>
+              <p className="text-white text-xs sm:text-sm font-medium opacity-90 uppercase tracking-wide">
                 {team[4].role}
               </p>
             </div>
