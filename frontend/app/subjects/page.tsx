@@ -136,7 +136,7 @@ const SubjectsPage = () => {
       description: "Understand mechanics, electricity, thermodynamics, and optics with simulations and practical applications.",
       path: "/subjects/physics",
       topics: ["Mechanics", "Electricity", "Thermodynamics", "Optics"],
-      bgImage: "/assets/images/physics-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1633493702341-4d04841df53b?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Chemistry",
@@ -145,7 +145,7 @@ const SubjectsPage = () => {
       description: "Explore organic, inorganic, and physical chemistry through interactive molecular models and virtual experiments.",
       path: "/subjects/chemistry",
       topics: ["Organic Chemistry", "Inorganic Chemistry", "Physical Chemistry", "Analytical Methods"],
-      bgImage: "/assets/images/chemistry-bg.jpg"
+      bgImage: "https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
       name: "Biology",
