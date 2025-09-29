@@ -334,11 +334,7 @@ const ChemistryPage = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-left animate-on-scroll">
               <div className="mb-6 flex items-center">
-                <span className="inline-block bg-white/10 backdrop-blur-md px-4 py-2 rounded-full">
-                  <span className="inline-block bg-gradient-to-r from-green-400 to-emerald-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase">
-                    Chemistry
-                  </span>
-                </span>
+                
               </div>
               
               <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight hero-title">

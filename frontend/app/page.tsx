@@ -125,17 +125,17 @@ CountUp.displayName = 'CountUp';
 const heroSlides = [
   {
     image: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=2070&auto=format&fit=crop",
-    title: "Together",
+    title: "For Excellence",
     subtitle: "Connect with qualified tutors who understand the Kenyan curriculum and exams"
   },
   {
     image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?q=80&w=2074&auto=format&fit=crop",
-    title: "Anytime",
+    title: "With Flexibility",
     subtitle: "Flexible scheduling to fit your busy school and home life"
   },
   {
     image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=2070&auto=format&fit=crop",
-    title: "Anywhere",
+    title: "To Succeed",
     subtitle: "Study from home, school, or anywhere with a reliable internet connection"
   }
 ];
@@ -200,7 +200,7 @@ const subjects = [
 const featuredTeachers = [
   {
     name: "John Maina",
-    image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1529111290557-82f6d5c6cf85?q=80&w=693&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     subjects: "Mathematics & Physics",
     qualification: "M.Sc. in Applied Mathematics",
     experience: "10+ years",
@@ -210,7 +210,7 @@ const featuredTeachers = [
   },
   {
     name: "Sarah Omondi",
-    image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=2070&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1507152832244-10d45c7eda57?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     subjects: "Biology & Chemistry",
     qualification: "B.Ed Science Education",
     experience: "8+ years",
@@ -220,7 +220,7 @@ const featuredTeachers = [
   },
   {
     name: "David Kipchoge",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2074&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1628149321186-7d4c5b1170f9?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     subjects: "English & Literature",
     qualification: "M.A. in English Literature",
     experience: "12+ years",
@@ -230,7 +230,7 @@ const featuredTeachers = [
   },
   {
     name: "Aisha Hassan",
-    image: "https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?q=80&w=2134&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1613005341945-35e159e522f1?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     subjects: "Kiswahili & History",
     qualification: "B.Ed Languages",
     experience: "7+ years",
@@ -355,15 +355,7 @@ export default function StudyBuddyHomepage() {
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-slate-800/40 to-emerald-900/50" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         
-        {/* Simplified Floating Elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute top-20 right-20 w-16 h-16 border border-emerald-400/20 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-40 left-16 w-12 h-12 bg-emerald-500/10 rounded-full blur-sm animate-bounce"></div>
-          <div className="absolute top-1/3 right-1/4 w-8 h-8 border border-green-400/30 rounded-full animate-ping"></div>
-          <BookOpen className="absolute top-1/4 left-1/4 w-6 h-6 text-emerald-400/30 animate-pulse" />
-          <GraduationCap className="absolute bottom-1/3 right-1/3 w-8 h-8 text-green-400/20 animate-bounce" />
-          <Award className="absolute top-1/2 left-1/6 w-5 h-5 text-green-400/25 animate-pulse" />
-        </div>
+       
 
         {/* Hero Content */}
         <div className="relative z-10 h-full flex items-center px-4 sm:px-6 lg:px-8">
@@ -374,7 +366,10 @@ export default function StudyBuddyHomepage() {
               <div className="space-y-8 animate-fade-in">
                 <div className="space-y-4">
                   <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
-                    <span className="block mb-2">Excel in School</span>
+                    <span className="block mb-2">
+                      Empowering Kenyan Students
+                      
+                    </span>
                     <span className="text-emerald-400 block text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
                       {heroSlides[currentSlide]?.title}
                     </span>
