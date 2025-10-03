@@ -93,7 +93,6 @@ const Navbar = () => {
         { name: 'Geography', path: '/subjects/geography', icon: Globe, description: 'Physical & Human Geography', color: 'from-teal-500 to-cyan-500' },
       ]
     },
-    { name: 'Blog', path: '/blog' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'Contact', path: '/contact' },
   ];
