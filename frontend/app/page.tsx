@@ -769,10 +769,10 @@ export default function StudyBuddyHomepage() {
               <div className="relative">
                 <div className="relative z-20 transform lg:-translate-y-20">
                   <Image 
-                    src="/assets/images/person1.png" 
+                    src="/assets/images/kenyan1.png" 
                     alt="Student with tablet" 
-                    width={400}
-                    height={500}
+                    width={600}
+                    height={700}
                     className="w-full max-w-md mx-auto h-auto object-cover rounded-3xl"
                   />
                   
