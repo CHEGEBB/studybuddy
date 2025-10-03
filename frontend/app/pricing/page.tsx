@@ -14,18 +14,23 @@ import {
   Calendar,
   BookOpen,
   Clock,
-  PlayCircle
+  PlayCircle,
+  TrendingUp,
+  Zap,
+  Shield
 } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import '@/styles/pricing.scss';
 
 const PricingPage = () => {
-  const [billingCycle, setBillingCycle] = useState('yearly');
+  const [billingCycle, setBillingCycle] = useState('weekly');
   const pricingRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
+  const heroImageRef = useRef<HTMLDivElement>(null);
   
   // Handle parallax effect
   useEffect(() => {
@@ -33,6 +38,11 @@ const PricingPage = () => {
       if (parallaxRef.current) {
         const scrollY = window.scrollY;
         parallaxRef.current.style.transform = `translateY(${scrollY * 0.5}px)`;
+      }
+      
+      if (heroImageRef.current) {
+        const scrollY = window.scrollY;
+        heroImageRef.current.style.transform = `translateY(${scrollY * 0.3}px)`;
       }
     };
     
@@ -61,11 +71,20 @@ const PricingPage = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Plans data
+  // Floating badges animation
+  useEffect(() => {
+    const badges = document.querySelectorAll('.floating-badge');
+    badges.forEach((badge, index) => {
+      const element = badge as HTMLElement;
+      element.style.animationDelay = `${index * 0.3}s`;
+    });
+  }, []);
+
+  // Plans data with KSH pricing
   const plans = [
     {
       name: 'Basic Plan',
-      price: { monthly: '19', yearly: '190' },
+      price: { weekly: '500', monthly: '1,800', yearly: '18,500' },
       description: 'Perfect for individual students who want to improve their grades.',
       features: [
         'Access all courses',
@@ -81,7 +100,7 @@ const PricingPage = () => {
     },
     {
       name: 'Standard Plan',
-      price: { monthly: '29', yearly: '290' },
+      price: { weekly: '800', monthly: '2,900', yearly: '29,500' },
       description: 'Ideal for serious students preparing for national exams.',
       features: [
         'Access all courses',
@@ -99,7 +118,7 @@ const PricingPage = () => {
     },
     {
       name: 'Advance Plan',
-      price: { monthly: '39', yearly: '390' },
+      price: { weekly: '1,100', monthly: '3,900', yearly: '39,500' },
       description: 'Comprehensive support for students aiming for top performance.',
       features: [
         'Access all courses',
@@ -119,7 +138,7 @@ const PricingPage = () => {
     },
     {
       name: 'Premium Plan',
-      price: { monthly: '49', yearly: '490' },
+      price: { weekly: '1,400', monthly: '4,900', yearly: '49,500' },
       description: 'The ultimate package for elite academic achievement.',
       features: [
         'Access all courses',
@@ -144,7 +163,7 @@ const PricingPage = () => {
   const faqs = [
     {
       question: 'How does the billing cycle work?',
-      answer: 'We offer both monthly and yearly subscription options. Choosing a yearly plan provides significant savings compared to the monthly option. You can switch between billing cycles at any time.',
+      answer: 'We offer weekly, monthly, and yearly subscription options. Choosing a yearly plan provides significant savings compared to the weekly or monthly options. You can switch between billing cycles at any time.',
     },
     {
       question: 'Can I switch between plans?',
@@ -161,6 +180,10 @@ const PricingPage = () => {
     {
       question: 'Do you offer refunds?',
       answer: 'We offer a 30-day money-back guarantee if you\'re not satisfied with our services. Contact our support team to process your refund.',
+    },
+    {
+      question: 'What payment methods do you accept?',
+      answer: 'We accept M-Pesa, bank transfers, and major credit/debit cards. All payments are processed securely through our payment partners.',
     }
   ];
 
@@ -175,6 +198,18 @@ const PricingPage = () => {
     { name: 'Career Guidance', basic: false, standard: false, advance: true, premium: true },
     { name: 'Parent Meetings', basic: false, standard: false, advance: false, premium: true }
   ];
+
+  const getCycleText = () => {
+    if (billingCycle === 'weekly') return 'week';
+    if (billingCycle === 'monthly') return 'month';
+    return 'year';
+  };
+
+  const getSavingsText = () => {
+    if (billingCycle === 'yearly') return 'Save up to KSh 10,300 annually';
+    if (billingCycle === 'monthly') return 'Save up to KSh 1,500/month';
+    return '';
+  };
 
   return (
     <div className="pricing-page min-h-screen bg-gray-50">
@@ -192,50 +227,136 @@ const PricingPage = () => {
         <div className="hero-particles absolute inset-0"></div>
         
         <div className="container mx-auto px-4 z-10 relative">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="mb-6 animate-on-scroll">
-              <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase">
-                Affordable Pricing Plans
-              </span>
-            </div>
-            
-            <h1 className="text-5xl lg:text-6xl font-bold mb-8 leading-tight animate-on-scroll" style={{ animationDelay: '0.2s' }}>
-              <span className="text-white">Invest in Your</span>
-              <br />
-              <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
-                Academic Future
-              </span>
-            </h1>
-            
-            <p className="text-xl text-gray-300 mb-12 leading-relaxed max-w-3xl mx-auto animate-on-scroll" style={{ animationDelay: '0.3s' }}>
-              Choose the perfect plan that fits your educational needs and budget. 
-              All plans include access to our core learning platform with varying levels 
-              of personalized support and advanced features.
-            </p>
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Content */}
+            <div className="text-left">
+              <div className="mb-6 animate-on-scroll">
+                <span className="inline-block bg-gradient-to-r from-emerald-400 to-green-400 text-transparent bg-clip-text font-semibold text-lg tracking-wide uppercase">
+                  Affordable Pricing Plans
+                </span>
+              </div>
+              
+              <h1 className="text-5xl lg:text-6xl font-bold mb-8 leading-tight animate-on-scroll" style={{ animationDelay: '0.2s' }}>
+                <span className="text-white">Invest in Your</span>
+                <br />
+                <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent">
+                  Academic Future
+                </span>
+              </h1>
+              
+              <p className="text-xl text-gray-300 mb-12 leading-relaxed animate-on-scroll" style={{ animationDelay: '0.3s' }}>
+                Choose the perfect plan that fits your educational needs and budget. 
+                All plans include access to our core learning platform with varying levels 
+                of personalized support and advanced features.
+              </p>
 
-            <div className="flex justify-center gap-4 animate-on-scroll" style={{ animationDelay: '0.4s' }}>
-              <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
-                View Plans <ArrowRight className="ml-2" size={20} />
-              </button>
-              <button className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center">
-                <PlayCircle className="mr-2" size={20} />
-                Watch Demo
-              </button>
+              <div className="flex flex-wrap gap-4 animate-on-scroll" style={{ animationDelay: '0.4s' }}>
+                <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center">
+                  View Plans <ArrowRight className="ml-2" size={20} />
+                </button>
+                <button className="bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20 px-8 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 flex items-center">
+                  <PlayCircle className="mr-2" size={20} />
+                  Watch Demo
+                </button>
+              </div>
+              
+              <div className="mt-12 animate-on-scroll" style={{ animationDelay: '0.5s' }}>
+                <div className="flex flex-wrap gap-6">
+                  <div className="flex items-center">
+                    <CheckCircle className="text-emerald-400 mr-2" size={20} />
+                    <span className="text-gray-300">No credit card required</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="text-emerald-400 mr-2" size={20} />
+                    <span className="text-gray-300">7-day free trial</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="text-emerald-400 mr-2" size={20} />
+                    <span className="text-gray-300">Cancel anytime</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            
-            <div className="mt-16 animate-on-scroll" style={{ animationDelay: '0.5s' }}>
-              <div className="flex flex-wrap justify-center gap-6">
-                <div className="flex items-center">
-                  <CheckCircle className="text-emerald-400 mr-2" size={20} />
-                  <span className="text-gray-300">No credit card required</span>
+
+            {/* Right Content - Floating Person Image */}
+            <div className="relative hidden lg:block animate-on-scroll" style={{ animationDelay: '0.6s' }}>
+              <div 
+                ref={heroImageRef}
+                className="relative z-10"
+              >
+                {/* Main Image Container */}
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full opacity-20 blur-3xl animate-pulse"></div>
+                  <div className="relative bg-gradient-to-br from-emerald-500/20 to-green-500/20 backdrop-blur-sm rounded-3xl p-8 border border-white/10">
+                    <Image 
+                      src="/assets/images/kenyan.png" 
+                      alt="Kenyan Student" 
+                      width={500}
+                      height={600}
+                      className="rounded-2xl object-cover"
+                    />
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="text-emerald-400 mr-2" size={20} />
-                  <span className="text-gray-300">7-day free trial</span>
+
+                {/* Floating Badges */}
+                <div className="floating-badge absolute -top-8 -left-8 bg-white rounded-2xl p-4 shadow-2xl border border-emerald-100 animate-float">
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-emerald-400 to-green-500 rounded-xl flex items-center justify-center">
+                      <TrendingUp className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-600 font-medium">Grade Improvement</div>
+                      <div className="text-2xl font-bold text-gray-800">+2 Grades</div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <CheckCircle className="text-emerald-400 mr-2" size={20} />
-                  <span className="text-gray-300">Cancel anytime</span>
+
+                <div className="floating-badge absolute top-1/4 -right-12 bg-white rounded-2xl p-4 shadow-2xl border border-blue-100 animate-float" style={{ animationDelay: '0.3s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-xl flex items-center justify-center">
+                      <Star className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-600 font-medium">Student Rating</div>
+                      <div className="text-2xl font-bold text-gray-800">4.9/5</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="floating-badge absolute bottom-12 -left-12 bg-white rounded-2xl p-4 shadow-2xl border border-purple-100 animate-float" style={{ animationDelay: '0.6s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-xl flex items-center justify-center">
+                      <Users className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-600 font-medium">Active Students</div>
+                      <div className="text-2xl font-bold text-gray-800">15,000+</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="floating-badge absolute bottom-1/3 -right-8 bg-white rounded-2xl p-4 shadow-2xl border border-orange-100 animate-float" style={{ animationDelay: '0.9s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-orange-400 to-orange-500 rounded-xl flex items-center justify-center">
+                      <Zap className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-600 font-medium">Success Rate</div>
+                      <div className="text-2xl font-bold text-gray-800">94%</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="floating-badge absolute top-1/2 left-0 bg-white rounded-2xl p-4 shadow-2xl border border-green-100 animate-float" style={{ animationDelay: '1.2s' }}>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-xl flex items-center justify-center">
+                      <Shield className="text-white" size={24} />
+                    </div>
+                    <div>
+                      <div className="text-sm text-gray-600 font-medium">Money Back</div>
+                      <div className="text-lg font-bold text-gray-800">30 Days</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -250,19 +371,26 @@ const PricingPage = () => {
       >
         <div className="container mx-auto px-4">
           <div className="flex justify-center mb-16 animate-on-scroll">
-            <div className="bg-white p-1.5 rounded-full shadow-md inline-flex items-center">
+            <div className="bg-white p-1.5 rounded-full shadow-md inline-flex items-center flex-wrap gap-2">
+              <button 
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${billingCycle === 'weekly' ? 'bg-emerald-500 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100'}`}
+                onClick={() => setBillingCycle('weekly')}
+              >
+                Weekly
+              </button>
               <button 
                 className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${billingCycle === 'monthly' ? 'bg-emerald-500 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100'}`}
                 onClick={() => setBillingCycle('monthly')}
               >
                 Monthly
+                <span className="ml-2 bg-emerald-600 text-white text-xs px-2 py-0.5 rounded-full">Save 10%</span>
               </button>
               <button 
                 className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${billingCycle === 'yearly' ? 'bg-emerald-500 text-white shadow-lg' : 'text-gray-700 hover:bg-gray-100'}`}
                 onClick={() => setBillingCycle('yearly')}
               >
                 Yearly
-                <span className="ml-2 bg-emerald-600 text-white text-xs px-2 py-0.5 rounded-full">Save 15%</span>
+                <span className="ml-2 bg-emerald-600 text-white text-xs px-2 py-0.5 rounded-full">Save 20%</span>
               </button>
             </div>
           </div>
@@ -293,12 +421,15 @@ const PricingPage = () => {
                   
                   <div className="mb-8">
                     <div className="flex items-baseline">
-                      <span className="text-4xl font-bold text-gray-800">${billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}</span>
-                      <span className="text-gray-500 ml-2">/{billingCycle === 'monthly' ? 'month' : 'year'}</span>
+                      <span className="text-lg font-medium text-gray-600">KSh</span>
+                      <span className="text-4xl font-bold text-gray-800 ml-1">
+                        {billingCycle === 'weekly' ? plan.price.weekly : billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
+                      </span>
+                      <span className="text-gray-500 ml-2">/{getCycleText()}</span>
                     </div>
-                    {billingCycle === 'yearly' && (
+                    {(billingCycle === 'monthly' || billingCycle === 'yearly') && (
                       <div className="text-emerald-600 text-sm font-medium mt-2">
-                        {billingCycle === 'yearly' ? 'Save $38 with annual billing' : ''}
+                        {getSavingsText()}
                       </div>
                     )}
                   </div>
@@ -624,6 +755,56 @@ const PricingPage = () => {
       </section>
 
       <Footer />
+      
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-20px);
+          }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .fade-in-up {
+          animation: fade-in-up 0.8s ease-out forwards;
+        }
+
+        .animate-on-scroll {
+          opacity: 0;
+        }
+
+        @media (max-width: 1024px) {
+          .floating-badge {
+            display: none;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-section h1 {
+            font-size: 2.5rem;
+          }
+          
+          .hero-section p {
+            font-size: 1.125rem;
+          }
+        }
+      `}</style>
     </div>
   );
 };
